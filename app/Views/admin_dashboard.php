@@ -8,6 +8,7 @@
 </head>
 <body>
     <div>
+        <h1>Github test</h1>
         <h2><?php echo $username;?></h2>
     </div>
 </body>
