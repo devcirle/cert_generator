@@ -22,7 +22,7 @@
         <div class="form-container">
             <button id="btnCloseForm" class="close-button">X</button>
             
-            <form action="<?php echo base_url(); ?>public/ownerprofile/SeminarController/create" method="post">
+            <?= form_open('SeminarController/create'); ?>
                 <div>
                     <input type="hidden" name="username" value="<?php echo $username; ?>">
                 </div>

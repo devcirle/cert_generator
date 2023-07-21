@@ -32,7 +32,7 @@
 </head>
 <body>
     
-    <form method="POST" action="<?= site_url('public/register') ?>">
+    <form method="POST" action="<?= site_url('register') ?>">
         <div class="container">
             <div class="title">
                 <div>

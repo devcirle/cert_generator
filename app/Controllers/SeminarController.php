@@ -28,7 +28,7 @@ class SeminarController extends Controller
                 'date' => $this->request->getVar('date')
             ];
             $seminarModel->save($data);
-            return redirect()->to('public/ownerprofile');
+            return redirect()->to('ownerprofile');
         }else{
             $data['validation'] = $this->validator;
             echo view('ownerprofile', $data);

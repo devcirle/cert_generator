@@ -36,30 +36,21 @@ class SigninController extends Controller
                 echo "Account Locked";
             } elseif ($data['role'] > 1) {
                 $session->set($ses_data);
-                return redirect()->to('public/ownerprofile');
+                return redirect()->to('ownerprofile');
             } else {
                 $session->set($ses_data);
-                return redirect()->to('public/adminprofile');
+                return redirect()->to('adminprofile');
             }
             
 
-            /*
-            // Check the role of the user
-            if ($data['role'] === 'Admin') {
-                $session->set($ses_data);
-                return redirect()->to('public/adminprofile');
-            } elseif ($data['role'] === 'Program Owner') {
-                $session->set($ses_data);
-                return redirect()->to('public/ownerprofile');
-            }
-            */
+            
         } else {
             $session->setFlashdata('msg', 'Password is incorrect.');
-            return redirect()->to('public/signin');
+            return redirect()->to('signin');
         }
     } else {
         $session->setFlashdata('msg', 'User does not exist.');
-        return redirect()->to('public/signin');
+        return redirect()->to('signin');
     }
 }
 

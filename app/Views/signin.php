@@ -17,8 +17,7 @@
                 <?= session()->getFlashdata('msg') ?>
 			</div>
         <?php endif;?>
-		
-        <form class="content1" action="<?php echo base_url(); ?>public/SigninController/loginAuth" method="post">
+		<?= form_open('SigninController/loginAuth'); ?>
             
             <div class="logos1">
                 <img class="cropped-cropped-logo-smallest-icon1" alt="" src="sdoin_logo.png">

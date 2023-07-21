@@ -15,7 +15,7 @@
                    <?= $validation->listErrors() ?>
                 </div>
                 <?php endif;?>
-                <form action="<?php echo base_url(); ?>public/SignupController/store" method="post">
+                <?= form_open('SignupController/create'); ?>
                     <div>
                         <input type="text" name="username" placeholder="Username" value="<?= set_value('username') ?>" class="form-control" >
                     </div>
