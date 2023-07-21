@@ -4,7 +4,7 @@ use CodeIgniter\Controller;
 use App\Models\UserModel;
   
 class SignupController extends Controller
-{
+{ 
     public function index()
     {
         helper(['form']);
