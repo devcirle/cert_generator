@@ -36,10 +36,10 @@ class SigninController extends Controller
                 echo "Account Locked";
             } elseif ($data['role'] > 1) {
                 $session->set($ses_data);
-                return redirect()->to('public/ownerprofile');
+                return redirect()->to('ownerprofile');
             } else {
                 $session->set($ses_data);
-                return redirect()->to('public/adminprofile');
+                return redirect()->to('adminprofile');
             }
             
 
@@ -55,11 +55,11 @@ class SigninController extends Controller
             */
         } else {
             $session->setFlashdata('msg', 'Password is incorrect.');
-            return redirect()->to('public/signin');
+            return redirect()->to('signin');
         }
     } else {
         $session->setFlashdata('msg', 'User does not exist.');
-        return redirect()->to('public/signin');
+        return redirect()->to('signin');
     }
 }
 
