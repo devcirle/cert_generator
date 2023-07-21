@@ -1,0 +1,19 @@
+CRITICAL - 2023-07-14 05:57:22 --> Undefined variable $rules
+in APPPATH\Controllers\SeminarController.php on line 23.
+ 1 APPPATH\Controllers\SeminarController.php(23): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $rules', 'C:\\xampp\\htdocs\\ci\\app\\Controllers\\SeminarController.php', 23)
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\SeminarController->create()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\SeminarController))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-07-14 05:58:42 --> Class "App\Controllers\SeminarModel" not found
+in APPPATH\Controllers\SeminarController.php on line 22.
+ 1 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\SeminarController->create()
+ 2 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\SeminarController))
+ 3 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-07-14 05:59:54 --> Class "App\Controllers\SeminarsModel" not found
+in APPPATH\Controllers\SeminarController.php on line 22.
+ 1 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\SeminarController->create()
+ 2 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\SeminarController))
+ 3 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()

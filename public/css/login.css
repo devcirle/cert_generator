@@ -1,0 +1,162 @@
+.cropped-cropped-logo-smallest-icon1 {
+  position: relative;
+  width: 4.32rem;
+  height: 4.31rem;
+  object-fit: cover;
+}
+.department-of-education-deped-icon2 {
+  position: relative;
+  width: 8.82rem;
+  height: 4.44rem;
+  object-fit: cover;
+}
+.department-of-education-deped-icon3 {
+  position: relative;
+  width: 4.38rem;
+  height: 4.31rem;
+  object-fit: cover;
+}
+.logos1 {
+  height: 4.31rem;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: center;
+  gap: var(--gap-lgi);
+}
+.header3 {
+  position: relative;
+  font-size: var(--font-size-9xl);
+  letter-spacing: 0.02em;
+  line-height: 150%;
+  display: inline-block;
+  font-family: var(--font-inria-sans);
+  color: var(--color-black);
+  text-align: center;
+  width: 16.94rem;
+  flex-shrink: 0;
+}
+.header2 {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  padding: var(--padding-3xs);
+  align-items: center;
+  justify-content: center;
+}
+.field,
+.field1input {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.field1input {
+  border: 0;
+  font-weight: 300;
+  font-family: var(--font-inria-sans);
+  font-size: var(--font-size-5xl);
+  background-color: var(--color-whitesmoke);
+  flex: 1;
+  border-radius: var(--br-5xs);
+  padding: 0 var(--padding-mini);
+}
+.field {
+  height: 8.19rem;
+  gap: 2rem;
+}
+
+.register2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.buttons1 .register2 {
+  text-decoration: none;
+  color: inherit;
+}
+
+.register2 {
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  background-color: var(--color-firebrick);
+  align-self: stretch;
+  border-radius: var(--br-11xl);
+  height: 2.88rem;
+  flex-direction: row;
+}
+.register2:hover {
+  background-color: #8b1c1c;
+}
+.sign-in,
+.register-as-admin {
+  position: relative;
+  font-size: var(--font-size-xl);
+  letter-spacing: 0.02em;
+  line-height: 150%;
+  display: inline-block;
+  font-family: var(--font-inria-sans);
+  color: var(--color-white);
+  text-align: center;
+  width: 13.81rem;
+  height: 1.88rem;
+  flex-shrink: 0;
+}
+.login {
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  background-color: #2277a7;
+  align-self: stretch;
+  border-radius: var(--br-11xl);
+  height: 2.88rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.login:hover {
+  background-color: #1C6792;
+}
+
+.buttons1 {
+  flex: 1;
+  gap: var(--gap-8xl);
+}
+.buttons1,
+.content1,
+.loginbox1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.content1 {
+  align-self: stretch;
+  flex: 1;
+  flex-direction: column;
+  padding: 0 var(--padding-31xl);
+  gap: var(--gap-8xl);
+}
+.loginbox1 {
+  position: absolute;
+  top: calc(50% - 297px);
+  left: calc(50% - 283px);
+  border-radius: var(--br-mini);
+  background-color: var(--color-white);
+  width: 35.31rem;
+  height: 37.06rem;
+  overflow: hidden;
+  flex-direction: row;
+  padding: var(--padding-13xl) 0;
+  box-sizing: border-box;
+}
+.pc-admin-loginpage {
+  position: relative;
+  background-color: var(--color-gainsboro);
+  width: 100%;
+  height: 67.5rem;
+}

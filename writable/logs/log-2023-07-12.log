@@ -1,0 +1,35 @@
+CRITICAL - 2023-07-12 19:24:26 --> The framework needs the following extension(s) installed and loaded: intl.
+in SYSTEMPATH\CodeIgniter.php on line 226.
+ 1 SYSTEMPATH\CodeIgniter.php(226): CodeIgniter\Exceptions\FrameworkException::forMissingExtension('intl')
+ 2 SYSTEMPATH\CodeIgniter.php(190): CodeIgniter\CodeIgniter->resolvePlatformExtensions()
+ 3 FCPATH\index.php(55): CodeIgniter\CodeIgniter->initialize()
+CRITICAL - 2023-07-12 07:47:06 --> Too few arguments to function App\Controllers\DataController::__construct(), 0 passed in C:\xampp\htdocs\ci\system\CodeIgniter.php on line 904 and exactly 1 expected
+in APPPATH\Controllers\DataController.php on line 12.
+ 1 SYSTEMPATH\CodeIgniter.php(904): App\Controllers\DataController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(488): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-07-12 07:55:49 --> Too few arguments to function App\Controllers\DataController::__construct(), 0 passed in C:\xampp\htdocs\ci\system\CodeIgniter.php on line 904 and exactly 1 expected
+in APPPATH\Controllers\DataController.php on line 12.
+ 1 SYSTEMPATH\CodeIgniter.php(904): App\Controllers\DataController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(488): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-07-12 07:56:12 --> Too few arguments to function App\Controllers\DataController::__construct(), 0 passed in C:\xampp\htdocs\ci\system\CodeIgniter.php on line 904 and exactly 1 expected
+in APPPATH\Controllers\DataController.php on line 12.
+ 1 SYSTEMPATH\CodeIgniter.php(904): App\Controllers\DataController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(488): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-07-12 07:57:08 --> Too few arguments to function App\Controllers\DataController::__construct(), 0 passed in C:\xampp\htdocs\ci\system\CodeIgniter.php on line 904 and exactly 1 expected
+in APPPATH\Controllers\DataController.php on line 12.
+ 1 SYSTEMPATH\CodeIgniter.php(904): App\Controllers\DataController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(488): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-07-12 07:57:52 --> Too few arguments to function App\Controllers\DataController::__construct(), 0 passed in C:\xampp\htdocs\ci\system\CodeIgniter.php on line 904 and exactly 1 expected
+in APPPATH\Controllers\DataController.php on line 12.
+ 1 SYSTEMPATH\CodeIgniter.php(904): App\Controllers\DataController->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(488): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()

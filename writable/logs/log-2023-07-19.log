@@ -1,0 +1,38 @@
+ERROR - 2023-07-19 15:16:19 --> mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`newdb`.`seminars`, CONSTRAINT `seminars_ibfk_1` FOREIGN KEY (`owner`) REFERENCES `users` (`id`)) in C:\xampp\htdocs\ci\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\xampp\htdocs\ci\system\Database\MySQLi\Connection.php(295): mysqli->query('INSERT INTO `se...', 0)
+#1 C:\xampp\htdocs\ci\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `se...')
+#2 C:\xampp\htdocs\ci\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `se...')
+#3 C:\xampp\htdocs\ci\system\Database\BaseBuilder.php(2309): CodeIgniter\Database\BaseConnection->query('INSERT INTO `se...', Array, false)
+#4 C:\xampp\htdocs\ci\system\Model.php(330): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\xampp\htdocs\ci\system\BaseModel.php(782): CodeIgniter\Model->doInsert(Array)
+#6 C:\xampp\htdocs\ci\system\Model.php(730): CodeIgniter\BaseModel->insert(Array, false)
+#7 C:\xampp\htdocs\ci\system\BaseModel.php(692): CodeIgniter\Model->insert(Array, false)
+#8 C:\xampp\htdocs\ci\app\Controllers\SeminarController.php(25): CodeIgniter\BaseModel->save(Array)
+#9 C:\xampp\htdocs\ci\system\CodeIgniter.php(932): App\Controllers\SeminarController->create()
+#10 C:\xampp\htdocs\ci\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\SeminarController))
+#11 C:\xampp\htdocs\ci\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\ci\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#13 {main}
+CRITICAL - 2023-07-19 15:16:19 --> Cannot add or update a child row: a foreign key constraint fails (`newdb`.`seminars`, CONSTRAINT `seminars_ibfk_1` FOREIGN KEY (`owner`) REFERENCES `users` (`id`))
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('INSERT INTO `seminars` (`owner`, `title`, `venue`, `date`) VALUES (\'richieowner\', \'test3\', \'sinait\', \'\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `seminars` (`owner`, `title`, `venue`, `date`) VALUES (\'richieowner\', \'test3\', \'sinait\', \'\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `seminars` (`owner`, `title`, `venue`, `date`) VALUES (\'richieowner\', \'test3\', \'sinait\', \'\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2309): CodeIgniter\Database\BaseConnection->query('INSERT INTO `seminars` (`owner`, `title`, `venue`, `date`) VALUES (:owner:, :title:, :venue:, :date:)', [...], false)
+ 5 SYSTEMPATH\Model.php(330): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(782): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(730): CodeIgniter\BaseModel->insert([...], false)
+ 8 SYSTEMPATH\BaseModel.php(692): CodeIgniter\Model->insert([...], false)
+ 9 APPPATH\Controllers\SeminarController.php(25): CodeIgniter\BaseModel->save([...])
+10 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\SeminarController->create()
+11 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\SeminarController))
+12 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-07-19 22:56:53 --> Undefined variable $username
+in APPPATH\Controllers\ProfileController.php on line 11.
+ 1 APPPATH\Controllers\ProfileController.php(11): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $username', 'C:\\xampp\\htdocs\\ci\\app\\Controllers\\ProfileController.php', 11)
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\ProfileController->admin()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ProfileController))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()

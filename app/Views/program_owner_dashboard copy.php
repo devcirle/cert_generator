@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Program Owner Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    
+</head>
+<body>
+    <h1>Program Owner Dashboard</h1>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    
+    <form action="<?php echo base_url(); ?>public/ownerprofile/SeminarController/create" method="post">
+        <div>
+            <input type="hidden" name="username" value="<?php echo $username; ?>">
+        </div>
+        <div>
+            <input type="text" name="title" placeholder="Seminar Title">
+        </div>
+        
+        <div>
+            <input type="text" name="venue" placeholder="Venue">
+        </div>
+
+        <div>
+            <input type="hidden" id="date" name="date">
+            <input type="text" id="dateRangePicker" name="daterange" value="01/01/2023 - 01/15/2023">
+
+            <script>
+                $(function() {
+                    var dateRangePicker = $('#dateRangePicker');
+                    dateRangePicker.daterangepicker({
+                        opens: 'left',
+                        autoUpdateInput: false,
+                        locale: {
+                            cancelLabel: 'Clear'
+                        }
+                    });
+
+                    dateRangePicker.on('apply.daterangepicker', function(ev, picker) {
+                        var startDate = picker.startDate;
+                        var endDate = picker.endDate;
+
+                        var dates = [];
+                        var currentDate = moment(startDate);
+
+                        while (currentDate.isSameOrBefore(endDate, 'day')) {
+                            dates.push(currentDate.format('YYYY-MM-DD'));
+                            currentDate.add(1, 'days');
+                        }
+
+                        $(this).val(startDate.format('MM/DD/YYYY') + ' - ' + endDate.format('MM/DD/YYYY'));
+                        $('#date').val(JSON.stringify(dates));
+                    });
+
+                    dateRangePicker.on('cancel.daterangepicker', function(ev, picker) {
+                        $(this).val('');
+                        $('#date').val('');
+                    });
+                });
+            </script>
+        </div>
+
+        <div>
+            <button type="submit" class="btn btn-success">Set Schedule</button>
+        </div>     
+    </form>
+
+</body>
+</html>
