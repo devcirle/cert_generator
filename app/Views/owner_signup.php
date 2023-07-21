@@ -10,7 +10,7 @@
   </head>
   <body>
     <div class="pc-admin-register-page">
-      <form class="main" action="<?php echo base_url(); ?>public/SignupController/store" method="post">
+    <?= form_open('SignupController/store'); ?>
         <b class="registration">REGISTRATION</b>
         
           
