@@ -21,8 +21,8 @@
                     </div>
                     <div>
                         <select name="role">
-                            <option>Admin</option>
-                            <option>Program Owner</option>
+                            <option value="1">Admin</option>
+                            <option value="2">Program Owner</option>
                         </select>
                     </div>
                     <div>
@@ -34,6 +34,8 @@
                     <div>
                         <button type="submit" class="btn btn-dark">Signup</button>
                     </div>
+                    <br>
+                    <a href="adminprofile">Back to homepage</a>
                 </form>
             </div>
         </div>

@@ -13,6 +13,12 @@ class SignupController extends Controller
         //echo view('newsignup', $data);
         //echo view('pre_reg_page', $data);
     }
+    public function adminsignup()
+    {
+        helper(['form']);
+        $data = [];
+        echo view ('signup', $data);
+    }
     
     public function store()
     {
