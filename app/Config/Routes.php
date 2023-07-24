@@ -45,7 +45,7 @@ $routes->get('/adminsignup', 'SignupController::adminsignup');
 
 $routes->match(['get', 'post'], 'SignupController/store', 'SignupController::store');
 $routes->match(['get', 'post'], 'SigninController/loginAuth', 'SigninController::loginAuth');
-$routes->match(['get', 'post'], 'ownerprofile/SeminarController/create', 'SeminarController::create');
+$routes->match(['get', 'post'], 'SeminarController/create', 'SeminarController::create');
 
 $routes->get('/signin', 'SigninController::index');
 $routes->get('/adminprofile', 'ProfileController::admin',['filter' => 'authGuard']);

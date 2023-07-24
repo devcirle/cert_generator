@@ -6,6 +6,9 @@ use App\Models\UserModel;
   
 class SeminarController extends Controller
 {
+    public function testfunc(){
+        echo "working";
+    }
     public function create()
     {
         helper(['form']);

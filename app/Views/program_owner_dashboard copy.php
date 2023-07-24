@@ -7,7 +7,7 @@
     <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
     <script src="js/seminar.js"></script>
     <title>Program Owner Dashboard</title>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <link rel="stylesheet" type="text/css" href="css/daterangepicker.css" />
 
 </head>
 <body>
@@ -16,13 +16,27 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     
     <h1>Program Owner Dashboard</h1>
+    
+    <div>
+        <h3>Title</h3>
+        <div>Date</div>
+        <div>Venue</div>
+        <div>
+            <select>
+                <option>Status</option>
+                <option>Upcoming</option>
+                <option>Ongoing</option>
+                <option>Ended</option>
+            </select>
+        </div>
+    </div>
+    
     <button id="btnOpenForm">Open Form</button>
-
+    
     <div class="form-popup-bg">
         <div class="form-container">
+            <form action="SeminarController/create" method="post">
             <button id="btnCloseForm" class="close-button">X</button>
-            
-            <?= form_open('SeminarController/create'); ?>
                 <div>
                     <input type="hidden" name="username" value="<?php echo $username; ?>">
                 </div>
@@ -39,15 +53,15 @@
                     <input type="text" class="picker" id="dateRangePicker" name="daterange" value="01/01/2023 - 01/15/2023">
 
                     <script>
-                        
                         $(function() {
                             var dateRangePicker = $('#dateRangePicker');
                             dateRangePicker.daterangepicker({
-                                opens: 'left',
+                                opens: 'center',
                                 autoUpdateInput: false,
                                 locale: {
                                     cancelLabel: 'Clear'
-                                }
+                                },
+                                parentEl: "body"
                             });
 
                             dateRangePicker.on('apply.daterangepicker', function(ev, picker) {
@@ -76,10 +90,10 @@
 
                 <div>
                     <button type="submit" class="btn btn-success">Set Schedule</button>
-                </div>     
+                </div>    
             </form>
+            </div>
         </div>
-    </div>
 
 </body>
 </html>

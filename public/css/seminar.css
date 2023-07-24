@@ -4,10 +4,6 @@ html, body {
   background-color: #fff;
 }
 
-.picker {
-    z-index: 9999;
-}
-
 .form-popup-bg {
   position:absolute;
   top: 0;
@@ -32,7 +28,6 @@ html, body {
   -moz-transition: opacity 0.3s 0s, visibility 0s 0.3s;
   transition: opacity 0.3s 0s, visibility 0s 0.3s;
   overflow-y: auto;
-  z-index: 10000;
 }
 .form-popup-bg.is-visible {
   opacity: 1;
