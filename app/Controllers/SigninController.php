@@ -12,55 +12,44 @@ class SigninController extends Controller
     } 
   
     public function loginAuth()
-{
-    $session = session();
-    $userModel = new UserModel();
-    $username = $this->request->getVar('username');
-    $password = $this->request->getVar('password');
-    
-    $data = $userModel->where('username', $username)->first();
-    
-    if ($data) {
-        $pass = $data['password'];
-        $authenticatePassword = password_verify($password, $pass);
+    {
+        $session = session();
+        $userModel = new UserModel();
+        $username = $this->request->getVar('username');
+        $password = $this->request->getVar('password');
         
-        if ($authenticatePassword) {
-            $ses_data = [
-                'id' => $data['id'],
-                'username' => $data['username'],
-                'isLoggedIn' => true
-            ];
-            // admin account pre-added
+        $data = $userModel->where('username', $username)->first();
+        
+        if ($data) {
+            $pass = $data['password'];
+            $authenticatePassword = password_verify($password, $pass);
             
-            if ($data['role'] < 0) {
-                echo "Account Locked";
-            } elseif ($data['role'] > 1) {
-                $session->set($ses_data);
-                return redirect()->to('ownerprofile');
+            if ($authenticatePassword) {
+                $ses_data = [
+                    'id' => $data['id'],
+                    'username' => $data['username'],
+                    'isLoggedIn' => true
+                ];
+                // admin account pre-added
+                
+                if ($data['role'] < 0) {
+                    $session->setFlashdata('msg', 'Account is locked.');
+                    return redirect()->to('signin');
+                } elseif ($data['role'] > 1) {
+                    $session->set($ses_data);
+                    return redirect()->to('ownerprofile');
+                } else {
+                    $session->set($ses_data);
+                    return redirect()->to('adminprofile');
+                }
             } else {
-                $session->set($ses_data);
-                return redirect()->to('adminprofile');
+                $session->setFlashdata('msg', 'Password is incorrect.');
+                return redirect()->to('signin');
             }
-            
-
-            /*
-            // Check the role of the user
-            if ($data['role'] === 'Admin') {
-                $session->set($ses_data);
-                return redirect()->to('public/adminprofile');
-            } elseif ($data['role'] === 'Program Owner') {
-                $session->set($ses_data);
-                return redirect()->to('public/ownerprofile');
-            }
-            */
         } else {
-            $session->setFlashdata('msg', 'Password is incorrect.');
+            $session->setFlashdata('msg', 'User does not exist.');
             return redirect()->to('signin');
         }
-    } else {
-        $session->setFlashdata('msg', 'User does not exist.');
-        return redirect()->to('signin');
     }
-}
 
 }
