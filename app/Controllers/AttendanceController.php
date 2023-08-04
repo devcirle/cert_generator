@@ -13,14 +13,14 @@ class AttendanceController extends Controller
     {
         helper(['form']);
         //$seminarModel = new SeminarsModel();
-        
+
         $userModel = new UserModel();
-        
+
         $userId = 2;
         $users = $userModel->getProgramOwners($userId);
-        
+
         //$seminars = $seminarModel->findAll();
-        
+
         //$data['seminars'] = $seminars;
         $data['users'] = $users;
 
@@ -45,8 +45,21 @@ class AttendanceController extends Controller
             'age' => $this->request->getVar('age'),
             'pre_reg' => $formattedDate
         ];
+        
+        //Random Code Generator
+        $length = 4; // Desired length of the random string
+        $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'; // Define the characters to choose from
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, strlen($characters) - 1)];
+        }
+        $year = $currentDate->format('Y');
+        $startIndex = 2;
+        $formattedYear = mb_substr($year, $startIndex);
 
+        $uniqueCode = 'SDOIN-' . $randomString . $formattedYear;
+        
         $attendeesModel->save($data);
-        echo "Pre-registered Successfully";
+        echo $uniqueCode;
     }
 }
