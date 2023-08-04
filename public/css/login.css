@@ -70,3 +70,8 @@ body {
   background-color: #1c658f;
   color: #ffffff;
 }
+
+.btnlogin:focus {
+  background-color: #1c658f;
+  color: #ffffff;
+}
