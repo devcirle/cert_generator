@@ -6,9 +6,6 @@ use App\Models\UserModel;
   
 class SeminarController extends Controller
 {
-    public function testfunc(){
-        echo "working";
-    }
     public function create()
     {
         helper(['form']);
@@ -31,10 +28,10 @@ class SeminarController extends Controller
                 'date' => $this->request->getVar('date')
             ];
             $seminarModel->save($data);
-            return redirect()->to('ownerprofile');
+            return redirect()->to('dashboard');
         }else{
             $data['validation'] = $this->validator;
-            echo view('ownerprofile', $data);
+            echo view('dashboard', $data);
         }
     }
 }

@@ -19,4 +19,9 @@ class UserModel extends Model
     {
         return $this->where('username', $username)->get()->getRow();
     }
+
+    public function getProgramOwners($role)
+    {
+        return $this->where('role', $role)->findAll();
+    }
 }

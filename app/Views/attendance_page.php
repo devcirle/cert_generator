@@ -32,7 +32,7 @@
 </head>
 <body>
     
-    <form method="POST" action="<?= site_url('register') ?>">
+    <?= form_open('#'); ?>
         <div class="container">
             <div class="title">
                 <div>
@@ -42,11 +42,21 @@
                     <h2>SYSTEM ADMIN</h2>
                 </div>
             </div>
+            <div class="district">
+                District
+                <input type=text id="district" name="district" required>
+            </div>
             <div class="user">
                 <input type=text id="username" name="username" required>
             </div>
-            <div class="pass">
-                <input type=password id="password" name="password" required>
+            <div class="user">
+                <input type=text id="username" name="username" required>
+            </div>
+            <div class="user">
+                <input type=text id="username" name="username" required>
+            </div>
+            <div class="user">
+                <input type=text id="username" name="username" required>
             </div>
             
             <div class="role">

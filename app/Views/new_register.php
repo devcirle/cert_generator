@@ -10,36 +10,54 @@
   </head>
   <body>
     <div class="pc-admin-register-page">
-    <?= form_open('SignupController/store'); ?>
+      <?= form_open('new_register'); ?>
         <b class="registration">REGISTRATION</b>
-        
-          
-          <div class="fields">
-          <input type="hidden" name="role" value="2">
+        <div class="main-child"></div>
+
+        <div class="namefield">
           <div class="name">Name</div>
           <div class="full-name">
             <img class="vector-icon" alt="" src="vector.svg">
             <input class="inputname" type="text" placeholder="Enter your full name">
           </div>
+        </div>
+
+        <div class="rolefield">
+            <div class="role">Role</div>
+            <div class="select-container">
+                <select name="role">
+                  <option value="1">Admin</option>
+                  <option value="2">Program Owner</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="fields">
           <div class="username">
             <div class="username1">Username</div>
             <div class="usernamefield">
               <img class="vector-icon1" alt="" src="vector1.svg">
-              <input class="enter-username" name="username" type="username" placeholder="Enter username">
+              <input class="enter-username" name="username" type="username" placeholder="Enter username" required value="<?= isset($_SESSION['prev_username']) ? $_SESSION['prev_username'] : '' ?>">
             </div>
           </div>
           <div class="username">
             <div class="password1">Password</div>
             <div class="usernamefield">
               <img class="vector-icon1" alt="" src="vector2.svg">
-              <input class="input-password" name="password" type="password" placeholder="Input password">
+              <input class="input-password" name="password" type="password" placeholder="Input password" required>
+              <?php if (isset($validation) && $validation->getError('confirmpassword')): ?>
+              <div class="error-message"><?= $validation->getError('confirmpassword') ?></div>
+              <?php endif; ?>
             </div>
           </div>
           <div class="username">
             <div class="confirm-password">Confirm Password</div>
             <div class="confirmationfield">
               <img class="vector-icon1" alt="" src="vector3.svg">
-              <input class="input-password1" name="confirmpassword" type="password" placeholder="Input password">
+              <input class="input-password1" name="confirmpassword" type="password" placeholder="Input password" required>
+              <?php if (isset($validation) && $validation->getError('confirmpassword')): ?>
+              <div class="error-message"><?= $validation->getError('confirmpassword') ?></div>
+              <?php endif; ?>
             </div>
           </div>
         </div>
@@ -47,6 +65,7 @@
         <div class="buttonregister">
           <button class="register1">REGISTER</button>
         </div>
+        
       </form>
     </div>
   </body>

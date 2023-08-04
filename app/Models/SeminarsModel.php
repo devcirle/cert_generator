@@ -15,4 +15,13 @@ class SeminarsModel extends Model
         'venue', 
         'created_at'
     ];
+    public function getData($id)
+    {
+        return $this->where('id', $id)->findAll();
+    }
+
+    public function getSeminar($owner)
+    {
+        return $this->where('owner', $owner)->findAll();
+    }
 }
