@@ -45,7 +45,7 @@ class AttendanceController extends Controller
             'age' => $this->request->getVar('age'),
             'pre_reg' => $formattedDate
         ];
-        
+
         //Random Code Generator
         $length = 4; // Desired length of the random string
         $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'; // Define the characters to choose from
@@ -61,5 +61,14 @@ class AttendanceController extends Controller
         
         $attendeesModel->save($data);
         echo $uniqueCode;
+    }
+
+    public function attendance()
+    {
+        helper(['form']);
+        /*updates the attendance date of the attendee
+        if the attendee attends a seminar
+        */
+
     }
 }

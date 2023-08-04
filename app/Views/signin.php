@@ -31,7 +31,7 @@
             <?= session()->getFlashdata('msg') ?>
           </div>
         <?php endif; ?>
-        <?= form_open('SigninController/loginAuth'); ?>
+        <?= form_open('loginAuth'); ?>
 
         <div class="content">
           <div class="logos">

@@ -11,7 +11,7 @@
         <h1>Github test</h1>
         <a href="home">Logout</a>
         <br>
-        <a href="new_register">Create new Admin/Owner accounts</a>
+        <a href="addAccount">Create new Admin/Owner accounts</a>
         <h2><?php echo $username;?></h2>
     </div>
 </body>
