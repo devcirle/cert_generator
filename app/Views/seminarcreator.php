@@ -15,8 +15,7 @@
 <div class="form-popup-bg">
   <div class="form-container">
     <button id="btnCloseForm" class="close-button">X</button>
-    <h1>Contact Us</h1>
-    <p>For more information. Please complete this form.</p>
+
     <form action="">
       <div class="form-group">
         <label for="">Name</label>
@@ -36,6 +35,7 @@
       </div>
       <button>Submit</button>
     </form>
+    
   </div>
 </div>
 </body>

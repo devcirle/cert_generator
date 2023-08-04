@@ -9,8 +9,6 @@
         <link rel="stylesheet" href="">
     </head>
     <body>
-        <a href="ownersignup">Create Account</a>
-        <br>
-        <a href="signin">Sign In</a>
+        <h2>Certificate Generator</h2>
     </body>
 </html>

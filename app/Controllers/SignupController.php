@@ -9,24 +9,16 @@ class SignupController extends Controller
     {
         helper(['form']);
         $data = [];
-        echo view('owner_signup', $data);
-        //echo view('newsignup', $data);
-        //echo view('pre_reg_page', $data);
-    }
-    public function adminsignup()
-    {
-        helper(['form']);
-        $data = [];
-        echo view ('signup', $data);
+        echo view ('new_register', $data);
     }
     
     public function store()
     {
         helper(['form']);
         $rules = [
-            'username'          => 'required|min_length[2]|max_length[50]',
-            'password'      => 'required|min_length[4]|max_length[50]',
-            'confirmpassword'  => 'matches[password]'
+            'username' => 'required|min_length[2]|max_length[50]',
+            'password' => 'required|min_length[4]|max_length[50]',
+            'confirmpassword' => 'matches[password]'
         ];
           
         if($this->validate($rules)){
@@ -37,12 +29,14 @@ class SignupController extends Controller
                 'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT)
             ];
             $userModel->save($data);
-            return redirect()->to('signin');
+            return redirect()->to('home');
         }else{
             $data['validation'] = $this->validator;
-            echo view('signup', $data);
+            // Store the previously inserted data in session
+            $_SESSION['prev_username'] = $this->request->getVar('username');
+            $_SESSION['prev_role'] = $this->request->getVar('role');
+            // Load the view again and pass the data containing the error message
+            return view('new_register', $data);
         }
-          
     }
-  
 }
