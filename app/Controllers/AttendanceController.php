@@ -9,7 +9,12 @@ use App\Models\UserModel;
 
 class AttendanceController extends Controller
 {
+    
     public function index()
+    {
+        return view('clienthome');
+    }
+    public function viewseminars()
     {
         helper(['form']);
         //$seminarModel = new SeminarsModel();
