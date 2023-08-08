@@ -10,7 +10,8 @@ class AccountController extends Controller
     public function index()
     {
         helper(['form']);
-        return view('signin');
+        return view('signin'); //default value
+        //return view('certificate_mockup');
     }
 
     //Checks if the Account used is Admin or Program Owner

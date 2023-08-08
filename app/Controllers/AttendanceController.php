@@ -6,7 +6,6 @@ use CodeIgniter\Controller;
 use App\Models\AttendeesModel;
 use App\Models\UserModel;
 
-
 class AttendanceController extends Controller
 {
     public function index()
@@ -34,18 +33,7 @@ class AttendanceController extends Controller
         $attendeesModel = new AttendeesModel();
         $currentDate = new \DateTime();
         $formattedDate = $currentDate->format('Y-m-d');
-        $data = [
-            'seminar' => $this->request->getVar('seminar'),
-            'district' => $this->request->getVar('district'),
-            'school' => $this->request->getVar('school'),
-            'name' => $this->request->getVar('name'),
-            'position' => $this->request->getVar('position'),
-            'contact' => $this->request->getVar('contact'),
-            'gender' => $this->request->getVar('gender'),
-            'age' => $this->request->getVar('age'),
-            'pre_reg' => $formattedDate
-        ];
-
+        
         //Random Code Generator
         $length = 4; // Desired length of the random string
         $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'; // Define the characters to choose from
@@ -58,6 +46,20 @@ class AttendanceController extends Controller
         $formattedYear = mb_substr($year, $startIndex);
 
         $uniqueCode = 'SDOIN-' . $randomString . $formattedYear;
+
+        $data = [
+            'seminar' => $this->request->getVar('seminar'),
+            'district' => $this->request->getVar('district'),
+            'school' => $this->request->getVar('school'),
+            'name' => $this->request->getVar('name'),
+            'position' => $this->request->getVar('position'),
+            'contact' => $this->request->getVar('contact'),
+            'gender' => $this->request->getVar('gender'),
+            'age' => $this->request->getVar('age'),
+            'pre_reg' => $formattedDate,
+            'code' => $uniqueCode
+        ];
+
         
         $attendeesModel->save($data);
         echo $uniqueCode;
@@ -69,6 +71,5 @@ class AttendanceController extends Controller
         /*updates the attendance date of the attendee
         if the attendee attends a seminar
         */
-
     }
 }
