@@ -37,7 +37,8 @@ $routes->match(['get', 'post'], 'addAccount', 'AccountController::storeAccount')
 $routes->match(['get', 'post'], 'SeminarController/create', 'SeminarController::create');
 
 /* Attendance Controller Routes */
-$routes->match(['get', 'post'], 'preregister', 'AttendanceController::index');
+$routes->get('/', 'AttendanceController::index');
+$routes->match(['get', 'post'], 'preregister', 'AttendanceController::viewseminars');
 $routes->match(['get', 'post'], 'preregister/success', 'AttendanceController::register');
 
 
