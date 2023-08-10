@@ -12,6 +12,7 @@ class AccountController extends Controller
         helper(['form']);
         return view('signin'); //default value
         //return view('certificate_mockup');
+        //return view('admin_dashboard');
     }
 
     //Checks if the Account used is Admin or Program Owner
@@ -38,7 +39,7 @@ class AccountController extends Controller
 
                 if ($data['role'] < 0) {
                     echo "Account Locked";
-                } else{
+                } else {
                     $session->set($ses_data);
                     return redirect()->to('dashboard');
                 }
@@ -103,5 +104,34 @@ class AccountController extends Controller
             // Load the view again and pass the data containing the error message
             return view('addAccount', $data);
         }
+    }
+
+    //Sets the state of an program owner account
+    public function setAccount()
+    {
+        helper(['form']);
+        $userModel = new UserModel();
+        $data = $userModel->getAllUser();
+
+        return view('setAccount', ['data' => $data]);
+    }
+
+    public function updateAccountRole()
+    {
+        helper(['form']);
+        $userModel = new UserModel();
+
+        $userRoles = $this->request->getPost('role');
+
+        if (!empty($userRoles) && is_array($userRoles)) {
+            foreach ($userRoles as $userId => $role) {
+                // Update user roles in the database
+                $userModel->updateRole($userId, $role);
+            }
+            // Add a success message or redirect after updating
+            echo "Updated Successfully";
+        }
+        echo "Failed Update";
+
     }
 }

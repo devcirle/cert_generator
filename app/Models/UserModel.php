@@ -9,9 +9,9 @@ class UserModel extends Model
     protected $table = 'users';
     protected $primaryKey = 'id';
     protected $allowedFields = [
-        'username', 
-        'password', 
-        'role', 
+        'username',
+        'password',
+        'role',
         'created_at'
     ];
 
@@ -20,8 +20,20 @@ class UserModel extends Model
         return $this->where('username', $username)->get()->getRow();
     }
 
+    public function getAllUser()
+    {
+        return $this->findAll();
+    }
+
     public function getProgramOwners($role)
     {
         return $this->where('role', $role)->findAll();
+    }
+
+    public function updateRole($id, $newRole)
+    {
+        $this->where('id', $id)
+            ->set('role', $newRole)
+            ->update();
     }
 }

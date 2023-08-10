@@ -22,6 +22,7 @@ $routes->set404Override();
  */
 $routes->get('api/getUserSeminars/(:num)', 'Api::getUserSeminars/$1');
 
+
 //********************
 
 $routes->get('home', 'AccountController::index');
@@ -29,6 +30,9 @@ $routes->match(['get', 'post'], 'loginAuth', 'AccountController::loginAuth');
 $routes->match(['get', 'post'], 'dashboard', 'AccountController::login', ['filter' => 'authGuard']);
 $routes->get('addAccount', 'AccountController::addAccount');
 $routes->match(['get', 'post'], 'addAccount', 'AccountController::storeAccount');
+
+$routes->get('setAccount', 'AccountController::setAccount');
+$routes->match(['get', 'post'], 'setAccount', 'AccountController::updateAccountRole');
 
 //********************
 
@@ -40,6 +44,9 @@ $routes->match(['get', 'post'], 'SeminarController/create', 'SeminarController::
 $routes->get('/', 'AttendanceController::index');
 $routes->match(['get', 'post'], 'preregister', 'AttendanceController::viewseminars');
 $routes->match(['get', 'post'], 'preregister/success', 'AttendanceController::register');
+
+$routes->get('datatable', 'DataController::index');
+$routes->get('datatable/get_data', 'DataController::get_data');
 
 
 

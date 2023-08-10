@@ -16,6 +16,7 @@
 
 <body>
     <h1>Restrict Account</h1>
+    <?= form_open('setAccount'); ?>
     <table id="datatable" class="display">
         <thead>
             <tr>
@@ -28,7 +29,7 @@
         <tbody>
             <?php foreach ($data as $row): ?>
                 <tr>
-                    <td>
+                    <td name="username">
                         <?= $row['username']; ?>
                     </td>
 
@@ -45,28 +46,26 @@
                     </td>
 
                     <td>
-                        <select>
-                            <option value="<?= $row['role']; ?>" selected><?php
-                              if ($row['role'] == "1") {
-                                  echo "Admin";
-                              } elseif ($row['role'] == "2") {
-                                  echo "Program Owner";
-                              } else {
-                                  echo "Account Locked";
-                              }
-                              ?></option>
+                        <?php
+                        if ($row['role'] == 1) { ?>
+                            <input type="radio" id="admin_<?= $row['id']; ?>" name="role[<?= $row['id']; ?>]" value="1"
+                                <?= $row['role'] == 1 ? 'checked' : ''; ?>>
+                            <label for="admin_<?= $row['id']; ?>">Admin</label>
+                            <input type="radio" id="account_locked_<?= $row['id']; ?>" name="role[<?= $row['id']; ?>]"
+                                value="-1" <?= $row['role'] == -1 ? 'checked' : ''; ?>>
+                            <label for="account_locked_<?= $row['id']; ?>">Account Locked</label>
                             <?php
-                            if ($row['role'] !== '1') {
-                                echo '<option value="1">Admin</option>';
-                            }
-                            if ($row['role'] !== '2') {
-                                echo '<option value="2">Program Owner</option>';
-                            }
-                            if ($row['role'] !== '-1') {
-                                echo '<option value="-1">Account Locked</option>';
-                            }
-                            ?>
-                        </select>
+                        } elseif ($row['role'] == 2 or $row['role'] < 0) { ?>
+                            <input type="radio" id="program_owner_<?= $row['id']; ?>" name="role[<?= $row['id']; ?>]" value="2"
+                                <?= $row['role'] == 2 ? 'checked' : ''; ?>>
+                            <label for="program_owner_<?= $row['id']; ?>">Program Owner</label>
+
+                            <input type="radio" id="account_locked_<?= $row['id']; ?>" name="role[<?= $row['id']; ?>]"
+                                value="-1" <?= $row['role'] == -1 ? 'checked' : ''; ?>>
+                            <label for="account_locked_<?= $row['id']; ?>">Account Locked</label>
+                            <?php
+                        }
+                        ?>
                     </td>
 
                 </tr>
@@ -75,15 +74,27 @@
     </table>
 
     <div class="buttons">
-        <button>Cancel</button>
-        <button>Save Changes</button>
+        <button type="submit" id="roleChangeButton">Save Changes</button>
     </div>
+
+    </form>
+
 
     <script>
         $(document).ready(function () {
             $('#datatable').DataTable();
         });
+
+        // Add a confirmation dialog before submitting the form
+        document.getElementById("roleChangeButton").addEventListener("click", function (event) {
+            var confirmed = confirm("Are you sure you want to save the changes?");
+            if (!confirmed) {
+                event.preventDefault(); // Cancel form submission
+            }
+        });
+
     </script>
+
 </body>
 
 </html>
