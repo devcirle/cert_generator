@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controllers;
 
 use App\Models\SeminarsModel;
@@ -9,9 +10,10 @@ use App\Models\UserModel;
 
 class AttendanceController extends Controller
 {
-    
+
     public function index()
     {
+        //return view('clienthome');
         return view('clienthome');
     }
     public function viewseminars()
@@ -63,9 +65,27 @@ class AttendanceController extends Controller
         $formattedYear = mb_substr($year, $startIndex);
 
         $uniqueCode = 'SDOIN-' . $randomString . $formattedYear;
-        
+
         $attendeesModel->save($data);
         echo $uniqueCode;
+    }
+
+    public function eventspage()
+    {
+        helper(['form']);
+        /*updates the attendance date of the attendee
+        if the attendee attends a seminar
+        */
+        return view('eventspage');
+    }
+
+    public function certificates()
+    {
+        helper(['form']);
+        /*updates the attendance date of the attendee
+        if the attendee attends a seminar
+        */
+        return view('certificates');
     }
 
     public function attendance()
@@ -74,6 +94,6 @@ class AttendanceController extends Controller
         /*updates the attendance date of the attendee
         if the attendee attends a seminar
         */
-
+        return view('attendance');
     }
 }
