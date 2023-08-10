@@ -19,6 +19,7 @@ class AttendeesModel extends Model
         'age',
         'pre_reg',
         'date',
+        'code',
         'created_at'
     ];
 }
