@@ -89,10 +89,53 @@ class AttendanceController extends Controller
         }
     }
 
-    public function attendance()
+    public function attendanceView()
     {
         helper(['form']);
         return view('attendance');
+    }
+
+    public function doAttendance()
+    {
+        helper(['form']);
+        $attendeeModel = new AttendeesModel();
+        $seminarModel = new SeminarsModel();
+
+        $currentDate = new \DateTime();
+        $formattedDate = $currentDate->format('Y-m-d');
+
+        $first = $this->request->getVar('first');
+        $second = $this->request->getVar('second');
+        $third = $this->request->getVar('third');
+        $fourth = $this->request->getVar('fourth');
+        $fifth = $this->request->getVar('fifth');
+        $sixth = $this->request->getVar('sixth');
+
+        //concatenate the uniquecode
+        $attendanceCode = 'SDOIN-' . $first . $second . $third . $fourth . $fifth . $sixth;
+
+        $attendee = $attendeeModel->where('code', $attendanceCode)->first();
+
+        $attendeeDateStatus = $attendee['date'];
+
+        if ($attendee) {
+            $seminarNum = $attendee['seminar'];
+
+            //gets the seminar row
+            $seminar = $seminarModel->where('id', $seminarNum)->first();
+
+            $seminarDate = json_decode($seminar['date']);
+
+            if (in_array($formattedDate, $seminarDate)) {
+                //attended
+                // $attendee['date'] = $attendeeDateStatus . 
+                echo "current date is on seminar date";
+            } else {
+                //alert
+                echo "current date is not on seminar date";
+            }
+
+        }
     }
 
     public function eventspage()

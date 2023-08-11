@@ -44,8 +44,8 @@ $routes->match(['get', 'post'], 'SeminarController/create', 'SeminarController::
 $routes->get('/', 'AttendanceController::index');
 $routes->match(['get', 'post'], 'events', 'AttendanceController::eventspage');
 
-$routes->match(['get', 'post'], 'attendance', 'AttendanceController::attendance');
-$routes->match(['get', 'post'], 'attendance/success', 'AttendanceController::attendance');
+$routes->match(['get', 'post'], 'attendance', 'AttendanceController::attendanceView');
+$routes->match(['get', 'post'], 'attendance/success', 'AttendanceController::doAttendance');
 
 $routes->match(['get', 'post'], 'preregister', 'AttendanceController::viewseminars');
 $routes->match(['get', 'post'], 'preregister/success', 'AttendanceController::register');
@@ -54,8 +54,6 @@ $routes->match(['get', 'post'], 'certificates', 'AttendanceController::certifica
 
 $routes->get('datatable', 'DataController::index');
 $routes->get('datatable/get_data', 'DataController::get_data');
-
-$routes->get('attend', 'AttendanceController::attendance');
 
 
 

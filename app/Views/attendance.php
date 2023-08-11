@@ -48,6 +48,7 @@
     </div>
     <hr>
 
+    <?= form_open('attendance/success') ?>
 
     <div class="container d-flex justify-content-center align-items-center">
         <div class="position-relative">
@@ -58,12 +59,18 @@
                     <small><i>e.g. SDOIN-<i><b>CODE23</b></i></small>
                 </div>
                 <div id="otp" class="inputs d-flex flex-row justify-content-center mt-2">
-                    <input class="m-2 text-center form-control rounded" type="text" id="first" maxlength="1" />
-                    <input class="m-2 text-center form-control rounded" type="text" id="second" maxlength="1" />
-                    <input class="m-2 text-center form-control rounded" type="text" id="third" maxlength="1" />
-                    <input class="m-2 text-center form-control rounded" type="text" id="fourth" maxlength="1" />
-                    <input class="m-2 text-center form-control rounded" type="text" id="fifth" maxlength="1" />
-                    <input class="m-2 text-center form-control rounded" type="text" id="sixth" maxlength="1" />
+                    <input name="first" class="m-2 text-center form-control rounded" type="text" id="first"
+                        maxlength="1" />
+                    <input name="second" class="m-2 text-center form-control rounded" type="text" id="second"
+                        maxlength="1" />
+                    <input name="third" class="m-2 text-center form-control rounded" type="text" id="third"
+                        maxlength="1" />
+                    <input name="fourth" class="m-2 text-center form-control rounded" type="text" id="fourth"
+                        maxlength="1" />
+                    <input name="fifth" class="m-2 text-center form-control rounded" type="text" id="fifth"
+                        maxlength="1" />
+                    <input name="sixth" class="m-2 text-center form-control rounded" type="text" id="sixth"
+                        maxlength="1" />
                 </div>
                 <div class="mt-4">
                     <button class="btn px-4 validate">SUBMIT</button>
