@@ -88,14 +88,37 @@ class AttendanceController extends Controller
         }
     }
 
-
-
-
     public function attendance()
     {
         helper(['form']);
-        /*updates the attendance date of the attendee
-        if the attendee attends a seminar
+    }
+
+    public function eventspage()
+    {
+        helper(['form']);
+        $userModel = new UserModel();
+        $userData = $userModel->getAllUser();
+
+        $seminarModel = new SeminarsModel();
+        $seminars = $seminarModel->getAll();
+
+        foreach ($seminars as &$seminar) {
+            $userKey = array_search($seminar['id'], array_column($userData, 'id'));
+            if ($userKey !== false) {
+                $seminar['registeredBy'] = $userData[$userKey]['username'];
+            }
+        }
+
+        return view('eventspage', ['seminars' => $seminars, 'user' => $userData]);
+
+    }
+
+    public function certificates()
+    {
+        helper(['form']);
+        /*updates the attendance date of the attendee	
+        if the attendee attends a seminar	
         */
+        return view('certificate_mockup');
     }
 }

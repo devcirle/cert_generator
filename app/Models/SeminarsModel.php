@@ -9,10 +9,10 @@ class SeminarsModel extends Model
     protected $table = 'seminars';
     protected $primaryKey = 'id';
     protected $allowedFields = [
-        'owner', 
-        'title', 
+        'owner',
+        'title',
         'date',
-        'venue', 
+        'venue',
         'created_at'
     ];
     public function getData($id)
@@ -23,5 +23,10 @@ class SeminarsModel extends Model
     public function getSeminar($owner)
     {
         return $this->where('owner', $owner)->findAll();
+    }
+
+    public function getAll()
+    {
+        return $this->findAll();
     }
 }
