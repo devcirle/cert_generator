@@ -10,11 +10,13 @@ class SeminarsModel extends Model
     protected $primaryKey = 'id';
     protected $allowedFields = [
         'owner',
+        'status',
         'title',
         'date',
         'venue',
         'created_at'
     ];
+
     public function getData($id)
     {
         return $this->where('id', $id)->findAll();

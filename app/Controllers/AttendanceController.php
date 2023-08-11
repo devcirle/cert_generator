@@ -13,6 +13,7 @@ class AttendanceController extends Controller
     {
         return view('clienthome');
     }
+
     public function viewseminars()
     {
         helper(['form']);
@@ -91,6 +92,7 @@ class AttendanceController extends Controller
     public function attendance()
     {
         helper(['form']);
+        return view('attendance');
     }
 
     public function eventspage()
@@ -103,10 +105,9 @@ class AttendanceController extends Controller
         $seminars = $seminarModel->getAll();
 
         foreach ($seminars as &$seminar) {
-            $userKey = array_search($seminar['id'], array_column($userData, 'id'));
-            if ($userKey !== false) {
-                $seminar['registeredBy'] = $userData[$userKey]['username'];
-            }
+            $userKey = array_search($seminar['owner'], array_column($userData, 'id'));
+
+            $seminar['registeredBy'] = $userData[$userKey]['username'];
         }
 
         return view('eventspage', ['seminars' => $seminars, 'user' => $userData]);

@@ -4,12 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel=stylesheet href="css/eventspage.css">
+    <link rel=stylesheet href="css/header.css">
+
     <title>Document</title>
 </head>
 
 <body>
-    <h1></h1>
     <div class="header">
         <div class="logos">
             <img class="logocontainer" src="images/logos.png" alt="">
@@ -38,33 +40,32 @@
         </div>
     </div>
     <hr>
-    <?= form_open(''); ?>
+    <?= form_open('attendance'); ?>
     <div class="content">
         <?php foreach ($seminars as $card): ?>
-            <ul class="cards">
-                <li class="cards__item">
-                    <div class="card">
-                        <div class="card__image card__image--fence"></div>
-                        <div class="card__content">
-                            <div class="card__title">
-                                <?= $card['title']; ?>
-                            </div>
-                            <p class="card__text">
-                                <?php if (isset($card['registeredBy'])): ?>
-                                <p>Created By:
-                                    <?php echo $card['registeredBy']; ?>
-                                </p>
-                            <?php endif; ?>
-                            <br>
-                            <?= $card['venue']; ?>
-                            <br>
-                            <?= $card['date']; ?>
-                            </p>
-                            <button class="btn btn--block card__btn">Attend</button>
+            <div class="cards">
+                <div class="card">
+                    <div class="card__content">
+                        <div class="card__title">
+                            <?= $card['title']; ?>
                         </div>
+                        <p class="card__text">
+                            <?php if (isset($card['registeredBy'])): ?>
+                            <p>Created By:
+                                <b>
+                                    <?php echo $card['registeredBy']; ?>
+                                </b>
+                            </p>
+                        <?php endif; ?>
+                        <br>
+                        <?= $card['venue']; ?>
+                        <br>
+                        <?= $card['date']; ?>
+                        </p>
+                        <button class="btn">Attend</button>
                     </div>
-                </li>
-            </ul>
+                </div>
+            </div>
         <?php endforeach; ?>
     </div>
     </form>
