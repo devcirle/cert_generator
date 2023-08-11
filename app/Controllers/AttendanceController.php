@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controllers;
 
 use App\Models\SeminarsModel;
@@ -10,10 +9,8 @@ use App\Models\UserModel;
 class AttendanceController extends Controller
 {
 
-
     public function index()
     {
-        //return view('clienthome');
         return view('clienthome');
     }
     public function viewseminars()
@@ -52,7 +49,7 @@ class AttendanceController extends Controller
         $formattedDate = $currentDate->format('Y-m-d');
 
         // Random Code Generator
-        $length = 1; // Desired length of the random string
+        $length = 4; // Desired length of the random string
 
         $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'; // Define the characters to choose from
 
@@ -60,25 +57,40 @@ class AttendanceController extends Controller
         $startIndex = 2;
         $formattedYear = mb_substr($year, $startIndex);
 
-        $uniqueCode = 'SDOIN-' . $randomString . $formattedYear;
+        $isUnique = false;
+        $uniqueCode = '';
 
-        $data = [
-            'seminar' => $this->request->getVar('seminar'),
-            'district' => $this->request->getVar('district'),
-            'school' => $this->request->getVar('school'),
-            'name' => $this->request->getVar('name'),
-            'position' => $this->request->getVar('position'),
-            'contact' => $this->request->getVar('contact'),
-            'gender' => $this->request->getVar('gender'),
-            'age' => $this->request->getVar('age'),
-            'pre_reg' => $formattedDate,
-            'code' => $uniqueCode
-        ];
+        while (!$isUnique) {
+            $uniqueCode = 'SDOIN-' . $this->randomGenerator($characters, $length) . $formattedYear;
+            // Check if the unique code already exists in the model
+            $existingCode = $attendeesModel->where('code', $uniqueCode)->first();
+            if (!$existingCode) {
+                $isUnique = true;
 
+                $data = [
+                    'seminar' => $this->request->getVar('seminar'),
+                    'district' => $this->request->getVar('district'),
+                    'school' => $this->request->getVar('school'),
+                    'name' => $this->request->getVar('name'),
+                    'position' => $this->request->getVar('position'),
+                    'contact' => $this->request->getVar('contact'),
+                    'gender' => $this->request->getVar('gender'),
+                    'age' => $this->request->getVar('age'),
+                    'pre_reg' => $formattedDate,
+                    'code' => $uniqueCode
+                ];
 
-        $attendeesModel->save($data);
-        echo $uniqueCode;
+                $attendeesModel->save($data); // Found a unique code, exit the loop
+            } else {
+                $isUnique = true;
+                echo "No more available codes";
+            }
+        }
     }
+
+
+
+
     public function attendance()
     {
         helper(['form']);
