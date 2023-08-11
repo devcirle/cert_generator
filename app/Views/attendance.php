@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="css/global.css">
     <title>Document</title>
 </head>
- 
+
 <body>
     <div class="header">
         <div class="logos">
@@ -40,7 +40,7 @@
         </div>
     </div>
     <hr>
-    <div class="container height-100 d-flex justify-content-center align-items-center">
+    <div class="container d-flex justify-content-center align-items-center">
         <div class="position-relative">
             <div class="card p-2 text-center">
                 <h6>ATTENDANCE</h6>
