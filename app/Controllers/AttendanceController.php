@@ -87,15 +87,13 @@ class AttendanceController extends Controller
             }
         }
     }
-
-
-
-
     public function attendance()
     {
         helper(['form']);
-        /*updates the attendance date of the attendee
-        if the attendee attends a seminar
-        */
+        
+        $seminarModel = new SeminarsModel();
+        $data = $seminarModel->getAll();
+
+        return view('attendance_page', ['data' => $data]);
     }
 }
