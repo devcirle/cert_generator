@@ -11,9 +11,9 @@
     <div>
         <div>
             <div>
-                <?= form_open('preregister/success'); ?>
+                
                 <h2>User Pre-Registration</h2>
-                <?php if (isset($validation)): ?>
+                     <?php if (isset($validation)): ?>
                     <div>
                         <?= $validation->listErrors() ?>
                     </div>
@@ -79,11 +79,11 @@
                 </div>
                 <div>
                     <input type="text" name="name" placeholder="Name"
-                        value="<?= isset($_SESSION['prev_name']) ? $_SESSION['prev_name'] : '' ?>">
+                       value="<?= isset($_SESSION['prev_name']) ? $_SESSION['prev_name'] : '' ?>">
                 </div>
                 <div>
                     <input type="number" name="age" placeholder="Age"
-                        value="<?= isset($_SESSION['prev_age']) ? $_SESSION['prev_age'] : '' ?>">
+                       value="<?= isset($_SESSION['prev_age']) ? $_SESSION['prev_age'] : '' ?>">
                 </div>
                 <div>
                     <input type="text" name="position" placeholder="Position"
@@ -102,7 +102,7 @@
                 <div>
                     <button type="submit" class="btn btn-dark">Signup</button>
                 </div>
-                </form>
+                
             </div>
         </div>
     </div>
