@@ -102,7 +102,7 @@ class AttendanceController extends Controller
         $seminarModel = new SeminarsModel();
 
         $currentDate = new \DateTime();
-        $formattedDate = $currentDate->format('Y-m-d');
+        $formattedCurrentDate = $currentDate->format('Y-m-d');
 
         $first = $this->request->getVar('first');
         $second = $this->request->getVar('second');
@@ -116,7 +116,7 @@ class AttendanceController extends Controller
 
         $attendee = $attendeeModel->where('code', $attendanceCode)->first();
 
-        $attendeeDateStatus = $attendee['date'];
+        $attendeeDateStatus = json_decode($attendee['date']);
 
         if ($attendee) {
             $seminarNum = $attendee['seminar'];
@@ -126,15 +126,14 @@ class AttendanceController extends Controller
 
             $seminarDate = json_decode($seminar['date']);
 
-            if (in_array($formattedDate, $seminarDate)) {
-                //attended
-                // $attendee['date'] = $attendeeDateStatus . 
+            //checks if the current date is on the seminar date and if the current date isn't already in the attendance date status
+            if (in_array($formattedCurrentDate, $seminarDate) && !in_array($formattedCurrentDate, $attendeeDateStatus)) {
+
                 echo "current date is on seminar date";
             } else {
                 //alert
                 echo "current date is not on seminar date";
             }
-
         }
     }
 
