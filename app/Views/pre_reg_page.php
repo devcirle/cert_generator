@@ -4,109 +4,53 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/pre_reg_page.css">
+    <link rel="stylesheet" href="css/global.css">
     <title>Pre-Register Page</title>
 </head>
 
 <body>
-    <div>
-        <div>
-            <div>
-                
-                <h2>User Pre-Registration</h2>
-                     <?php if (isset($validation)): ?>
-                    <div>
-                        <?= $validation->listErrors() ?>
-                    </div>
-                <?php endif; ?>
-                <div>
-                    <select name="owner" onchange="fetchSeminars(this)">
-                        <?php foreach ($users as $user): ?>
-                            <option value="<?= $user['id'] ?>"><?= $user['username'] ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-                <div>
-                    <select name="seminar" id="seminarSelect">
+    <div class="card">
 
-                    </select>
+        <div class="container">
+            <header>
+                <img src="images/sdoin.png" alt="">EVENT<br>PRE-REGISTRATION <img src="images/kagawaran.png" alt=""></header>
+            <?php if (isset($validation)) : ?>
+                <div>
+                    <?= $validation->listErrors() ?>
                 </div>
+            <?php endif; ?>
+            <div class="content">
+                <label for="Name">Name</label>
+                <input type="text" name="name" value="<?= isset($_SESSION['prev_name']) ? $_SESSION['prev_name'] : '' ?>" />
+                <label for="District">District</label>
+                <input type="text" name="district" pattern=".{6,}" title="Please enter at least 6 characters." />
+                <label for="School">School</label>
+                <input type="text" name="school" value="<?= isset($_SESSION['prev_school']) ? $_SESSION['prev_school'] : '' ?>" />
+                <label for="Age">Age</label>
+                <input type="number" name="age" value="<?= isset($_SESSION['prev_age']) ? $_SESSION['prev_age'] : '' ?>" />
+                <label for="Position">Position</label>
+                <input type="text" name="position" value="<?= isset($_SESSION['prev_position']) ? $_SESSION['prev_position'] : '' ?>" />
+                <label for="Contact">Contact</label>
+                <input type="text" name="contact" value="<?= isset($_SESSION['prev_contact']) ? $_SESSION['prev_contact'] : '' ?>" />
 
-                <script>
-                    function fetchSeminars(selectElement) {
-                        const selectedUserId = selectElement.value;
-                        const seminarSelect = document.getElementById('seminarSelect');
-
-                        // Clear existing options
-                        while (seminarSelect.firstChild) {
-                            seminarSelect.removeChild(seminarSelect.firstChild);
-                        }
-
-                        // Make a fetch request to get seminars for the selected user
-                        fetch('<?= site_url("api/getUserSeminars") ?>/' + selectedUserId)
-                            .then(response => {
-                                if (!response.ok) {
-                                    throw new Error('Network response was not ok');
-                                }
-                                return response.json();
-                            })
-                            .then(data => {
-                                // Handle the case when there are no seminars for the user
-                                if (data.hasOwnProperty('message')) {
-                                    console.log(data.message);
-                                    return;
-                                }
-
-                                // Populate the seminar select element with the fetched seminars
-                                data.forEach(seminar => {
-                                    const option = document.createElement('option');
-                                    option.value = seminar.id;
-                                    option.text = seminar.title;
-                                    seminarSelect.appendChild(option);
-                                });
-                            })
-                            .catch(error => console.error('Error fetching seminars:', error));
-                    }
-
-                </script>
-
-                <div>
-                    <input type="text" name="district" placeholder="District" pattern=".{6,}"
-                        title="Please enter at least 6 characters.">
-                </div>
-                <div>
-                    <input type="text" name="school" placeholder="School"
-                        value="<?= isset($_SESSION['prev_school']) ? $_SESSION['prev_school'] : '' ?>">
-                </div>
-                <div>
-                    <input type="text" name="name" placeholder="Name"
-                       value="<?= isset($_SESSION['prev_name']) ? $_SESSION['prev_name'] : '' ?>">
-                </div>
-                <div>
-                    <input type="number" name="age" placeholder="Age"
-                       value="<?= isset($_SESSION['prev_age']) ? $_SESSION['prev_age'] : '' ?>">
-                </div>
-                <div>
-                    <input type="text" name="position" placeholder="Position"
-                        value="<?= isset($_SESSION['prev_position']) ? $_SESSION['prev_position'] : '' ?>">
-                </div>
-                <div>
-                    <input type="text" name="contact" placeholder="Contact"
-                        value="<?= isset($_SESSION['prev_contact']) ? $_SESSION['prev_contact'] : '' ?>">
-                </div>
-                <div>
-                    <select name="gender">
-                        <option>Male</option>
-                        <option>Female</option>
-                    </select>
-                </div>
-                <div>
-                    <button type="submit" class="btn btn-dark">Signup</button>
-                </div>
-                
+            </div>
+            <div class="gender-container">
+                <label for="Gender">Gender</label>
+                <input type="radio" name="gender" value="Male" checked>
+                Male
+                <input type="radio" name="gender" value="Female">
+                Female
+                </br>
+                </select>
+            </div>
+            <div class="register">
+                <button type="submit" class="btn reg">PRE-REGISTER</button>
+                <button type="cancel" class="btn cancel">CANCEL</button>
             </div>
         </div>
     </div>
-
 </body>
+<script src="js/pre_reg_page.js"></script>
 
 </html>

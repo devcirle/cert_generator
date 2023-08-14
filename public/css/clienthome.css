@@ -259,9 +259,9 @@ span {
     .menu__btn {
         display: flex;
         align-items: center;
-        position: fixed;
-        top: 20px;
-        right: 20px;
+        position: relative;
+        top: 5px;
+        right: 5px;
         /* Change 'left' to 'right' */
 
         width: 26px;
@@ -314,7 +314,7 @@ span {
         list-style: none;
 
         background-color: #ECEFF1;
-        
+
         transition-duration: 0.25s;
     }
 

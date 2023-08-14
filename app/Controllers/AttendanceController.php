@@ -14,7 +14,15 @@ class AttendanceController extends Controller
     public function index()
     {
         //return view('clienthome');
-        return view('clienthome');
+        return view('certgen');
+    }
+    public function eventspage()
+    {
+        helper(['form']);
+        /*updates the attendance date of the attendee
+        if the attendee attends a seminar
+        */
+        return view('eventspage');
     }
     public function viewseminars()
     {
