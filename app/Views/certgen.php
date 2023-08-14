@@ -9,6 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/headerstyle.css">
     <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/certgen.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -23,10 +25,10 @@
             </label>
 
             <ul class="menu__box blur-effect">
-                <li><a class="menu__item" href="#">HOME</a></li>
+                <li><a class="menu__item" href="#">ABOUT</a></li>
                 <li><a class="menu__item" href="#">CERTIFICATES</a></li>
                 <li><a class="menu__item" href="#">ATTENDANCE</a></li>
-                <li><a class="menu__item" href="#">ABOUT</a></li>
+                <li><a class="menu__item" href="#">SUPPORT</a></li>
             </ul>
         </div>
 
@@ -35,11 +37,22 @@
                 <li><a href="#">ABOUT</a></li>
                 <li><a href="#">CERTIFICATES</a></li>
                 <li><a href="#">ATTENDANCE</a></li>
-                <li><a href="#">SUPPORT</a></li>   
+                <li><a href="#">SUPPORT</a></li>
             </ul>
         </div>
     </div>
+    
+
     <hr>
+    <div class="container">
+        <div class="searchpage">
+            <label for="search">Please enter certificate code or name</label>
+            <div class="search">
+                <input type="text" class="searchTerm" placeholder="e.g Neil Ritzson, SDOIN-CODE23 ...">
+                <img src="images/searchicon.png" class="searchIcon">
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
