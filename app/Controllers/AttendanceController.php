@@ -177,14 +177,6 @@ class AttendanceController extends Controller
             echo "Account not available";
         }
 
-        // $certDateStatus = substr($attendee['date'], 0, -1);
-        // $newCertDateStatus = '[' . $certDateStatus . ']';
-
-        // if ($newCertDateStatus == $seminar['date']) {
-        //     echo $attendanceCode;
-        //     $certModel->updateCertificateStatus($attendanceCode, 1);
-        // }
-
     }
 
     public function eventspage()
@@ -194,7 +186,7 @@ class AttendanceController extends Controller
         $userData = $userModel->getAllUser();
 
         $seminarModel = new SeminarsModel();
-        $seminars = $seminarModel->getAll();
+        $seminars = $seminarModel->getAllUpcomingSeminar();
 
         foreach ($seminars as &$seminar) {
             $userKey = array_search($seminar['owner'], array_column($userData, 'id'));

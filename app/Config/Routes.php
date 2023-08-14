@@ -58,6 +58,8 @@ $routes->match(['get', 'post'], 'certificates', 'AttendanceController::certifica
 $routes->get('datatable', 'DataController::index');
 $routes->get('datatable/get_data', 'DataController::get_data');
 
+// $routes->get('generate-pdf', 'PdfController::generatePdf');
+
 
 
 

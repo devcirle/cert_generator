@@ -42,17 +42,15 @@ class DataController extends BaseController
         $searchQuery = $this->request->getVar('query');
         $certificateData = $certModel->where('cert_no', $searchQuery)->first();
         
-
+        
         if ($certificateData['status'] == 1) {
             $attendeeCert = $attendeeModel->where('code', $searchQuery)->first();
             $seminarData = $seminarModel->where('id', $attendeeCert['seminar'])->first();
-            return view('certificate_mockup', ['data' => $attendeeCert, 'seminar' => $seminarData]);
-            var_dump($attendeeCert['']);
-            // echo "Certificate available";
-            // echo "Generate the Certificate";
+            return view('certificate_mockup', ['data' => $attendeeCert, 'seminar' => $seminarData]);   
         } else {
             echo "Certificate Not Available";
         }
+        
 
 
 

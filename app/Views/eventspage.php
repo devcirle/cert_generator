@@ -43,29 +43,29 @@
     <?= form_open('attendance'); ?>
     <div class="content">
         <?php foreach ($seminars as $card): ?>
-            <div class="cards">
-                <div class="card">
-                    <div class="card__content">
-                        <div class="card__title">
-                            <?= $card['title']; ?>
-                        </div>
-                        <p class="card__text">
-                            <?php if (isset($card['registeredBy'])): ?>
-                            <p>Created By:
-                                <b>
-                                    <?php echo $card['registeredBy']; ?>
-                                </b>
+                <div class="cards">
+                    <div class="card">
+                        <div class="card__content">
+                            <div class="card__title">
+                                <?= $card['title']; ?>
+                            </div>
+                            <p class="card__text">
+                                <?php if (isset($card['registeredBy'])): ?>
+                                    <p>Created By:
+                                        <b>
+                                            <?php echo $card['registeredBy']; ?>
+                                        </b>
+                                    </p>
+                            <?php endif; ?>
+                            <br>
+                            <?= $card['venue']; ?>
+                            <br>
+                            <?= $card['date']; ?>
                             </p>
-                        <?php endif; ?>
-                        <br>
-                        <?= $card['venue']; ?>
-                        <br>
-                        <?= $card['date']; ?>
-                        </p>
-                        <button class="btn">Attend</button>
+                            <button class="btn">Pre-Register</button>
+                        </div>
                     </div>
                 </div>
-            </div>
         <?php endforeach; ?>
     </div>
     </form>
