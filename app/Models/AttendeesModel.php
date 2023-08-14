@@ -9,8 +9,8 @@ class AttendeesModel extends Model
     protected $table = 'attendees';
     protected $primaryKey = 'id';
     protected $allowedFields = [
-        'seminar', 
-        'district', 
+        'seminar',
+        'district',
         'school',
         'name',
         'position',
@@ -22,4 +22,11 @@ class AttendeesModel extends Model
         'code',
         'created_at'
     ];
+
+    public function updateDateStatus($id, $newDate)
+    {
+        $this->where('id', $id)
+            ->set('date', $newDate)
+            ->update();
+    }
 }

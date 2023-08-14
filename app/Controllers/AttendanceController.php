@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controllers;
 
 use App\Models\SeminarsModel;
@@ -10,20 +9,11 @@ use App\Models\UserModel;
 class AttendanceController extends Controller
 {
 
-
     public function index()
     {
-        //return view('clienthome');
-        return view('certgen');
+        return view('clienthome');
     }
-    public function eventspage()
-    {
-        helper(['form']);
-        /*updates the attendance date of the attendee
-        if the attendee attends a seminar
-        */
-        return view('eventspage');
-    }
+
     public function viewseminars()
     {
         helper(['form']);
@@ -60,40 +50,141 @@ class AttendanceController extends Controller
         $formattedDate = $currentDate->format('Y-m-d');
 
         // Random Code Generator
-        $length = 1; // Desired length of the random string
-        
+        $length = 4; // Desired length of the random string
+
         $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'; // Define the characters to choose from
 
         $year = $currentDate->format('Y');
         $startIndex = 2;
         $formattedYear = mb_substr($year, $startIndex);
 
-        $uniqueCode = 'SDOIN-' . $randomString . $formattedYear;
+        $isUnique = false;
+        $uniqueCode = '';
 
-        $data = [
-            'seminar' => $this->request->getVar('seminar'),
-            'district' => $this->request->getVar('district'),
-            'school' => $this->request->getVar('school'),
-            'name' => $this->request->getVar('name'),
-            'position' => $this->request->getVar('position'),
-            'contact' => $this->request->getVar('contact'),
-            'gender' => $this->request->getVar('gender'),
-            'age' => $this->request->getVar('age'),
-            'pre_reg' => $formattedDate,
-            'code' => $uniqueCode
-        ];
+        while (!$isUnique) {
+            $uniqueCode = 'SDOIN-' . $this->randomGenerator($characters, $length) . $formattedYear;
+            // Check if the unique code already exists in the model
+            $existingCode = $attendeesModel->where('code', $uniqueCode)->first();
+            if (!$existingCode) {
+                $isUnique = true;
 
-        
-        $attendeesModel->save($data);
-        echo $uniqueCode;
+                $data = [
+                    'seminar' => $this->request->getVar('seminar'),
+                    'district' => $this->request->getVar('district'),
+                    'school' => $this->request->getVar('school'),
+                    'name' => $this->request->getVar('name'),
+                    'position' => $this->request->getVar('position'),
+                    'contact' => $this->request->getVar('contact'),
+                    'gender' => $this->request->getVar('gender'),
+                    'age' => $this->request->getVar('age'),
+                    'pre_reg' => $formattedDate,
+                    'code' => $uniqueCode
+                ];
+
+                $attendeesModel->save($data); // Found a unique code, exit the loop
+            } else {
+                $isUnique = true;
+                echo "No more available codes";
+            }
+        }
     }
 
-    public function attendance()
+    public function attendanceView()
     {
         helper(['form']);
-        /*updates the attendance date of the attendee
-        if the attendee attends a seminar
-        */
         return view('attendance');
+    }
+
+    public function doAttendance()
+    {
+        helper(['form']);
+        $attendeeModel = new AttendeesModel();
+        $seminarModel = new SeminarsModel();
+
+        $currentDate = new \DateTime();
+        $formattedCurrentDate = $currentDate->format('Y-m-d');
+
+        $first = $this->request->getVar('first');
+        $second = $this->request->getVar('second');
+        $third = $this->request->getVar('third');
+        $fourth = $this->request->getVar('fourth');
+        $fifth = $this->request->getVar('fifth');
+        $sixth = $this->request->getVar('sixth');
+
+        //concatenate the uniquecode
+        $attendanceCode = 'SDOIN-' . $first . $second . $third . $fourth . $fifth . $sixth;
+
+        $attendee = $attendeeModel->where('code', $attendanceCode)->first();
+
+
+        if ($attendee) {
+            $attendeeDateStatus = $attendee['date'];
+            $seminarNum = $attendee['seminar'];
+            //gets the seminar row
+            $seminar = $seminarModel->where('id', $seminarNum)->first();
+
+
+            // 0 ended
+            // 1 upcoming
+            // 2 on going
+            // 3 cancelled
+            if ($seminar['status'] == 2) {
+                //can attend seminar
+                $seminarDate = json_decode($seminar['date']);
+
+                //checks if the current date is on the seminar date and if the current date isn't already in the attendance date status
+                //then append the current date to attendee attendance date
+
+                if (in_array($formattedCurrentDate, $seminarDate)) {
+                    if (!strpos($attendeeDateStatus, $formattedCurrentDate)) {
+
+                        $newDate = $attendee['date'] . '"' . $formattedCurrentDate . '"' . ',';
+
+                        $attendeeModel->updateDateStatus($attendee['id'], $newDate);
+
+                        echo "Updated Successfully";
+                        echo "Attended successfully";
+
+                    } else {
+                        echo "Already attended on this date.";
+                    }
+                } else {
+                    echo "Date not on seminar date";
+                }
+
+            } else {
+                echo "Seminar is either upcoming or cancelled";
+            }
+        } else {
+            echo "Account not available";
+        }
+    }
+
+    public function eventspage()
+    {
+        helper(['form']);
+        $userModel = new UserModel();
+        $userData = $userModel->getAllUser();
+
+        $seminarModel = new SeminarsModel();
+        $seminars = $seminarModel->getAll();
+
+        foreach ($seminars as &$seminar) {
+            $userKey = array_search($seminar['owner'], array_column($userData, 'id'));
+
+            $seminar['registeredBy'] = $userData[$userKey]['username'];
+        }
+
+        return view('eventspage', ['seminars' => $seminars, 'user' => $userData]);
+
+    }
+
+    public function certificates()
+    {
+        helper(['form']);
+        /*updates the attendance date of the attendee	
+        if the attendee attends a seminar	
+        */
+        return view('certificate_mockup');
     }
 }

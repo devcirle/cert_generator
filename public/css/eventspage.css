@@ -307,108 +307,76 @@ img {
     text-transform: lowercase;
 }
 
-.btn--block {
-    display: block;
-    width: 100%;
+.content {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: baseline;
+  flex-wrap: wrap;
 }
 
 .cards {
-    display: flex;
-    flex-wrap: wrap;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.cards__item {
-    display: flex;
-    padding: 1rem;
-    z-index: -1;
-
-    @media(min-width: 40rem) {
-        width: 50%;
-    }
-
-    @media(min-width: 56rem) {
-        width: 33.3333%;
-    }
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
 .card {
-    background-color: white;
-    border-radius: 0.25rem;
-    box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
+  width: 300px;
+  height: 300px;
+  border: 1px solid #ccc;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
 
-    &:hover {
-        .card__image {
-            filter: contrast(100%);
-        }
-    }
+  background-color: white;
+  margin: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
 }
 
 .card__content {
-    display: flex;
-    flex: 1 1 auto;
-    flex-direction: column;
-    padding: 1rem;
-}
-
-.card__image {
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    border-top-left-radius: 0.25rem;
-    border-top-right-radius: 0.25rem;
-    filter: contrast(70%);
-    //filter: saturate(180%);
-    overflow: hidden;
-    position: relative;
-    transition: filter 0.5s cubic-bezier(.43, .41, .22, .91);
-    ;
-
-    &::before {
-        content: "";
-        display: block;
-        padding-top: 56.25%; // 16:9 aspect ratio
-    }
-
-    @media(min-width: 40rem) {
-        &::before {
-            padding-top: 66.6%; // 3:2 aspect ratio
-        }
-    }
-}
-
-.card__image--flowers {
-    background-image: url(https://unsplash.it/800/600?image=82);
-}
-
-.card__image--river {
-    background-image: url(https://unsplash.it/800/600?image=11);
-}
-
-.card__image--record {
-    background-image: url(https://unsplash.it/800/600?image=39);
-}
-
-.card__image--fence {
-    background-image: url(https://unsplash.it/800/600?image=59);
+  /* flex: 1; */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1rem;
 }
 
 .card__title {
-    color: @gray-dark;
-    font-size: 1.25rem;
-    font-weight: 300;
-    letter-spacing: 2px;
-    text-transform: uppercase;
+  color: #696969;
+  font-size: 1.25rem;
+  font-weight: 300;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  /* margin-bottom: 10px; */
 }
 
 .card__text {
-    flex: 1 1 auto;
-    font-size: 0.875rem;
-    line-height: 1.5;
-    margin-bottom: 1.25rem;
+  /* margin-bottom: 10px; */
+  flex: 1 1 auto;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  /* line-height: 1.5; */
+  /* margin-bottom: 10px; */
+}
+
+.btn {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  display: block;
+  width: 50%;
+  background-color: white;
+  border: 1px solid #cccccc;
+  border-radius: 1rem;
+  color: #696969;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+
+  &:hover {
+    background-color: #696969;
+    color: white;
+  }
 }

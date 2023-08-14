@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"
+        integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
     <script src="js/seminar.js"></script>
     <title>Program Owner Dashboard</title>
     <link rel="stylesheet" type="text/css" href="css/daterangepicker.css" />
@@ -52,24 +53,22 @@
                 </div>
                 <hr>
                 <div>
-                    <input type="hidden" name="username">
+                    <input type="hidden" name="username" value="<?php echo $username; ?>">
                 </div>
+
                 <label for="title">Event Name:</label>
                 <div id="title">
                     <input type="text" name="title">
-                </div>
-                <label for="venue">Set Venue:</label>
-                <div id="venue">
-                    <input type="text" name="venue">
                 </div>
 
                 <label for="title">Set Date:</label>
                 <div id="date-range">
                     <input type="hidden" id="date" name="date">
-                    <input type="text" class="picker" id="dateRangePicker" name="daterange" value="01/01/2023 - 01/15/2023">
+                    <input type="text" class="picker" id="dateRangePicker" name="daterange"
+                        value="01/01/2023 - 01/15/2023">
 
                     <script>
-                        $(function() {
+                        $(function () {
                             var dateRangePicker = $('#dateRangePicker');
                             dateRangePicker.daterangepicker({
                                 opens: 'center',
@@ -80,7 +79,7 @@
                                 parentEl: "body"
                             });
 
-                            dateRangePicker.on('apply.daterangepicker', function(ev, picker) {
+                            dateRangePicker.on('apply.daterangepicker', function (ev, picker) {
                                 var startDate = picker.startDate;
                                 var endDate = picker.endDate;
 
@@ -96,13 +95,19 @@
                                 $('#date').val(JSON.stringify(dates));
                             });
 
-                            dateRangePicker.on('cancel.daterangepicker', function(ev, picker) {
+                            dateRangePicker.on('cancel.daterangepicker', function (ev, picker) {
                                 $(this).val('');
                                 $('#date').val('');
                             });
                         });
                     </script>
                 </div>
+                <label for="venue">Set Venue:</label>
+                <div id="venue">
+                    <input type="text" name="venue">
+                </div>
+
+
                 <div class="buttons">
                     <div>
                         <button id="btnCloseForm" class="close-button">CANCEL</button>
