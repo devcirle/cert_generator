@@ -62,9 +62,11 @@
             <label for="search">Please enter certificate code</label>
             <div class="search">
                 <input type="text" class="searchTerm" placeholder="e.g. SDOIN-CODE23 ...">
-                <img src="images/searchicon.png" class="searchIcon">
+                <button type="submit">
+                    <img src="images/searchicon.png" class="searchIcon">
+                </button>
             </div>
-            <button type="submit">Search</button>
+            
         </div>
     </div>
     </form>
