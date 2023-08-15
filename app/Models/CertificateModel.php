@@ -15,9 +15,9 @@ class CertificateModel extends Model
         'cert_no'
     ];
 
-    public function updateCertificateStatus($id, $newStatus)
+    public function updateCertificateStatus($code, $newStatus)
     {
-        $this->where('id', $id)
+        $this->where('cert_no', $code)
             ->set('status', $newStatus)
             ->update();
     }

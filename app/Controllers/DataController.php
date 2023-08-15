@@ -25,6 +25,12 @@ class DataController extends BaseController
         return $this->response->setJSON($data);
     }
 
+    public function certViewTest()
+    {
+        helper(['form']);
+        return view('certgen');
+    }
+
     public function getCertificate()
     {
         // $seminarModel = new SeminarsModel();

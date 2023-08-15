@@ -41,18 +41,22 @@
             </ul>
         </div>
     </div>
-    
+
 
     <hr>
+    <?= form_open('cert-test'); ?>
     <div class="container">
         <div class="searchpage">
             <label for="search">Please enter certificate code or name</label>
             <div class="search">
-                <input type="text" class="searchTerm" placeholder="e.g Neil Ritzson, SDOIN-CODE23 ...">
+                <input type="text" class="searchTerm" name="query" placeholder="e.g Neil Ritzson, SDOIN-CODE23 ...">
                 <img src="images/searchicon.png" class="searchIcon">
             </div>
+            <button type="submit">Search</button>
         </div>
     </div>
+    </form>
+
 </body>
 
 </html>

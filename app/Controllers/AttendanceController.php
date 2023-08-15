@@ -117,6 +117,7 @@ class AttendanceController extends Controller
         helper(['form']);
         $attendeeModel = new AttendeesModel();
         $seminarModel = new SeminarsModel();
+        $certModel = new CertificateModel();
 
         $currentDate = new \DateTime();
         $formattedCurrentDate = $currentDate->format('Y-m-d');
@@ -139,8 +140,6 @@ class AttendanceController extends Controller
             $seminarNum = $attendee['seminar'];
             //gets the seminar row
             $seminar = $seminarModel->where('id', $seminarNum)->first();
-
-
             // 0 ended
             // 1 upcoming
             // 2 on going
@@ -148,9 +147,6 @@ class AttendanceController extends Controller
             if ($seminar['status'] == 2) {
                 //can attend seminar
                 $seminarDate = json_decode($seminar['date']);
-
-                //checks if the current date is on the seminar date and if the current date isn't already in the attendance date status
-                //then append the current date to attendee attendance date
 
                 if (in_array($formattedCurrentDate, $seminarDate)) {
                     if (!strpos($attendeeDateStatus, $formattedCurrentDate)) {
@@ -161,6 +157,13 @@ class AttendanceController extends Controller
 
                         echo "Updated Successfully";
                         echo "Attended successfully";
+                        $certDateStatus = substr($newDate, 0, -1);
+                        $newCertDateStatus = '[' . $certDateStatus . ']';
+
+                        if ($newCertDateStatus == $seminar['date']) {
+                            echo $attendanceCode;
+                            $certModel->updateCertificateStatus($attendanceCode, 1);
+                        }
                     } else {
                         echo "Already attended on this date.";
                     }
@@ -174,10 +177,13 @@ class AttendanceController extends Controller
             echo "Account not available";
         }
 
-        //updates the certificate status of the attendee if the seminar has already ended
-        if ($seminar['status'] == 0) {
+        // $certDateStatus = substr($attendee['date'], 0, -1);
+        // $newCertDateStatus = '[' . $certDateStatus . ']';
 
-        }
+        // if ($newCertDateStatus == $seminar['date']) {
+        //     echo $attendanceCode;
+        //     $certModel->updateCertificateStatus($attendanceCode, 1);
+        // }
 
     }
 
