@@ -24,7 +24,7 @@
 
             <div class="content">
                 <!-- test -->
-                <input type="hidden" name="seminar" value="23">
+                <input type="hidden" name="seminar" value="24">
                 <!-- test -->
                 <label for="Name">Name</label>
                 <input type="text" name="name"

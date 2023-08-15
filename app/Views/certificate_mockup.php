@@ -29,10 +29,18 @@
             <div class="contents">
                 <div class="certificate">Certificate of Participation</div>
                 <div class="awarded">is awarded to</div>
-                <div class="name">RICHIE RITZ YORO</div>
-                <div class="participation">for his active participation during the</div>
-                <div class="seminar">IT TRAINING PROGRAM</div>
-                <div class="venue">held at <b>Grand Octagon Resort, Laoag City</b> on <br><br>SEPTEMBER 23, 2023</div>
+                <div class="name">
+                    <?= $data['name']; ?>
+                </div>
+                <div class="participation">for his/her active participation during the</div>
+                <div class="seminar">
+                    <?= $seminar['title']; ?>
+                </div>
+                <div class="venue">held at <b>
+                        <?= $seminar['venue']; ?>
+                    </b> on <br><br>
+                    <?= $seminar['date']; ?>
+                </div>
             </div>
 
             <div class="signature">
@@ -46,7 +54,9 @@
                     <img class="deped-logos" src="images\cert-images\cert-logos.png" alt="cert-logos">
                     <div class="qr-tab">
                         <img class="qr-code" src="images\cert-images\cert-qr.png">
-                        <div class="unique-code">SDOIN-HR7I23</div>
+                        <div class="unique-code">
+                            <?= $data['code']; ?>
+                        </div>
                     </div>
                 </div>
             </div>
