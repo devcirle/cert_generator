@@ -46,9 +46,9 @@
     <hr>
     <div class="container">
         <div class="searchpage">
-            <label for="search">Please enter certificate code or name</label>
+            <label for="search">Please enter certificate code</label>
             <div class="search">
-                <input type="text" class="searchTerm" placeholder="e.g Neil Ritzson, SDOIN-CODE23 ...">
+                <input type="text" class="searchTerm" placeholder="e.g. SDOIN-CODE23 ...">
                 <img src="images/searchicon.png" class="searchIcon">
             </div>
         </div>
