@@ -1,108 +1,102 @@
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .container {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-    margin-top: 5rem;
-    max-width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 5rem;
+  max-width: 100%;
 }
 
 .content {
-    width: 45rem;
-    height: 36rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 5.125rem;
-    max-width: 100%;
+  width: 45rem;
+  height: 36rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5.125rem;
+  max-width: 100%;
 }
 
 p {
-    margin-block: 0;
+  margin-block: 0;
 }
 
 .heading {
-    display: flex;
-    align-items: center;
-    gap: 1.3125rem;
+  display: flex;
+  align-items: center;
+  gap: 1.3125rem;
 
-    font-size: 2rem;
-
+  font-size: 2rem;
 }
 
 .change-cred hr {
-    width: 45rem;
-    max-width: 100%;
+  width: 45rem;
+  max-width: 100%;
 }
 
 .change-cred {
-    width: 45rem;
-    max-width: 100%;
+  width: 45rem;
+  max-width: 100%;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 3.375rem;
-
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3.375rem;
 }
 
 .username,
 .password {
-    width: 100%;
-    display: flex;
-    align-items: flex-start;
-    gap: 1.5rem;
-    align-items: center;
-
+  width: 100%;
+  /* display: flex;
+  align-items: flex-start; */
+  gap: 1.5rem;
+  align-items: center;
 }
 
 label {
-    font-size: 2rem;
-    line-height: 150%;
+  font-size: 1.6rem;
+  line-height: 150%;
 }
 
 input {
-    border-radius: 0.5rem;
-    background: #F1F1F1;
-    border: none;
-    width: 100%;
-    height: 3rem;
-    font-size: medium;
-    padding: 10px;
+  border-radius: 0.5rem;
+  background: #f1f1f1;
+  border: none;
+  width: 80%;
+  height: 3rem;
+  font-size: medium;
+  padding: 10px;
 }
 
 .save-changes {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5625rem;
-
+  display: flex;
+  flex-direction: column;
+  gap: 1.5625rem;
 }
 
 .save-changes p {
-    color: #000;
-    font-family: Inria Sans;
-    font-size: 1.625rem;
-    font-style: italic;
-    font-weight: 300;
-    line-height: 150%;
-
+  color: #000;
+  font-family: Inria Sans;
+  font-size: 1.625rem;
+  font-style: italic;
+  font-weight: 300;
+  line-height: 150%;
 }
 
 .save-changes button {
-    border-radius: .5rem;
-    background: #2277A7;
-    height: 3rem;
-    border: none;
+  border-radius: 0.5rem;
+  background: #2277a7;
+  height: 3rem;
+  border: none;
 
-    color: #FFF;
-    font-size: 1.5rem;
-    font-weight: 400;
-    font-style: normal;
-
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 400;
+  font-style: normal;
 }

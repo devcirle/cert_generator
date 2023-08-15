@@ -9,6 +9,7 @@ class UserModel extends Model
     protected $table = 'users';
     protected $primaryKey = 'id';
     protected $allowedFields = [
+        'name',
         'username',
         'password',
         'role',
@@ -35,5 +36,22 @@ class UserModel extends Model
         $this->where('id', $id)
             ->set('role', $newRole)
             ->update();
+    }
+
+    public function updateAccount($id, $newUsername, $newPassword)
+    {
+        $this->where('id', $id)
+            ->set('username', $newUsername)
+            ->update();
+
+        $this->where('id', $id)
+            ->set('password', $newPassword)
+            ->update();
+    }
+
+    public function searchUsers($query)
+    {
+        return $this->like('name', $query)
+                    ->findAll();
     }
 }

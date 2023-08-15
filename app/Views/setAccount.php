@@ -5,17 +5,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:wght@700&display=swap" rel="stylesheet">
+
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
     <!-- Include DataTables CSS and JS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.0/css/jquery.dataTables.min.css">
     <script src="https://cdn.datatables.net/1.11.0/js/jquery.dataTables.min.js"></script>
+    <!-- <link rel=stylesheet href="css/headerstyle.css">
+    <link rel=stylesheet href="css/global.css"> -->
+    <link rel=stylesheet href="css/admin.css">
 
     <title>Document</title>
 </head>
 
 <body>
-    <h1>Restrict Account</h1>
+    <header>
+        <div class="logo">
+            <img src="images\logos.png" alt="DepEd">
+            <div class="title">ACCOUNT</div>
+        </div>
+        <div class="container">
+            <nav>
+                <ul>
+                    <li class="tabs"><a href="datatable">HOME</a></li>
+                    <li class="tabs"><a href="#">EVENTS</a></li>
+                    <li class="tabs"><a>ACCOUNT</a>
+                        <ul>
+                            <li><a id="list" href="addAccount">CREATE ACCOUNT</a></li>
+                            <li><a id="list" href="updateAccount">RETRIEVE ACCOUNT</a></li>
+                            <li><a id="list" href="setAccount">RESTRICT ACCOUNT</a></li>
+                        </ul>
+                    </li>
+                    <li class="tabs"><a href="home">LOGOUT</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
     <?= form_open('setAccount'); ?>
     <table id="datatable" class="display">
         <thead>

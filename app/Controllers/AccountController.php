@@ -91,29 +91,40 @@ class AccountController extends Controller
     public function storeAccount()
     {
         helper(['form']);
-        $rules = [
-            'username' => 'required|min_length[2]|max_length[50]',
-            'password' => 'required|min_length[4]|max_length[50]',
-            'confirmpassword' => 'matches[password]'
-        ];
+        $userModel = new UserModel();
+        
+        $existingUsername = $userModel->where('username', $this->request->getVar('username'))->first();
 
-        if ($this->validate($rules)) {
-            $userModel = new UserModel();
-            $data = [
-                'username' => $this->request->getVar('username'),
-                'role' => $this->request->getVar('role'),
-                'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT)
+        if (!$existingUsername){
+            $rules = [
+                'username' => 'required|min_length[2]|max_length[50]',
+                'password' => 'required|min_length[4]|max_length[50]',
+                'confirmpassword' => 'matches[password]'
             ];
-            $userModel->save($data);
-            return redirect()->to('home');
+    
+            if ($this->validate($rules)) {
+                $userModel = new UserModel();
+                $data = [
+                    'name' => $this->request->getVar('name'),
+                    'username' => $this->request->getVar('username'),
+                    'role' => $this->request->getVar('role'),
+                    'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT)
+                ];
+                $userModel->save($data);
+                return redirect()->to('dashboard');
+            } else {
+                $data['validation'] = $this->validator;
+                // Store the previously inserted data in session
+                $_SESSION['prev_username'] = $this->request->getVar('username');
+                $_SESSION['prev_role'] = $this->request->getVar('role');
+                // Load the view again and pass the data containing the error message
+                return view('addAccount', $data);
+            }
         } else {
-            $data['validation'] = $this->validator;
-            // Store the previously inserted data in session
-            $_SESSION['prev_username'] = $this->request->getVar('username');
-            $_SESSION['prev_role'] = $this->request->getVar('role');
-            // Load the view again and pass the data containing the error message
-            return view('addAccount', $data);
+            session()->setFlashdata('error_message', 'Username already exist');
         }
+        return redirect()->to('addAccount');
+
     }
 
     //Sets the state of an program owner account
@@ -144,4 +155,40 @@ class AccountController extends Controller
         echo "Failed Update";
 
     }
+
+    public function updateAccountView(){
+        helper(['form']);
+        
+        return view('accountupdate');
+    }
+
+    
+    public function updateAccountCredentials()
+    {
+        helper(['form']);
+        $userModel = new UserModel();
+        
+        // var_dump($existingUsername);
+
+        $toUpdate = $userModel->where('name', $this->request->getVar('name'))->first();
+        // var_dump($toUpdate['id']);
+
+            $rules = [
+                'username' => 'required|min_length[2]|max_length[50]',
+                'password' => 'required|min_length[4]|max_length[50]',
+                'confirmpassword' => 'matches[password]'
+            ];
+    
+            if ($this->validate($rules)) {
+                $existingUsername = $userModel->where('username', $this->request->getVar('username'))->first();
+                if (!$existingUsername){
+                    $data = [
+                        'username' => $this->request->getVar('username'),
+                        'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT)
+                    ];
+                    var_dump($existingUsername);
+                    $userModel->updateAccount($toUpdate['id'], $data['username'], $data['password']);
+                }
+            }
+        }
 }
