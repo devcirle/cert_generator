@@ -26,8 +26,9 @@
 
             <ul class="menu__box blur-effect">
                 <li><a class="menu__item" href="#">ABOUT</a></li>
-                <li><a class="menu__item" href="#">CERTIFICATES</a></li>
-                <li><a class="menu__item" href="#">ATTENDANCE</a></li>
+                <li><a class="menu__item" href="events">EVENTS</a></li>
+                <li><a class="menu__item" href="cert-test">CERTIFICATES</a></li>
+                <li><a class="menu__item" href="attendance">ATTENDANCE</a></li>
                 <li><a class="menu__item" href="#">SUPPORT</a></li>
             </ul>
         </div>
@@ -35,8 +36,9 @@
         <div class="nav">
             <ul>
                 <li><a href="#">ABOUT</a></li>
-                <li><a href="#">CERTIFICATES</a></li>
-                <li><a href="#">ATTENDANCE</a></li>
+                <li><a href="events">EVENTS</a></li>
+                <li><a href="cert-test">CERTIFICATES</a></li>
+                <li><a href="attendance">ATTENDANCE</a></li>
                 <li><a href="#">SUPPORT</a></li>
             </ul>
         </div>

@@ -19,19 +19,12 @@ class AttendanceController extends Controller
     public function viewseminars()
     {
         helper(['form']);
-        //$seminarModel = new SeminarsModel();
 
-        $userModel = new UserModel();
+        $data = [
+            'seminarId' =>  $this->request->getVar('id')
+        ];
 
-        $userId = 2;
-        $users = $userModel->getProgramOwners($userId);
-
-        //$seminars = $seminarModel->findAll();
-
-        //$data['seminars'] = $seminars;
-        $data['users'] = $users;
-
-        return view('pre_reg_page', $data);
+        return view('pre_reg_page', ['data' => $data]);
     }
 
     function randomGenerator($characters, $length)
@@ -103,6 +96,7 @@ class AttendanceController extends Controller
         ];
 
         $certModel->save($certData);
+        return redirect()->to('/');
 
     }
 
@@ -182,11 +176,36 @@ class AttendanceController extends Controller
     public function eventspage()
     {
         helper(['form']);
-        $userModel = new UserModel();
+        $userModel = new UserModel();        
         $userData = $userModel->getAllUser();
 
         $seminarModel = new SeminarsModel();
+        $currentDate = new \DateTime();
+        $formattedCurrentDate = $currentDate->format('Y-m-d');
+
+        $upcomingSeminar = $seminarModel->getAllUpcomingSeminar();
+        $ongoingSeminar = $seminarModel->getAllOnGoingSeminar();
+        
+
         $seminars = $seminarModel->getAllUpcomingSeminar();
+
+        $allSeminars = $seminarModel->getAll();
+
+        foreach ($allSeminars as $seminarData){
+            if ($seminarData['status'] == 1){
+                $newData = json_decode($seminarData['date'], true); // Decode as an associative array
+                if (is_array($newData) && (in_array($formattedCurrentDate, $newData) || (!empty($newData) && $formattedCurrentDate == $newData[0]))) {
+                    $seminarModel->updateStatusToOngoing($seminarData['id']);
+                }
+            } elseif ($seminarData['status'] == 2){
+                $dateArray = json_decode($seminarData['date']);
+            
+                $endDate = end($dateArray);
+                if ($formattedCurrentDate > $endDate){
+                    $seminarModel->updateStatusToEnded($seminarData['id']);
+                }
+            }
+        }
 
         foreach ($seminars as &$seminar) {
             $userKey = array_search($seminar['owner'], array_column($userData, 'id'));
