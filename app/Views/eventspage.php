@@ -23,49 +23,52 @@
             </label>
 
             <ul class="menu__box blur-effect">
-                <li><a class="menu__item" href="#">HOME</a></li>
-                <li><a class="menu__item" href="#">CERTIFICATES</a></li>
-                <li><a class="menu__item" href="#">ATTENDANCE</a></li>
-                <li><a class="menu__item" href="#">EXIT</a></li>
+                <li><a class="menu__item" href="/">HOME</a></li>
+                <li><a class="menu__item" href="events">EVENTS</a></li>
+                <li><a class="menu__item" href="cert-test">CERTIFICATES</a></li>
+                <li><a class="menu__item" href="attendance">ATTENDANCE</a></li>
+                <li><a class="menu__item" href="/">EXIT</a></li>
             </ul>
         </div>
 
         <div class="nav">
             <ul>
-                <li><a href="#">HOME</a></li>
-                <li><a href="#">CERTIFICATES</a></li>
-                <li><a href="#">ATTENDANCE</a></li>
-                <li><a href="#">EXIT</a></li>
+                <li><a href="/">HOME</a></li>
+                <li><a href="events">EVENTS</a></li>
+                <li><a href="cert-test">CERTIFICATES</a></li>
+                <li><a href="attendance">ATTENDANCE</a></li>
+                <li><a href="/">EXIT</a></li>
             </ul>
         </div>
     </div>
     <hr>
-    <?= form_open('attendance'); ?>
+    <?= form_open('preregister'); ?>
     <div class="content">
         <?php foreach ($seminars as $card): ?>
-            <div class="cards">
-                <div class="card">
-                    <div class="card__content">
-                        <div class="card__title">
-                            <?= $card['title']; ?>
-                        </div>
-                        <p class="card__text">
-                            <?php if (isset($card['registeredBy'])): ?>
-                            <p>Created By:
-                                <b>
-                                    <?php echo $card['registeredBy']; ?>
-                                </b>
+                <div class="cards">
+                    <div class="card">
+                        <input type="hidden" name="id" value="<?= $card['id']; ?>">
+                        <div class="card__content">
+                            <div class="card__title">
+                                <?= $card['title']; ?>
+                            </div>
+                            <p class="card__text">
+                                <?php if (isset($card['registeredBy'])): ?>
+                                    <p>Created By:
+                                        <b>
+                                            <?php echo $card['registeredBy']; ?>
+                                        </b>
+                                    </p>
+                            <?php endif; ?>
+                            <br>
+                            <?= $card['venue']; ?>
+                            <br>
+                            <?= $card['date']; ?>
                             </p>
-                        <?php endif; ?>
-                        <br>
-                        <?= $card['venue']; ?>
-                        <br>
-                        <?= $card['date']; ?>
-                        </p>
-                        <button class="btn">Attend</button>
+                            <button type="submit" class="btn">Pre-Register</button>
+                        </div>
                     </div>
                 </div>
-            </div>
         <?php endforeach; ?>
     </div>
     </form>

@@ -23,6 +23,12 @@ class AttendeesModel extends Model
         'created_at'
     ];
 
+    public function getAttendeeIdByAttendeeName($attendeeName)
+    {
+        $result = $this->where('code', $attendeeName)->get()->getRow();
+        return ($result !== null) ? $result->id : null;
+    }
+
     public function updateDateStatus($id, $newDate)
     {
         $this->where('id', $id)

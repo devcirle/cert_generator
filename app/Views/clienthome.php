@@ -24,19 +24,21 @@
             </label>
 
             <ul class="menu__box blur-effect">
-                <li><a class="menu__item" href="#">HOME</a></li>
-                <li><a class="menu__item" href="#">CERTIFICATES</a></li>
-                <li><a class="menu__item" href="#">ATTENDANCE</a></li>
-                <li><a class="menu__item" href="#">EXIT</a></li>
+                <li><a class="menu__item" href="/">HOME</a></li>
+                <li><a class="menu__item" href="events">EVENTS</a></li>
+                <li><a class="menu__item" href="cert-test">CERTIFICATES</a></li>
+                <li><a class="menu__item" href="attendance">ATTENDANCE</a></li>
+                <li><a class="menu__item" href="/">EXIT</a></li>
             </ul>
         </div>
 
         <div class="nav">
             <ul>
-                <li><a href="#">HOME</a></li>
-                <li><a href="#">CERTIFICATES</a></li>
-                <li><a href="#">ATTENDANCE</a></li>
-                <li><a href="#">EXIT</a></li>
+                <li><a href="/">HOME</a></li>
+                <li><a href="events">EVENTS</a></li>
+                <li><a href="cert-test">CERTIFICATES</a></li>
+                <li><a href="attendance">ATTENDANCE</a></li>
+                <li><a href="/">EXIT</a></li>
             </ul>
         </div>
     </div>
@@ -50,9 +52,10 @@
                 <div class="separator">
                     <hr>
                 </div>
-                <p>SDOIN Seminar and Training Programs award professional teachers the experience and knowledge for their career growth</p>
+                <p>SDOIN Seminar and Training Programs award professional teachers the experience and knowledge for
+                    their career growth</p>
                 <div class="button-wrap">
-                    <button class="enlist" href="#">ENLIST ME!</button>
+                    <button class="enlist"><a href="events" style="text-decoration: none;">ENLIST ME!</a></button>
                 </div>
             </div>
             <div class="rightcontent">

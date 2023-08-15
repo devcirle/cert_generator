@@ -9,9 +9,16 @@ class CertificateModel extends Model
     protected $table = 'certificate';
     protected $primaryKey = 'id';
     protected $allowedFields = [
-        'status', 
-        'seminar', 
-        'attendee', 
+        'status',
+        'seminar',
+        'attendee',
         'cert_no'
     ];
+
+    public function updateCertificateStatus($code, $newStatus)
+    {
+        $this->where('cert_no', $code)
+            ->set('status', $newStatus)
+            ->update();
+    }
 }

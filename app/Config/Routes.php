@@ -34,6 +34,9 @@ $routes->match(['get', 'post'], 'addAccount', 'AccountController::storeAccount')
 $routes->get('setAccount', 'AccountController::setAccount');
 $routes->match(['get', 'post'], 'setAccount', 'AccountController::updateAccountRole');
 
+$routes->get('cert-test', 'DataController::certViewTest');
+$routes->match(['get', 'post'], 'cert-test', 'DataController::getCertificate');
+
 //********************
 
 
@@ -54,6 +57,8 @@ $routes->match(['get', 'post'], 'certificates', 'AttendanceController::certifica
 
 $routes->get('datatable', 'DataController::index');
 $routes->get('datatable/get_data', 'DataController::get_data');
+
+// $routes->get('generate-pdf', 'PdfController::generatePdf');
 
 
 

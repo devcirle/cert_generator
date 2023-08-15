@@ -6,6 +6,7 @@ use App\Models\SeminarsModel;
 use CodeIgniter\Controller;
 use App\Models\AttendeesModel;
 use App\Models\UserModel;
+use App\Models\CertificateModel;
 
 class AttendanceController extends Controller
 {
@@ -18,19 +19,12 @@ class AttendanceController extends Controller
     public function viewseminars()
     {
         helper(['form']);
-        //$seminarModel = new SeminarsModel();
 
-        $userModel = new UserModel();
+        $data = [
+            'seminarId' =>  $this->request->getVar('id')
+        ];
 
-        $userId = 2;
-        $users = $userModel->getProgramOwners($userId);
-
-        //$seminars = $seminarModel->findAll();
-
-        //$data['seminars'] = $seminars;
-        $data['users'] = $users;
-
-        return view('pre_reg_page', $data);
+        return view('pre_reg_page', ['data' => $data]);
     }
 
     function randomGenerator($characters, $length)
@@ -47,6 +41,8 @@ class AttendanceController extends Controller
         helper(['form']);
 
         $attendeesModel = new AttendeesModel();
+        $certModel = new CertificateModel();
+        $seminarModel = new SeminarsModel();
         $currentDate = new \DateTime();
         $formattedDate = $currentDate->format('Y-m-d');
 
@@ -60,7 +56,9 @@ class AttendanceController extends Controller
         $formattedYear = mb_substr($year, $startIndex);
 
         $isUnique = false;
-        $uniqueCode = '';
+
+        $seminarTitle = $this->request->getVar('seminar');
+        $attendeeName = $this->request->getVar('name');
 
         while (!$isUnique) {
             $uniqueCode = 'SDOIN-' . $this->randomGenerator($characters, $length) . $formattedYear;
@@ -70,10 +68,10 @@ class AttendanceController extends Controller
                 $isUnique = true;
 
                 $data = [
-                    'seminar' => $this->request->getVar('seminar'),
+                    'seminar' => $seminarTitle,
                     'district' => $this->request->getVar('district'),
                     'school' => $this->request->getVar('school'),
-                    'name' => $this->request->getVar('name'),
+                    'name' => $attendeeName,
                     'position' => $this->request->getVar('position'),
                     'contact' => $this->request->getVar('contact'),
                     'gender' => $this->request->getVar('gender'),
@@ -88,6 +86,18 @@ class AttendanceController extends Controller
                 echo "No more available codes";
             }
         }
+
+
+        $certData = [
+            'seminar' => $seminarTitle,
+            'attendee' => $attendeesModel->getAttendeeIdByAttendeeName($uniqueCode),
+            'cert_no' => $uniqueCode,
+            'status' => 0
+        ];
+
+        $certModel->save($certData);
+        return view('preregSuccess', ['data' => $certData]);
+
     }
 
     public function attendanceView()
@@ -98,9 +108,11 @@ class AttendanceController extends Controller
 
     public function doAttendance()
     {
+        // $session = session();
         helper(['form']);
         $attendeeModel = new AttendeesModel();
         $seminarModel = new SeminarsModel();
+        $certModel = new CertificateModel();
 
         $currentDate = new \DateTime();
         $formattedCurrentDate = $currentDate->format('Y-m-d');
@@ -123,8 +135,6 @@ class AttendanceController extends Controller
             $seminarNum = $attendee['seminar'];
             //gets the seminar row
             $seminar = $seminarModel->where('id', $seminarNum)->first();
-
-
             // 0 ended
             // 1 upcoming
             // 2 on going
@@ -133,9 +143,6 @@ class AttendanceController extends Controller
                 //can attend seminar
                 $seminarDate = json_decode($seminar['date']);
 
-                //checks if the current date is on the seminar date and if the current date isn't already in the attendance date status
-                //then append the current date to attendee attendance date
-
                 if (in_array($formattedCurrentDate, $seminarDate)) {
                     if (!strpos($attendeeDateStatus, $formattedCurrentDate)) {
 
@@ -143,30 +150,62 @@ class AttendanceController extends Controller
 
                         $attendeeModel->updateDateStatus($attendee['id'], $newDate);
 
-                        echo "Updated Successfully";
-                        echo "Attended successfully";
+                        $certDateStatus = substr($newDate, 0, -1);
+                        $newCertDateStatus = '[' . $certDateStatus . ']';
+
+                        if ($newCertDateStatus == $seminar['date']) {
+                            echo $attendanceCode;
+                            $certModel->updateCertificateStatus($attendanceCode, 1);
+                        }
+                        session()->setFlashdata('success_message', 'Attended Successfully');
                     } else {
-                        echo "Already attended on this date.";
+                        session()->setFlashdata('success_message', 'Already attended on this date');
                     }
-                } else {
-                    echo "Date not on seminar date";
                 }
             } else {
-                echo "Seminar is either upcoming or cancelled";
+                session()->setFlashdata('error_message', 'Seminar is either upcoming, cancelled or has already ended');
             }
         } else {
-            echo "Account not available";
+            session()->setFlashdata('error_message', 'Account not available');
         }
+        
+        return redirect()->to('attendance');
+
     }
 
     public function eventspage()
     {
         helper(['form']);
-        $userModel = new UserModel();
+        $userModel = new UserModel();        
         $userData = $userModel->getAllUser();
 
         $seminarModel = new SeminarsModel();
-        $seminars = $seminarModel->getAll();
+        $currentDate = new \DateTime();
+        $formattedCurrentDate = $currentDate->format('Y-m-d');
+
+        $upcomingSeminar = $seminarModel->getAllUpcomingSeminar();
+        $ongoingSeminar = $seminarModel->getAllOnGoingSeminar();
+        
+
+        $seminars = $seminarModel->getAllUpcomingSeminar();
+
+        $allSeminars = $seminarModel->getAll();
+
+        foreach ($allSeminars as $seminarData){
+            if ($seminarData['status'] == 1){
+                $newData = json_decode($seminarData['date'], true); // Decode as an associative array
+                if (is_array($newData) && (in_array($formattedCurrentDate, $newData) || (!empty($newData) && $formattedCurrentDate == $newData[0]))) {
+                    $seminarModel->updateStatusToOngoing($seminarData['id']);
+                }
+            } elseif ($seminarData['status'] == 2){
+                $dateArray = json_decode($seminarData['date']);
+            
+                $endDate = end($dateArray);
+                if ($formattedCurrentDate > $endDate){
+                    $seminarModel->updateStatusToEnded($seminarData['id']);
+                }
+            }
+        }
 
         foreach ($seminars as &$seminar) {
             $userKey = array_search($seminar['owner'], array_column($userData, 'id'));

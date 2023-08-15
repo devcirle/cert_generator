@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="css/daterangepicker.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="css/programowner.css">
+    <link rel="stylesheet" href="css/eventspage.css">
     <link rel="stylesheet" href="css/global.css">
     <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:wght@400;700&display=swap" rel="stylesheet">
 
@@ -31,7 +32,7 @@
             <ul>
                 <li><a href="#">HOME</a></li>
                 <li><a href="#">ACCOUNT</a></li>
-                <li><a href="#">LOGOUT</a></li>
+                <li><a href="home">LOGOUT</a></li>
             </ul>
         </div>
     </div>
@@ -41,9 +42,35 @@
         <h1>EVENTS</h1>
         <hr class="event-hr">
     </div>
-    <div class="add-button">
-        <button id="btnOpenForm" class="add-event">+</button>
+    
+    <div class="ownerContent">
+        <div class="add-button">
+            <button id="btnOpenForm" class="add-event">+</button>
+        </div>
+    
+        <div class="content">
+            <?php foreach ($data as $card): ?>
+                    <div class="cards">
+                        <div class="card">
+                            <div class="card__content">
+                                <div class="card__title">
+                                    <?= $card['title']; ?>
+                                </div>
+                                <p class="card__text">
+                                    <?= $card['date']; ?>
+                                    <br>
+                                    <?= $card['venue']; ?>
+                                    <br>
+                                    <?= $card['status']; ?>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+            <?php endforeach; ?>
+        </div>
     </div>
+
+    
 
     <div class="form-popup-bg">
         <div class="form-container">

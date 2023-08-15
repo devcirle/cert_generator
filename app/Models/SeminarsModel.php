@@ -6,6 +6,12 @@ use CodeIgniter\Model;
 
 class SeminarsModel extends Model
 {
+    // SEMINAR STATUS
+    // 0 ended
+    // 1 upcoming
+    // 2 on going
+    // 3 cancelled
+
     protected $table = 'seminars';
     protected $primaryKey = 'id';
     protected $allowedFields = [
@@ -16,6 +22,11 @@ class SeminarsModel extends Model
         'venue',
         'created_at'
     ];
+
+    public function getSeminarIdBySeminar($seminar)
+    {
+        return $this->where('title', $seminar)->get()->getRow();
+    }
 
     public function getData($id)
     {
@@ -30,5 +41,28 @@ class SeminarsModel extends Model
     public function getAll()
     {
         return $this->findAll();
+    }
+
+    public function getAllUpcomingSeminar(){
+        return $this->where('status', 1)->findAll();
+    }
+
+    public function getAllOnGoingSeminar(){
+        return $this->where('status', 2)->findAll();
+    }
+
+    public function updateStatusToOngoing($id)
+    {
+
+        $this->where('id', $id)
+            ->set('status', 2)
+            ->update();
+    }
+
+    public function updateStatusToEnded($id)
+    {
+        $this->where('id', $id)
+            ->set('status', 0)
+            ->update();
     }
 }

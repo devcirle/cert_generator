@@ -32,21 +32,32 @@
             </label>
 
             <ul class="menu__box blur-effect">
-                <li><a class="menu__item" href="#">HOME</a></li>
-                <li><a class="menu__item" href="#">CERTIFICATES</a></li>
-                <li><a class="menu__item" href="#">ATTENDANCE</a></li>
+                <li><a class="menu__item" href="/">HOME</a></li>
+                <li><a class="menu__item" href="events">EVENTS</a></li>
+                <li><a class="menu__item" href="cert-test">CERTIFICATES</a></li>
+                <li><a class="menu__item" href="attendance">ATTENDANCE</a></li>
             </ul>
         </div>
 
         <div class="my-nav">
             <ul>
-                <li><a href="#">HOME</a></li>
-                <li><a href="#">CERTIFICATES</a></li>
-                <li><a href="#">ATTENDANCE</a></li>
+                <li><a href="/">HOME</a></li>
+                <li><a href="events">EVENTS</a></li>
+                <li><a href="cert-test">CERTIFICATES</a></li>
+                <li><a href="attendance">ATTENDANCE</a></li>
             </ul>
         </div>
     </div>
     <hr>
+    <?php if (session()->has('success_message')) : ?>
+        <div class="alert alert-success" role="alert">
+            <?= session('success_message') ?>
+        </div>
+    <?php elseif (session()->has('error_message')) : ?>
+        <div class="alert alert-danger" role="alert">
+            <?= session('error_message') ?>
+        </div>
+    <?php endif; ?>
 
     <?= form_open('attendance/success') ?>
 
