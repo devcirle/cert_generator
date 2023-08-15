@@ -15,7 +15,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
         integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa"
         crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:wght@400;700&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="css/attendance.css">
+    <link rel="stylesheet" href="css/headerstyle.css">
     <link rel="stylesheet" href="css/global.css">
     <title>Document</title>
 </head>
