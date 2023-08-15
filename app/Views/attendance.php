@@ -49,6 +49,15 @@
         </div>
     </div>
     <hr>
+    <?php if (session()->has('success_message')) : ?>
+        <div class="alert alert-success" role="alert">
+            <?= session('success_message') ?>
+        </div>
+    <?php elseif (session()->has('error_message')) : ?>
+        <div class="alert alert-danger" role="alert">
+            <?= session('error_message') ?>
+        </div>
+    <?php endif; ?>
 
     <?= form_open('attendance/success') ?>
 

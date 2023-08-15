@@ -96,7 +96,7 @@ class AttendanceController extends Controller
         ];
 
         $certModel->save($certData);
-        return redirect()->to('/');
+        return view('preregSuccess', ['data' => $certData]);
 
     }
 
@@ -108,6 +108,7 @@ class AttendanceController extends Controller
 
     public function doAttendance()
     {
+        // $session = session();
         helper(['form']);
         $attendeeModel = new AttendeesModel();
         $seminarModel = new SeminarsModel();
@@ -149,8 +150,6 @@ class AttendanceController extends Controller
 
                         $attendeeModel->updateDateStatus($attendee['id'], $newDate);
 
-                        echo "Updated Successfully";
-                        echo "Attended successfully";
                         $certDateStatus = substr($newDate, 0, -1);
                         $newCertDateStatus = '[' . $certDateStatus . ']';
 
@@ -158,18 +157,19 @@ class AttendanceController extends Controller
                             echo $attendanceCode;
                             $certModel->updateCertificateStatus($attendanceCode, 1);
                         }
+                        session()->setFlashdata('success_message', 'Attended Successfully');
                     } else {
-                        echo "Already attended on this date.";
+                        session()->setFlashdata('success_message', 'Already attended on this date');
                     }
-                } else {
-                    echo "Date not on seminar date";
                 }
             } else {
-                echo "Seminar is either upcoming or cancelled";
+                session()->setFlashdata('error_message', 'Seminar is either upcoming, cancelled or has already ended');
             }
         } else {
-            echo "Account not available";
+            session()->setFlashdata('error_message', 'Account not available');
         }
+        
+        return redirect()->to('attendance');
 
     }
 

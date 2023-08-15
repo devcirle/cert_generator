@@ -19,7 +19,7 @@
     <div class="container">
       <nav>
         <ul>
-          <li class="tabs"><a href="datatable">HOME</a></li>
+          <li class="tabs"><a href="dashboard">HOME</a></li>
           <li class="tabs"><a href="#">EVENTS</a></li>
           <li class="tabs"><a>ACCOUNT</a>
             <ul>
@@ -36,13 +36,13 @@
   <div class="account-form">
     <?= form_open('addAccount'); ?>
 
-    <div class="namefield">
+    <!-- <div class="namefield">
       <div class="name">Name</div>
       <div class="full-name">
         <img class="vector-icon" alt="" src="vector.svg">
         <input class="inputname" type="text" placeholder="Enter your full name">
       </div>
-    </div>
+    </div> -->
 
     <div class="rolefield">
       <div class="role">Role</div>

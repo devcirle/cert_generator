@@ -3,6 +3,7 @@ namespace App\Controllers;
 
 use CodeIgniter\Controller;
 use App\Models\UserModel;
+use App\Models\SeminarsModel;
 
 class AccountController extends Controller
 {
@@ -59,11 +60,20 @@ class AccountController extends Controller
         $session = session();
         $username = $session->get('username');
         $role = $session->get('role');
+        $seminarModel = new SeminarsModel();
+        $userModel = new UserModel();
+
+        $data = $seminarModel->getAll();
+
+        $ownerId = $userModel->getUserIdByUsername($username);
+
+        $ownerData = $seminarModel->getSeminar($ownerId->id);
+
 
         if ($role == 1) {
-            return view('admin_dashboard', ['username' => $username]);
+            return view('admin_dashboard', ['username' => $username, 'data' => $data]);
         } elseif ($role == 2) {
-            return view('owner_dashboard', ['username' => $username]);
+            return view('owner_dashboard', ['username' => $username, 'data' => $ownerData]);
         } else {
             echo "Account Locked";
         }

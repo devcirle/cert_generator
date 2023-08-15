@@ -43,15 +43,25 @@
             </ul>
         </div>
     </div>
-
-
+    
     <hr>
+
+    <?php if (session()->has('success_message')) : ?>
+        <div class="alert alert-success" role="alert">
+            <?= session('success_message') ?>
+        </div>
+    <?php elseif (session()->has('error_message')) : ?>
+        <div class="alert alert-danger" role="alert">
+            <?= session('error_message') ?>
+        </div>
+    <?php endif; ?>
+
     <?= form_open('cert-test'); ?>
     <div class="container">
         <div class="searchpage">
-            <label for="search">Please enter certificate code or name</label>
+            <label for="search">Please enter certificate code</label>
             <div class="search">
-                <input type="text" class="searchTerm" name="query" placeholder="e.g Neil Ritzson, SDOIN-CODE23 ...">
+                <input type="text" class="searchTerm" name="query" placeholder="SDOIN-CODE23">
                 <img src="images/searchicon.png" class="searchIcon">
             </div>
             <button type="submit">Search</button>
