@@ -22,12 +22,15 @@ class SeminarController extends Controller
 
         if ($this->validate($rules)) {
             $seminarModel = new SeminarsModel();
+
             $data = [
                 'owner' => $user->id,
                 'title' => $this->request->getVar('title'),
                 'venue' => $this->request->getVar('venue'),
-                'date' => $this->request->getVar('date')
+                'date' => $this->request->getVar('date'),
+                'status' => 1
             ];
+
             $seminarModel->save($data);
             return redirect()->to('dashboard');
         } else {
@@ -35,4 +38,5 @@ class SeminarController extends Controller
             echo view('dashboard', $data);
         }
     }
+
 }

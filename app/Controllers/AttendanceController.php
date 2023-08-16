@@ -116,24 +116,47 @@ class AttendanceController extends Controller
 
         $attendee = $attendeeModel->where('code', $attendanceCode)->first();
 
-        $attendeeDateStatus = json_decode($attendee['date']);
 
         if ($attendee) {
+            $attendeeDateStatus = $attendee['date'];
             $seminarNum = $attendee['seminar'];
-
             //gets the seminar row
             $seminar = $seminarModel->where('id', $seminarNum)->first();
 
-            $seminarDate = json_decode($seminar['date']);
 
-            //checks if the current date is on the seminar date and if the current date isn't already in the attendance date status
-            if (in_array($formattedCurrentDate, $seminarDate) && !in_array($formattedCurrentDate, $attendeeDateStatus)) {
+            // 0 ended
+            // 1 upcoming
+            // 2 on going
+            // 3 cancelled
+            if ($seminar['status'] == 2) {
+                //can attend seminar
+                $seminarDate = json_decode($seminar['date']);
 
-                echo "current date is on seminar date";
+                //checks if the current date is on the seminar date and if the current date isn't already in the attendance date status
+                //then append the current date to attendee attendance date
+
+                if (in_array($formattedCurrentDate, $seminarDate)) {
+                    if (!strpos($attendeeDateStatus, $formattedCurrentDate)) {
+
+                        $newDate = $attendee['date'] . '"' . $formattedCurrentDate . '"' . ',';
+
+                        $attendeeModel->updateDateStatus($attendee['id'], $newDate);
+
+                        echo "Updated Successfully";
+                        echo "Attended successfully";
+
+                    } else {
+                        echo "Already attended on this date.";
+                    }
+                } else {
+                    echo "Date not on seminar date";
+                }
+
             } else {
-                //alert
-                echo "current date is not on seminar date";
+                echo "Seminar is either upcoming or cancelled";
             }
+        } else {
+            echo "Account not available";
         }
     }
 
