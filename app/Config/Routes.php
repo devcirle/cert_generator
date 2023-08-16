@@ -34,6 +34,10 @@ $routes->match(['get', 'post'], 'addAccount', 'AccountController::storeAccount')
 $routes->get('setAccount', 'AccountController::setAccount');
 $routes->match(['get', 'post'], 'setAccount', 'AccountController::updateAccountRole');
 
+$routes->get('updateAccount', 'AccountController::updateAccountView');
+$routes->match(['get', 'post'], 'updateAccount', 'AccountController::updateAccountCredentials');
+
+
 $routes->get('cert-test', 'DataController::certViewTest');
 $routes->match(['get', 'post'], 'cert-test', 'DataController::getCertificate');
 
@@ -60,7 +64,7 @@ $routes->get('datatable/get_data', 'DataController::get_data');
 
 // $routes->get('generate-pdf', 'PdfController::generatePdf');
 
-
+$routes->get('search/perform_search', 'Search::perform_search');
 
 
 if (is_file(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {

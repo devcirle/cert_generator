@@ -127,12 +127,6 @@ class AccountController extends Controller
 
     }
 
-    public function updateAccountCredentials()
-    {
-        $userModel = new UserModel();
-        
-    }
-
     //Sets the state of an program owner account
     public function setAccount()
     {
@@ -161,4 +155,40 @@ class AccountController extends Controller
         echo "Failed Update";
 
     }
+
+    public function updateAccountView(){
+        helper(['form']);
+        
+        return view('accountupdate');
+    }
+
+    
+    public function updateAccountCredentials()
+    {
+        helper(['form']);
+        $userModel = new UserModel();
+        
+        // var_dump($existingUsername);
+
+        $toUpdate = $userModel->where('name', $this->request->getVar('name'))->first();
+        // var_dump($toUpdate['id']);
+
+            $rules = [
+                'username' => 'required|min_length[2]|max_length[50]',
+                'password' => 'required|min_length[4]|max_length[50]',
+                'confirmpassword' => 'matches[password]'
+            ];
+    
+            if ($this->validate($rules)) {
+                $existingUsername = $userModel->where('username', $this->request->getVar('username'))->first();
+                if (!$existingUsername){
+                    $data = [
+                        'username' => $this->request->getVar('username'),
+                        'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT)
+                    ];
+                    var_dump($existingUsername);
+                    $userModel->updateAccount($toUpdate['id'], $data['username'], $data['password']);
+                }
+            }
+        }
 }

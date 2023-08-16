@@ -49,7 +49,9 @@ class UserModel extends Model
             ->update();
     }
 
-    public function checkUsernameAvailability($username){
-        
+    public function searchUsers($query)
+    {
+        return $this->like('name', $query)
+                    ->findAll();
     }
 }

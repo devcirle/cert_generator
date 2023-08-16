@@ -35,7 +35,7 @@
                     <li class="tabs"><a>ACCOUNT</a>
                         <ul>
                             <li><a id="list" href="addAccount">CREATE ACCOUNT</a></li>
-                            <li><a id="list" href="#">RETRIEVE ACCOUNT</a></li>
+                            <li><a id="list" href="updateAccount">RETRIEVE ACCOUNT</a></li>
                             <li><a id="list" href="setAccount">RESTRICT ACCOUNT</a></li>
                         </ul>
                     </li>
