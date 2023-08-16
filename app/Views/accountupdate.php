@@ -43,12 +43,15 @@
     </div>
 
     <hr>
+    <br>
+    <br>
+    <br>
 
     <?= form_open('updateAccount'); ?>
         <div class="container">
             <div class="content">
                 <div class="change-cred">
-                    <div class="heading"><img src="images/vector.png"><p>Account settings</p></div>
+                    <div class="heading"><img src="images/vector.png"><p>Account Update</p></div>
                     <hr>
                     <!--  -->
                     <input type="text" id="searchInput" name="name" placeholder="Type to search">
@@ -104,17 +107,22 @@
                     <?php endif; ?>
 
                     <div class="username">
-                    <label for="username">Username:</label>
-                    <input type="text" name="username">
+                        <label for="username">New Username:</label>
+                        <input type="text" name="username">
                     </div>
+
                     <div class="password">
-                    <label for="password">Password:</label>
-                    <input type="password" name="password">
+                        <label for="password">New Password:</label>
+                        <input type="password" name="password">
                     </div>
+                    
+                    <div class="password">
+                        <label for="confirmpassword">Confirm Password:</label>
+                        <input type="password" name="confirmpassword">
+                    </div>
+
                 </div>
                 <div class="save-changes">
-                    <p><i>Enter password to save changes</i></p>
-                    <input type="password" name="confirmpassword">
                     <button type="submit">Save changes</button>
                 </div>
             </div>
