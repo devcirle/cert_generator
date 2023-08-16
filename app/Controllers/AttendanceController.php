@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controllers;
 
 use App\Models\SeminarsModel;
@@ -160,14 +161,12 @@ class AttendanceController extends Controller
 
                         echo "Updated Successfully";
                         echo "Attended successfully";
-
                     } else {
                         echo "Already attended on this date.";
                     }
                 } else {
                     echo "Date not on seminar date";
                 }
-
             } else {
                 echo "Seminar is either upcoming or cancelled";
             }
@@ -198,7 +197,6 @@ class AttendanceController extends Controller
         }
 
         return view('eventspage', ['seminars' => $seminars, 'user' => $userData]);
-
     }
 
     public function certificates()
