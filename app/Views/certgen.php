@@ -25,25 +25,25 @@
             </label>
 
             <ul class="menu__box blur-effect">
-                <li><a class="menu__item" href="#">ABOUT</a></li>
+                <li><a class="menu__item" href="/">ABOUT</a></li>
+                <li><a class="menu__item" href="/">HOME</a></li>
                 <li><a class="menu__item" href="events">EVENTS</a></li>
                 <li><a class="menu__item" href="cert-test">CERTIFICATES</a></li>
                 <li><a class="menu__item" href="attendance">ATTENDANCE</a></li>
-                <li><a class="menu__item" href="#">SUPPORT</a></li>
             </ul>
         </div>
 
         <div class="nav">
             <ul>
-                <li><a href="#">ABOUT</a></li>
-                <li><a href="events">EVENTS</a></li>
-                <li><a href="cert-test">CERTIFICATES</a></li>
-                <li><a href="attendance">ATTENDANCE</a></li>
-                <li><a href="#">SUPPORT</a></li>
+                <li><a class="menu__item" href="/">ABOUT</a></li>
+                <li><a class="menu__item" href="/">HOME</a></li>
+                <li><a class="menu__item" href="events">EVENTS</a></li>
+                <li><a class="menu__item" href="cert-test">CERTIFICATES</a></li>
+                <li><a class="menu__item" href="attendance">ATTENDANCE</a></li>
             </ul>
         </div>
     </div>
-    
+
     <hr>
 
     <?php if (session()->has('success_message')) : ?>
@@ -61,12 +61,12 @@
         <div class="searchpage">
             <label for="search">Please enter certificate code</label>
             <div class="search">
-                <input type="text" class="searchTerm" placeholder="e.g. SDOIN-CODE23 ...">
+                <input type="text" name="query" class="searchTerm" placeholder="e.g. SDOIN-CODE23 ...">
                 <button type="submit">
                     <img src="images/searchicon.png" class="searchIcon">
                 </button>
             </div>
-            
+
         </div>
     </div>
     </form>

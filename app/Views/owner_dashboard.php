@@ -85,7 +85,7 @@
 
                 <label for="title">Event Name:</label>
                 <div id="title">
-                    <input type="text" name="title">
+                    <textarea name="title" id="title" cols="30" rows="3"></textarea>
                 </div>
 
                 <label for="title">Set Date:</label>
@@ -131,7 +131,7 @@
                 </div>
                 <label for="venue">Set Venue:</label>
                 <div id="venue">
-                    <input type="text" name="venue">
+                    <textarea name="venue" id="" cols="30" rows="3"></textarea>
                 </div>
 
 
