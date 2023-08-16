@@ -36,13 +36,13 @@
   <div class="account-form">
     <?= form_open('addAccount'); ?>
 
-    <!-- <div class="namefield">
+    <div class="namefield">
       <div class="name">Name</div>
       <div class="full-name">
         <img class="vector-icon" alt="" src="vector.svg">
-        <input class="inputname" type="text" placeholder="Enter your full name">
+        <input class="inputname" name="name" type="text" placeholder="Enter your full name">
       </div>
-    </div> -->
+    </div>
 
     <div class="rolefield">
       <div class="role">Role</div>
@@ -53,7 +53,15 @@
         </select>
       </div>
     </div>
-
+    <?php if (session()->has('success_message')) : ?>
+        <div class="alert alert-success" role="alert">
+            <?= session('success_message') ?>
+        </div>
+    <?php elseif (session()->has('error_message')) : ?>
+        <div class="alert alert-danger" role="alert">
+            <?= session('error_message') ?>
+        </div>
+    <?php endif; ?>
     <div class="fields">
       <div class="username">
         <div class="username1">Username</div>

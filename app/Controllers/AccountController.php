@@ -91,29 +91,46 @@ class AccountController extends Controller
     public function storeAccount()
     {
         helper(['form']);
-        $rules = [
-            'username' => 'required|min_length[2]|max_length[50]',
-            'password' => 'required|min_length[4]|max_length[50]',
-            'confirmpassword' => 'matches[password]'
-        ];
+        $userModel = new UserModel();
+        
+        $existingUsername = $userModel->where('username', $this->request->getVar('username'))->first();
 
-        if ($this->validate($rules)) {
-            $userModel = new UserModel();
-            $data = [
-                'username' => $this->request->getVar('username'),
-                'role' => $this->request->getVar('role'),
-                'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT)
+        if (!$existingUsername){
+            $rules = [
+                'username' => 'required|min_length[2]|max_length[50]',
+                'password' => 'required|min_length[4]|max_length[50]',
+                'confirmpassword' => 'matches[password]'
             ];
-            $userModel->save($data);
-            return redirect()->to('home');
+    
+            if ($this->validate($rules)) {
+                $userModel = new UserModel();
+                $data = [
+                    'name' => $this->request->getVar('name'),
+                    'username' => $this->request->getVar('username'),
+                    'role' => $this->request->getVar('role'),
+                    'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT)
+                ];
+                $userModel->save($data);
+                return redirect()->to('dashboard');
+            } else {
+                $data['validation'] = $this->validator;
+                // Store the previously inserted data in session
+                $_SESSION['prev_username'] = $this->request->getVar('username');
+                $_SESSION['prev_role'] = $this->request->getVar('role');
+                // Load the view again and pass the data containing the error message
+                return view('addAccount', $data);
+            }
         } else {
-            $data['validation'] = $this->validator;
-            // Store the previously inserted data in session
-            $_SESSION['prev_username'] = $this->request->getVar('username');
-            $_SESSION['prev_role'] = $this->request->getVar('role');
-            // Load the view again and pass the data containing the error message
-            return view('addAccount', $data);
+            session()->setFlashdata('error_message', 'Username already exist');
         }
+        return redirect()->to('addAccount');
+
+    }
+
+    public function updateAccountCredentials()
+    {
+        $userModel = new UserModel();
+        
     }
 
     //Sets the state of an program owner account
