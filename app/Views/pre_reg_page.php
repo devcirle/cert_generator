@@ -11,28 +11,38 @@
 
 <body>
     <div class="card">
-
         <div class="container">
             <header>
-                <img src="images/sdoin.png" alt="">EVENT<br>PRE-REGISTRATION <img src="images/kagawaran.png" alt=""></header>
-            <?php if (isset($validation)) : ?>
+                <img src="images/sdoin.png" alt="">EVENT<br>PRE-REGISTRATION <img src="images/kagawaran.png" alt="">
+            </header>
+            <?php if (isset($validation)): ?>
                 <div>
                     <?= $validation->listErrors() ?>
                 </div>
             <?php endif; ?>
+            <?= form_open('preregister/success') ?>
+
             <div class="content">
+                <!-- test -->
+                <input type="hidden" name="seminar" value="23">
+                <!-- test -->
                 <label for="Name">Name</label>
-                <input type="text" name="name" value="<?= isset($_SESSION['prev_name']) ? $_SESSION['prev_name'] : '' ?>" />
+                <input type="text" name="name"
+                    value="<?= isset($_SESSION['prev_name']) ? $_SESSION['prev_name'] : '' ?>" />
                 <label for="District">District</label>
                 <input type="text" name="district" pattern=".{6,}" title="Please enter at least 6 characters." />
                 <label for="School">School</label>
-                <input type="text" name="school" value="<?= isset($_SESSION['prev_school']) ? $_SESSION['prev_school'] : '' ?>" />
+                <input type="text" name="school"
+                    value="<?= isset($_SESSION['prev_school']) ? $_SESSION['prev_school'] : '' ?>" />
                 <label for="Age">Age</label>
-                <input type="number" name="age" value="<?= isset($_SESSION['prev_age']) ? $_SESSION['prev_age'] : '' ?>" />
+                <input type="number" name="age"
+                    value="<?= isset($_SESSION['prev_age']) ? $_SESSION['prev_age'] : '' ?>" />
                 <label for="Position">Position</label>
-                <input type="text" name="position" value="<?= isset($_SESSION['prev_position']) ? $_SESSION['prev_position'] : '' ?>" />
+                <input type="text" name="position"
+                    value="<?= isset($_SESSION['prev_position']) ? $_SESSION['prev_position'] : '' ?>" />
                 <label for="Contact">Contact</label>
-                <input type="text" name="contact" value="<?= isset($_SESSION['prev_contact']) ? $_SESSION['prev_contact'] : '' ?>" />
+                <input type="text" name="contact"
+                    value="<?= isset($_SESSION['prev_contact']) ? $_SESSION['prev_contact'] : '' ?>" />
 
             </div>
             <div class="gender-container">
@@ -48,6 +58,7 @@
                 <button type="submit" class="btn reg">PRE-REGISTER</button>
                 <button type="cancel" class="btn cancel">CANCEL</button>
             </div>
+            </form>
         </div>
     </div>
 </body>

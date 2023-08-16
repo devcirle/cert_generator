@@ -5,6 +5,7 @@ use App\Models\SeminarsModel;
 use CodeIgniter\Controller;
 use App\Models\AttendeesModel;
 use App\Models\UserModel;
+use App\Models\CertificateModel;
 
 class AttendanceController extends Controller
 {
@@ -46,6 +47,8 @@ class AttendanceController extends Controller
         helper(['form']);
 
         $attendeesModel = new AttendeesModel();
+        $certModel = new CertificateModel();
+        $seminarModel = new SeminarsModel();
         $currentDate = new \DateTime();
         $formattedDate = $currentDate->format('Y-m-d');
 
@@ -59,7 +62,9 @@ class AttendanceController extends Controller
         $formattedYear = mb_substr($year, $startIndex);
 
         $isUnique = false;
-        $uniqueCode = '';
+
+        $seminarTitle = $this->request->getVar('seminar');
+        $attendeeName = $this->request->getVar('name');
 
         while (!$isUnique) {
             $uniqueCode = 'SDOIN-' . $this->randomGenerator($characters, $length) . $formattedYear;
@@ -69,10 +74,10 @@ class AttendanceController extends Controller
                 $isUnique = true;
 
                 $data = [
-                    'seminar' => $this->request->getVar('seminar'),
+                    'seminar' => $seminarTitle,
                     'district' => $this->request->getVar('district'),
                     'school' => $this->request->getVar('school'),
-                    'name' => $this->request->getVar('name'),
+                    'name' => $attendeeName,
                     'position' => $this->request->getVar('position'),
                     'contact' => $this->request->getVar('contact'),
                     'gender' => $this->request->getVar('gender'),
@@ -87,6 +92,17 @@ class AttendanceController extends Controller
                 echo "No more available codes";
             }
         }
+
+
+        $certData = [
+            'seminar' => $seminarTitle,
+            'attendee' => $attendeesModel->getAttendeeIdByAttendeeName($uniqueCode),
+            'cert_no' => $uniqueCode,
+            'status' => 0
+        ];
+
+        $certModel->save($certData);
+
     }
 
     public function attendanceView()
@@ -158,6 +174,12 @@ class AttendanceController extends Controller
         } else {
             echo "Account not available";
         }
+
+        //updates the certificate status of the attendee if the seminar has already ended
+        if ($seminar['status'] == 0) {
+
+        }
+
     }
 
     public function eventspage()

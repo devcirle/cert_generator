@@ -17,6 +17,11 @@ class SeminarsModel extends Model
         'created_at'
     ];
 
+    public function getSeminarIdBySeminar($seminar)
+    {
+        return $this->where('title', $seminar)->get()->getRow();
+    }
+
     public function getData($id)
     {
         return $this->where('id', $id)->findAll();
