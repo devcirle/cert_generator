@@ -16,7 +16,22 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.0/css/jquery.dataTables.min.css">
     <script src="https://cdn.datatables.net/1.11.0/js/jquery.dataTables.min.js"></script>
 
-
+    <style>
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #datatable_wrapper, #datatable_wrapper * {
+                visibility: visible;
+            }
+            #datatable_wrapper {
+                position: static;
+            }
+            br {
+                display: none;
+            }
+        }
+    </style>
 
     <title>Dashboard Admin</title>
 </head>
@@ -103,10 +118,15 @@
         </tbody>
 
     </table>
+    
+    <button id="printButton">Print Data</button>
 
     <script>
         $(document).ready(function () {
             $('#datatable').DataTable();
+        });
+        document.getElementById('printButton').addEventListener('click', function () {
+            window.print();
         });
     </script>
 </body>
