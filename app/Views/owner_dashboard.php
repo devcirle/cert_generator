@@ -29,8 +29,8 @@
 
         <div class="nav">
             <ul>
-                <li><a href="#">HOME</a></li>
-                <li><a href="#">ACCOUNT</a></li>
+                <li><a href="dashboard">HOME</a></li>
+                <li><a href="ownerUpdate">ACCOUNT</a></li>
                 <li><a href="home">LOGOUT</a></li>
             </ul>
         </div>

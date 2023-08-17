@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controllers;
 
 use CodeIgniter\Controller;
@@ -44,7 +45,6 @@ class AccountController extends Controller
                     $session->set($ses_data);
                     return redirect()->to('dashboard');
                 }
-
             } else {
                 $session->setFlashdata('msg', 'Password is incorrect.');
                 return redirect()->to('dashboard');
@@ -92,16 +92,16 @@ class AccountController extends Controller
     {
         helper(['form']);
         $userModel = new UserModel();
-        
+
         $existingUsername = $userModel->where('username', $this->request->getVar('username'))->first();
 
-        if (!$existingUsername){
+        if (!$existingUsername) {
             $rules = [
                 'username' => 'required|min_length[2]|max_length[50]',
                 'password' => 'required|min_length[4]|max_length[50]',
                 'confirmpassword' => 'matches[password]'
             ];
-    
+
             if ($this->validate($rules)) {
                 $userModel = new UserModel();
                 $data = [
@@ -124,7 +124,6 @@ class AccountController extends Controller
             session()->setFlashdata('error_message', 'Username already exist');
         }
         return redirect()->to('addAccount');
-
     }
 
     //Sets the state of an program owner account
@@ -153,42 +152,49 @@ class AccountController extends Controller
             echo "Updated Successfully";
         }
         echo "Failed Update";
-
     }
 
-    public function updateAccountView(){
+    public function updateAccountView()
+    {
         helper(['form']);
-        
+
         return view('accountupdate');
     }
 
-    
+    public function ownerAccountUpdate()
+    {
+        helper(['form']);
+
+        return view('ownerAccountUpdate');
+    }
+
+
     public function updateAccountCredentials()
     {
         helper(['form']);
         $userModel = new UserModel();
-        
+
         // var_dump($existingUsername);
 
         $toUpdate = $userModel->where('name', $this->request->getVar('name'))->first();
         // var_dump($toUpdate['id']);
 
-            $rules = [
-                'username' => 'required|min_length[2]|max_length[50]',
-                'password' => 'required|min_length[4]|max_length[50]',
-                'confirmpassword' => 'matches[password]'
-            ];
-    
-            if ($this->validate($rules)) {
-                $existingUsername = $userModel->where('username', $this->request->getVar('username'))->first();
-                if (!$existingUsername){
-                    $data = [
-                        'username' => $this->request->getVar('username'),
-                        'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT)
-                    ];
-                    var_dump($existingUsername);
-                    $userModel->updateAccount($toUpdate['id'], $data['username'], $data['password']);
-                }
+        $rules = [
+            'username' => 'required|min_length[2]|max_length[50]',
+            'password' => 'required|min_length[4]|max_length[50]',
+            'confirmpassword' => 'matches[password]'
+        ];
+
+        if ($this->validate($rules)) {
+            $existingUsername = $userModel->where('username', $this->request->getVar('username'))->first();
+            if (!$existingUsername) {
+                $data = [
+                    'username' => $this->request->getVar('username'),
+                    'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT)
+                ];
+                var_dump($existingUsername);
+                $userModel->updateAccount($toUpdate['id'], $data['username'], $data['password']);
             }
         }
+    }
 }
