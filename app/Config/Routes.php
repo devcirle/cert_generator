@@ -73,6 +73,7 @@ $routes->post('seminar/viewDetails/(:num)', 'DataController::viewSeminarDetails/
 // view all who fully attended a seminar
 $routes->post('seminar/viewAttendees/(:num)', 'DataController::viewAttendeesFullyAttended/$1');
 
+$routes->get('success', 'AttendanceController::preRegSuccess');
 
 if (is_file(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {
     require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';

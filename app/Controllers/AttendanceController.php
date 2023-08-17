@@ -95,9 +95,25 @@ class AttendanceController extends Controller
             'status' => 0
         ];
 
-        $certModel->save($certData);
-        return view('preregSuccess', ['data' => $certData]);
+        // Storing $certData in the session before the redirect
+        session()->set('cert_data', $certData);
 
+        // Performing the redirect
+        return redirect()->to('success');
+
+
+        // $certModel->save($certData);
+        // return view('preregSuccess', ['data' => $certData]);
+
+    }
+
+    public function preRegSuccess()
+    {
+        // Retrieving $certData from the session after the redirect
+        $certData = session('cert_data');
+
+        // Now you can use $certData in your new view or controller action
+        return view('preregSuccess', ['data' => $certData]);
     }
 
     public function attendanceView()
