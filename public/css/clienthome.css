@@ -43,6 +43,10 @@ hr {
 ul {
     list-style-type: none;
     padding-inline-start: 0;
+    margin-block: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
 }
 
 li {
@@ -57,12 +61,16 @@ li a {
     font-size: 1.2rem;
     font-style: normal;
     font-weight: 700;
-    line-height: normal;
+    line-height: 10px;
     letter-spacing: 0.0975rem;
+
 }
 
-nav li a:hover {
-    animation: pulse 1s ease-in;
+ul a{
+    transition: transform 0.3s;
+}
+nav a:hover {
+    transform: translateY(-5px);
 }
 
 .content-wrap {
@@ -96,6 +104,10 @@ nav li a:hover {
     min-width: 30rem;
 }
 
+.enlist a {
+    color: #fff;
+}
+
 .enlist {
     margin-top: 1rem;
     width: 10.3125rem;
@@ -105,7 +117,6 @@ nav li a:hover {
     border: none;
     border-radius: 0.5rem;
     font-weight: bold;
-    color: #fff;
 }
 
 .enlist:hover {
@@ -166,6 +177,7 @@ span {
         align-items: center;
         justify-content: center;
         padding: .0 1rem 0 0;
+        z-index: 2;
     }
 
     /*menu-nav*/

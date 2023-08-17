@@ -30,8 +30,8 @@
         <div class="container">
             <nav>
                 <ul>
-                    <li class="tabs"><a href="datatable">HOME</a></li>
-                    <li class="tabs"><a href="#">EVENTS</a></li>
+                    <li class="tabs"><a href="dashboard">HOME</a></li>
+                    <li class="tabs"><a href="">EVENTS</a></li>
                     <li class="tabs"><a>ACCOUNT</a>
                         <ul>
                             <li><a id="list" href="addAccount">CREATE ACCOUNT</a></li>

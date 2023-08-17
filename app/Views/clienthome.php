@@ -24,21 +24,21 @@
             </label>
 
             <ul class="menu__box blur-effect">
+                <li><a class="menu__item" href="/">ABOUT</a></li>
                 <li><a class="menu__item" href="/">HOME</a></li>
                 <li><a class="menu__item" href="events">EVENTS</a></li>
                 <li><a class="menu__item" href="cert-test">CERTIFICATES</a></li>
                 <li><a class="menu__item" href="attendance">ATTENDANCE</a></li>
-                <li><a class="menu__item" href="/">EXIT</a></li>
             </ul>
         </div>
 
         <div class="nav">
             <ul>
+                <li><a class="menu__item" href="/">ABOUT</a></li>
                 <li><a href="/">HOME</a></li>
                 <li><a href="events">EVENTS</a></li>
                 <li><a href="cert-test">CERTIFICATES</a></li>
                 <li><a href="attendance">ATTENDANCE</a></li>
-                <li><a href="/">EXIT</a></li>
             </ul>
         </div>
     </div>

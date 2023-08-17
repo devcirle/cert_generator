@@ -5,8 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <!-- <link rel="stylesheet" href="css/certificate.css"> -->
-    <style>
+    <link rel="stylesheet" href="css/certificate.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
+
+    <!-- <style>
         .container {
             position: relative;
             width: 559.29px;
@@ -201,26 +203,26 @@
             background-color: white;
             font-size: 5pt;
         }
-    </style>
+    </style> -->
 </head>
 
 <body>
-    <h1>Certificate Mockup</h1>
-    <div class="container">
-        <div class="background-img"></div>
-        <div class="main-contents">
+    <!-- <h1 class="mockup">Certificate Mockup</h1> -->
+    <div class="wrapper">
+        <div class="container" id="capture-me">
+            <div class="background-img"><img class="background-img" src="images/cert-images/cert-bg.png"></div>
+            <div class="main-contents">
 
-            <div class="header">
-                <div class="edukasyon">
-                    <img class="edukasyon-logo" src="images\cert-images\cert-edukasyon.png"
-                        alt="kagawaran ng edukasyon">
+                <div class="header">
+                    <div class="edukasyon">
+                        <img class="edukasyon-logo" src="images\cert-images\cert-edukasyon.png" alt="kagawaran ng edukasyon">
+                    </div>
+                    <div class="republic">Republic of the Philippines</div>
+                    <div class="department">Department of Education</div>
+                    <div class="region">REGION I</div>
+                    <div class="division">SCHOOLS DIVISION OF ILOCOS NORTE</div>
+                    <div class="laoag">Laoag City, Ilocos Norte</div>
                 </div>
-                <div class="republic">Republic of the Philippines</div>
-                <div class="department">Department of Education</div>
-                <div class="region">REGION I</div>
-                <div class="division">SCHOOLS DIVISION OF ILOCOS NORTE</div>
-                <div class="laoag">Laoag City, Ilocos Norte</div>
-            </div>
 
             <div class="contents">
                 <div class="certificate">Certificate of Participation</div>
@@ -259,26 +261,103 @@
                 </div>
             </div>
 
-            <div class="signature">
-                <img src="images\cert-images\cert-sign.png">
-            </div>
+                <div class="signature">
+                    <img src="images\cert-images\cert-sign.png">
+                </div>
 
-            <div class="footer">
-                <div class="atty">ATTY. DONATO D. BALDERAS, JR.</div>
-                <div class="sds">Schools Division Superintendent</div>
-                <div class="logos">
-                    <img class="deped-logos" src="images\cert-images\cert-logos.png" alt="cert-logos">
-                    <div class="qr-tab">
-                        <img class="qr-code" src="images\cert-images\cert-qr.png">
-                        <div class="unique-code">
-                            <?= $data['code']; ?>
+                <div class="footer">
+                    <div class="atty">ATTY. DONATO D. BALDERAS, JR.</div>
+                    <div class="sds">Schools Division Superintendent</div>
+                    <div class="logos">
+                        <img class="deped-logos" src="images\cert-images\cert-logos.png" alt="cert-logos">
+                        <div class="qr-tab">
+                            <img class="qr-code" src="images\cert-images\cert-qr.png">
+                            <div class="unique-code">
+                                <?= $data['code']; ?>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
+            </div>
         </div>
     </div>
+
+    <button id="capture-button">Capture</button>
+
+    <div id="captured-image"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const captureButton = document.getElementById('capture-button');
+            const elementToCapture = document.getElementById('capture-me');
+
+            captureButton.addEventListener('click', async () => {
+                try {
+                    const scale = 2; // Increase the scale for higher image quality
+                    const contentWidth = elementToCapture.offsetWidth;
+                    const contentHeight = elementToCapture.offsetHeight;
+
+                    const canvas = document.createElement('canvas');
+                    const dpi = 300; // DPI for printing
+
+                    const a4Width = 8.27 * dpi; // A4 paper width in pixels
+                    const a4Height = 11.69 * dpi; // A4 paper height in pixels
+
+                    const scaleFactor = Math.min(a4Width / contentWidth, a4Height / contentHeight);
+
+                    canvas.width = a4Width;
+                    canvas.height = a4Height;
+
+                    const canvasContext = canvas.getContext('2d');
+                    canvasContext.scale(scaleFactor, scaleFactor);
+
+                    await html2canvas(elementToCapture, {
+                        canvas: canvas,
+                    });
+
+                    // Create a data URL and trigger a download
+                    const dataURL = canvas.toDataURL('image/png');
+                    const link = document.createElement('a');
+                    link.href = dataURL;
+                    link.download = 'captured_image.png'; // Set the file name
+                    link.click();
+                } catch (error) {
+                    console.error('An error occurred:', error);
+                }
+            });
+        });
+    </script>
+
+    <!-- <button id="printButton">Print Certificate</button>
+
+    <script>
+        document.getElementById('printButton').addEventListener('click', function() {
+            printCertificate();
+        });
+
+        function printCertificate() {
+            var printWindow = window.open('', '_blank');
+            var printContent = document.querySelector('.container').outerHTML;
+
+            // Customize the print styles including A4 size and targeting .container
+            printContent += '<style>';
+            printContent += '/* Custom print styles */';
+            printContent += '.container { width: 100%; height: 100vh; }'; // Cover entire A4 page
+            printContent += '@page { size: A4; }'; // Set A4 paper size
+            printContent += '</style>';
+
+            printWindow.document.open();
+            printWindow.document.write(printContent);
+            printWindow.document.close();
+
+            // Wait for the window to finish loading before printing
+            printWindow.onload = function() {
+                printWindow.print();
+                printWindow.close();
+            };
+        }
+    </script> -->
 </body>
 
 </html>
