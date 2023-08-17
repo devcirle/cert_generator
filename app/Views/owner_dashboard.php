@@ -4,8 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://code.jquery.com/jquery-3.7.0.js"
-        integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
     <script src="js/seminar.js"></script>
     <title>Program Owner Dashboard</title>
     <link rel="stylesheet" type="text/css" href="css/daterangepicker.css" />
@@ -42,66 +41,86 @@
         <h1>EVENTS</h1>
         <hr class="event-hr">
     </div>
-    
+
     <div class="ownerContent">
         <div class="add-button">
             <button id="btnOpenForm" class="add-event">+</button>
         </div>
 
         <div class="content">
-            <?php foreach ($data as $card): ?>
-                    <div class="cards">
-                        <div class="card">
-                            <div class="card__content">
-                                <div class="card__title">
-                                    <?= $card['title']; ?>
-                                </div>
-                                <p class="card__text">
-                                    <?= $card['date']; ?>
-                                    <br>
-                                    <?= $card['venue']; ?>
-                                    <br>
-                                    <?php
-                                        switch ($card['status']) {
-                                            case "0":
-                                                echo "Ended";
-                                                break;
-                                            case "1":
-                                                echo "Upcoming";
-                                                break;
-                                            case "2":
-                                                echo "Ongoing";
-                                                break;
-                                            case "3":
-                                                echo "Cancelled";
-                                                break;
-                                        }
-                                    ?>
-                                    <?php if ($card['status'] == 1): ?>
-                                        <form action="<?= base_url('seminar/cancel/' . $card['id']); ?>" method="post">
-                                            <button type="submit" name="cancel">Cancel Seminar</button>
-                                        </form>
-                                    <?php endif; ?>
-                                    <?php if ($card['status'] == 0): ?>
-                                        <form action="<?= base_url('seminar/viewAttendees' . $card['id']); ?>" method="post">
-                                            <button type="submit">View Attendees</button>
-                                        </form>
-                                    <?php endif; ?>
-                                </p>
-                                    <!-- <button type="submit" name="submit">View Details</button> -->
-                                    <?php if ($card['status'] == 0 or $card['status'] == 1 or $card['status'] == 2): ?>
-                                        <form action="<?= base_url('seminar/viewDetails/' . $card['id']); ?>" method="post">
-                                            <button type="submit">View Pre-Registered Attendees</button>
-                                        </form>
-                                    <?php endif; ?>
+            <?php foreach ($data as $card) : ?>
+                <div class="cards">
+                    <div class="card">
+                        <div class="card__content">
+                            <div class="card__title">
+                                <?= $card['title']; ?>
                             </div>
+                            <p class="card__text">
+                                <?php
+                                $seminarDates = json_decode($card['date']);
+                                // Convert dates to DateTime objects
+                                $dateObjects = array_map(function ($date) {
+                                    return new DateTime($date);
+                                }, $seminarDates);
+
+                                $startDate = reset($dateObjects);
+                                $endDate = end($dateObjects);
+
+                                $formattedStartDate = $startDate->format('F j');
+                                $formattedEndDate = $endDate->format('F j, Y');
+
+                                if ($startDate->format('m') !== $endDate->format('m')) {
+                                    $formattedDateRange = $formattedStartDate . '-' . $formattedEndDate;
+                                } else {
+                                    $formattedDateRange = $startDate->format('F d') . '-' . $endDate->format('d, Y');
+                                }
+
+                                echo $formattedDateRange;
+                                ?>
+                                <br>
+                                <?= $card['venue']; ?>
+                                <br>
+                                <?php
+                                switch ($card['status']) {
+                                    case "0":
+                                        echo "Ended";
+                                        break;
+                                    case "1":
+                                        echo "Upcoming";
+                                        break;
+                                    case "2":
+                                        echo "Ongoing";
+                                        break;
+                                    case "3":
+                                        echo "Cancelled";
+                                        break;
+                                }
+                                ?>
+                                <?php if ($card['status'] == 1) : ?>
+                            <form action="<?= base_url('seminar/cancel/' . $card['id']); ?>" method="post">
+                                <button type="submit" name="cancel">Cancel Seminar</button>
+                            </form>
+                        <?php endif; ?>
+                        <?php if ($card['status'] == 0) : ?>
+                            <form action="<?= base_url('seminar/viewAttendees' . $card['id']); ?>" method="post">
+                                <button type="submit">View Attendees</button>
+                            </form>
+                        <?php endif; ?>
+                        </p>
+                        <!-- <button type="submit" name="submit">View Details</button> -->
+                        <?php if ($card['status'] == 0 or $card['status'] == 1 or $card['status'] == 2) : ?>
+                            <form action="<?= base_url('seminar/viewDetails/' . $card['id']); ?>" method="post">
+                                <button type="submit">View Pre-Registered Attendees</button>
+                            </form>
+                        <?php endif; ?>
                         </div>
                     </div>
+                </div>
             <?php endforeach; ?>
         </div>
     </div>
 
-    
+
 
     <div class="form-popup-bg">
         <div class="form-container">
@@ -122,11 +141,10 @@
                 <label for="title">Set Date:</label>
                 <div id="date-range">
                     <input type="hidden" id="date" name="date">
-                    <input type="text" class="picker" id="dateRangePicker" name="daterange"
-                        value="01/01/2023 - 01/15/2023">
+                    <input type="text" class="picker" id="dateRangePicker" name="daterange" value="01/01/2023 - 01/15/2023">
 
                     <script>
-                        $(function () {
+                        $(function() {
                             var dateRangePicker = $('#dateRangePicker');
                             dateRangePicker.daterangepicker({
                                 opens: 'center',
@@ -137,7 +155,7 @@
                                 parentEl: "body"
                             });
 
-                            dateRangePicker.on('apply.daterangepicker', function (ev, picker) {
+                            dateRangePicker.on('apply.daterangepicker', function(ev, picker) {
                                 var startDate = picker.startDate;
                                 var endDate = picker.endDate;
 
@@ -153,7 +171,7 @@
                                 $('#date').val(JSON.stringify(dates));
                             });
 
-                            dateRangePicker.on('cancel.daterangepicker', function (ev, picker) {
+                            dateRangePicker.on('cancel.daterangepicker', function(ev, picker) {
                                 $(this).val('');
                                 $('#date').val('');
                             });

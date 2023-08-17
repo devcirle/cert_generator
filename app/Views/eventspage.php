@@ -66,7 +66,27 @@
                     <br>
                     <?= $card['venue']; ?>
                     <br>
-                    <?= $card['date']; ?>
+                    <?php
+                    $seminarDates = json_decode($card['date']);
+                    // Convert dates to DateTime objects
+                    $dateObjects = array_map(function ($date) {
+                        return new DateTime($date);
+                    }, $seminarDates);
+
+                    $startDate = reset($dateObjects);
+                    $endDate = end($dateObjects);
+
+                    $formattedStartDate = $startDate->format('F j');
+                    $formattedEndDate = $endDate->format('F j, Y');
+
+                    if ($startDate->format('m') !== $endDate->format('m')) {
+                        $formattedDateRange = $formattedStartDate . '-' . $formattedEndDate;
+                    } else {
+                        $formattedDateRange = $startDate->format('F d') . '-' . $endDate->format('d, Y');
+                    }
+
+                    echo $formattedDateRange;
+                    ?>
                     </p>
                     <button type="submit" class="btn">Pre-Register</button>
 
