@@ -16,6 +16,22 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.0/css/jquery.dataTables.min.css">
     <script src="https://cdn.datatables.net/1.11.0/js/jquery.dataTables.min.js"></script>
 
+    <style>
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #datatable_wrapper, #datatable_wrapper * {
+                visibility: visible;
+            }
+            #datatable_wrapper {
+                position: static;
+            }
+            br {
+                display: none;
+            }
+        }
+    </style>
 
 
     <title>Dashboard Admin</title>
@@ -55,6 +71,10 @@
     <br>
     <br>
     <br>
+    <label for="yearFilter">Filter by Year:</label>
+    <select id="yearFilter">
+        <!-- Options will be dynamically added by the JavaScript code -->
+    </select>
 
     <table id="datatable" class="display">
         <thead>
@@ -91,10 +111,41 @@
 
     </table>
 
+    <button id="printButton">Print Data</button>
+
     <script>
         $(document).ready(function () {
-            $('#datatable').DataTable();
+            var dataTable = $('#datatable').DataTable({
+                "order": [[3, "desc"]]  // Sort by the fourth column (date) in descending order
+            });
+
+            var yearFilter = $('#yearFilter');
+
+            yearFilter.append('<option value="">All Years</option>'); // Add an option for all years
+
+            for (var year = 2023; year <= new Date().getFullYear() + 1; year++) {
+                yearFilter.append('<option value="' + year + '">' + year + '</option>');
+            }
+
+
+            // Add a change event listener to the year filter select element
+            yearFilter.on('change', function () {
+                var selectedYear = $(this).val();
+
+                // Clear any existing filtering
+                dataTable.search('').columns().search('').draw();
+
+                // Apply the selected year as a filter
+                if (selectedYear !== '') {
+                    dataTable.column(3).search(selectedYear, true, false).draw();
+                }
+            });
+
+            document.getElementById('printButton').addEventListener('click', function () {
+                window.print();
+            });
         });
+
     </script>
 </body>
 

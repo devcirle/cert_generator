@@ -224,22 +224,42 @@
                     <div class="laoag">Laoag City, Ilocos Norte</div>
                 </div>
 
-                <div class="contents">
-                    <div class="certificate">Certificate of Participation</div>
-                    <div class="awarded">is awarded to</div>
-                    <div class="name">
-                        <?= $data['name']; ?>
-                    </div>
-                    <div class="participation">for his/her active participation during the</div>
-                    <div class="seminar">
-                        <?= $seminar['title']; ?>
-                    </div>
-                    <div class="venue">held at <b>
-                            <?= $seminar['venue']; ?>
-                        </b> on <br><br>
-                        <?= $seminar['date']; ?>
-                    </div>
+            <div class="contents">
+                <div class="certificate">Certificate of Participation</div>
+                <div class="awarded">is awarded to</div>
+                <div class="name">
+                    <?= $data['name']; ?>
                 </div>
+                <div class="participation">for his/her active participation during the</div>
+                <div class="seminar">
+                    <?= $seminar['title']; ?>
+                </div>
+                <div class="venue">held at <b>
+                        <?= $seminar['venue']; ?>
+                    </b> on <br><br>
+                    <?php
+                        $seminarDates = json_decode($seminar['date']);
+                        // Convert dates to DateTime objects
+                        $dateObjects = array_map(function ($date) {
+                            return new DateTime($date);
+                        }, $seminarDates);
+
+                        $startDate = reset($dateObjects);
+                        $endDate = end($dateObjects);
+
+                        $formattedStartDate = $startDate->format('F j');
+                        $formattedEndDate = $endDate->format('F j, Y');
+
+                        if ($startDate->format('m') !== $endDate->format('m')) {
+                            $formattedDateRange = $formattedStartDate . '-' . $formattedEndDate;
+                        } else {
+                            $formattedDateRange = $startDate->format('F d') . '-' . $endDate->format('d, Y');
+                        }
+                                            
+                        echo $formattedDateRange;
+                    ?>
+                </div>
+            </div>
 
                 <div class="signature">
                     <img src="images\cert-images\cert-sign.png">

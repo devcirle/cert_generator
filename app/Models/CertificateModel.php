@@ -21,4 +21,10 @@ class CertificateModel extends Model
             ->set('status', $newStatus)
             ->update();
     }
+
+    public function getAttendeeByCertStatus($seminarId){
+        return $this->where('status', 1)
+                    ->where('seminar', $seminarId)
+                    ->findAll();
+    }
 }

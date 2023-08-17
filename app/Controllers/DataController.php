@@ -18,6 +18,33 @@ class DataController extends BaseController
         return view('admin_dashboard', ['data' => $data]);
     }
 
+    public function viewSeminarDetails($seminarId)
+    {
+        $model = new AttendeesModel();
+        $data = $model->getAttendeeBySeminar($seminarId);
+
+        return view('ownerSeminarDetails', ['data' => $data]);
+    }
+    
+    public function viewAttendeesFullyAttended($seminarId)
+    {
+        $model = new CertificateModel();
+        $attendeesModel = new AttendeesModel();
+
+        $data = $model->getAttendeeByCertStatus($seminarId);
+
+        $newData = [];
+
+        foreach ($data as $row) {
+            $attendee = $attendeesModel->find($row['attendee']);
+            if ($attendee) {
+                $newData[] = $attendee;
+            }
+        }
+
+        return view('ownerSeminarDetails', ['data' => $newData]);
+    }
+
     public function get_data()
     {
         $model = new SeminarsModel();

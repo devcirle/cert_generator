@@ -25,6 +25,7 @@
             <div class="content">
                 <!-- test -->
                 <input type="hidden" name="seminar" value="<?= $data['seminarId']; ?>">
+                
                 <!-- test -->
                 <label for="Name">Name</label>
                 <input type="text" name="name" required
