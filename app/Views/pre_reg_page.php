@@ -27,21 +27,21 @@
                 <input type="hidden" name="seminar" value="<?= $data['seminarId']; ?>">
                 <!-- test -->
                 <label for="Name">Name</label>
-                <input type="text" name="name"
+                <input type="text" name="name" required
                     value="<?= isset($_SESSION['prev_name']) ? $_SESSION['prev_name'] : '' ?>" />
                 <label for="District">District</label>
-                <input type="text" name="district" pattern=".{6,}" title="Please enter at least 6 characters." />
+                <input type="text" name="district" pattern=".{6,}" title="Please enter at least 6 characters." required/>
                 <label for="School">School</label>
-                <input type="text" name="school"
+                <input type="text" name="school" required
                     value="<?= isset($_SESSION['prev_school']) ? $_SESSION['prev_school'] : '' ?>" />
                 <label for="Age">Age</label>
-                <input type="number" name="age"
+                <input type="number" name="age" required
                     value="<?= isset($_SESSION['prev_age']) ? $_SESSION['prev_age'] : '' ?>" />
                 <label for="Position">Position</label>
-                <input type="text" name="position"
+                <input type="text" name="position" required
                     value="<?= isset($_SESSION['prev_position']) ? $_SESSION['prev_position'] : '' ?>" />
                 <label for="Contact">Contact</label>
-                <input type="text" name="contact"
+                <input type="text" name="contact" required
                     value="<?= isset($_SESSION['prev_contact']) ? $_SESSION['prev_contact'] : '' ?>" />
 
             </div>
