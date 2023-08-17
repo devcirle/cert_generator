@@ -65,6 +65,13 @@ $routes->get('datatable/get_data', 'DataController::get_data');
 // $routes->get('generate-pdf', 'PdfController::generatePdf');
 
 $routes->get('search/perform_search', 'Search::perform_search');
+$routes->post('seminar/cancel/(:num)', 'SeminarController::cancel/$1');
+
+// view all preregistered attendees
+$routes->post('seminar/viewDetails/(:num)', 'DataController::viewSeminarDetails/$1');
+
+// view all who fully attended a seminar
+$routes->post('seminar/viewAttendees/(:num)', 'DataController::viewAttendeesFullyAttended/$1');
 
 
 if (is_file(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {

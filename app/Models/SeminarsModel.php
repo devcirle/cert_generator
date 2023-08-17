@@ -51,6 +51,13 @@ class SeminarsModel extends Model
         return $this->where('status', 2)->findAll();
     }
 
+    public function updateStatusToCancelled($id)
+    {
+        $this->where('id', $id)
+            ->set('status', 3)
+            ->update();
+    }
+
     public function updateStatusToOngoing($id)
     {
 

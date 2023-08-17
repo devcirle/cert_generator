@@ -29,6 +29,10 @@ class AttendeesModel extends Model
         return ($result !== null) ? $result->id : null;
     }
 
+    public function getAttendeeBySeminar($seminar){
+        return $this->where('seminar', $seminar)->findAll();
+    }
+
     public function updateDateStatus($id, $newDate)
     {
         $this->where('id', $id)

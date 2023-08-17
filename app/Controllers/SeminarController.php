@@ -39,4 +39,13 @@ class SeminarController extends Controller
         }
     }
 
+    public function cancel($id)
+    {
+        $seminarModel = new SeminarsModel();
+
+        $seminarModel->updateStatusToCancelled($id);
+
+        return redirect()->to('dashboard');
+    }
+
 }

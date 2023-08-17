@@ -47,7 +47,7 @@
         <div class="add-button">
             <button id="btnOpenForm" class="add-event">+</button>
         </div>
-    
+
         <div class="content">
             <?php foreach ($data as $card): ?>
                     <div class="cards">
@@ -61,8 +61,39 @@
                                     <br>
                                     <?= $card['venue']; ?>
                                     <br>
-                                    <?= $card['status']; ?>
+                                    <?php
+                                        switch ($card['status']) {
+                                            case "0":
+                                                echo "Ended";
+                                                break;
+                                            case "1":
+                                                echo "Upcoming";
+                                                break;
+                                            case "2":
+                                                echo "Ongoing";
+                                                break;
+                                            case "3":
+                                                echo "Cancelled";
+                                                break;
+                                        }
+                                    ?>
+                                    <?php if ($card['status'] == 1): ?>
+                                        <form action="<?= base_url('seminar/cancel/' . $card['id']); ?>" method="post">
+                                            <button type="submit" name="cancel">Cancel Seminar</button>
+                                        </form>
+                                    <?php endif; ?>
+                                    <?php if ($card['status'] == 0): ?>
+                                        <form action="<?= base_url('seminar/viewAttendees' . $card['id']); ?>" method="post">
+                                            <button type="submit">View Attendees</button>
+                                        </form>
+                                    <?php endif; ?>
                                 </p>
+                                    <!-- <button type="submit" name="submit">View Details</button> -->
+                                    <?php if ($card['status'] == 0 or $card['status'] == 1 or $card['status'] == 2): ?>
+                                        <form action="<?= base_url('seminar/viewDetails/' . $card['id']); ?>" method="post">
+                                            <button type="submit">View Pre-Registered Attendees</button>
+                                        </form>
+                                    <?php endif; ?>
                             </div>
                         </div>
                     </div>
