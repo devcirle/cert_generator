@@ -43,7 +43,6 @@
         </div>
     </div>
     <hr>
-    <?= form_open('preregister'); ?>
     <div class="content">
         <?php foreach ($seminars as $card) : ?>
             <div class="cards">
@@ -65,7 +64,7 @@
                     <?php endif; ?>
                     <br>
                     <?= $card['venue']; ?>
-                    <br>
+                    <br><br>
                     <?php
                     $seminarDates = json_decode($card['date']);
                     // Convert dates to DateTime objects

@@ -21,12 +21,16 @@
             body * {
                 visibility: hidden;
             }
-            #datatable_wrapper, #datatable_wrapper * {
+
+            #datatable_wrapper,
+            #datatable_wrapper * {
                 visibility: visible;
             }
+
             #datatable_wrapper {
                 position: static;
             }
+
             br {
                 display: none;
             }
@@ -88,19 +92,54 @@
         </thead>
 
         <tbody>
-            <?php foreach ($data as $row): ?>
+            <?php foreach ($data as $row) : ?>
                 <tr>
                     <td>
                         <?= $row['owner']; ?>
                     </td>
                     <td>
-                        <?= $row['status']; ?>
+                        <?php
+                        switch ($row['status']) {
+                            case "0":
+                                echo "Ended";
+                                break;
+                            case "1":
+                                echo "Upcoming";
+                                break;
+                            case "2":
+                                echo "Ongoing";
+                                break;
+                            case "3":
+                                echo "Cancelled";
+                                break;
+                        }
+                        ?>
                     </td>
                     <td>
                         <?= $row['title']; ?>
                     </td>
                     <td>
-                        <?= $row['date']; ?>
+                        <?php
+                        $seminarDates = json_decode($row['date']);
+                        // Convert dates to DateTime objects
+                        $dateObjects = array_map(function ($date) {
+                            return new DateTime($date);
+                        }, $seminarDates);
+
+                        $startDate = reset($dateObjects);
+                        $endDate = end($dateObjects);
+
+                        $formattedStartDate = $startDate->format('F j');
+                        $formattedEndDate = $endDate->format('F j, Y');
+
+                        if ($startDate->format('m') !== $endDate->format('m')) {
+                            $formattedDateRange = $formattedStartDate . '-' . $formattedEndDate;
+                        } else {
+                            $formattedDateRange = $startDate->format('F d') . '-' . $endDate->format('d, Y');
+                        }
+
+                        echo $formattedDateRange;
+                        ?>
                     </td>
                     <td>
                         <?= $row['venue']; ?>
@@ -114,9 +153,11 @@
     <button id="printButton">Print Data</button>
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             var dataTable = $('#datatable').DataTable({
-                "order": [[3, "desc"]]  // Sort by the fourth column (date) in descending order
+                "order": [
+                    [3, "desc"]
+                ] // Sort by the fourth column (date) in descending order
             });
 
             var yearFilter = $('#yearFilter');
@@ -129,7 +170,7 @@
 
 
             // Add a change event listener to the year filter select element
-            yearFilter.on('change', function () {
+            yearFilter.on('change', function() {
                 var selectedYear = $(this).val();
 
                 // Clear any existing filtering
@@ -141,11 +182,10 @@
                 }
             });
 
-            document.getElementById('printButton').addEventListener('click', function () {
+            document.getElementById('printButton').addEventListener('click', function() {
                 window.print();
             });
         });
-
     </script>
 </body>
 

@@ -25,11 +25,13 @@
             <?= $data['cert_no']; ?>
         </div>
 
+        
+
 
         <p class="bottomtxt">This will serve as your attendance code and <br> for retrieving your certificate</p>
         <div class="homebtn">
             <button class="print" id="print-button">Backup as PDF</button>
-            <button class="home"><a href="/">Back to Home</a></button>
+            <a href="/"> <button class="home">Back to Home</button></a>
 
         </div>
     </div>

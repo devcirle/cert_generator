@@ -56,7 +56,7 @@ p {
     border-radius: 6px;
     padding: 1rem;
 }
-.home a{
+a .home{
     font-size: small;
     font-weight: 600;
 }

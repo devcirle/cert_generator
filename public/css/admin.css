@@ -54,7 +54,7 @@ nav a {
   transition: transform 0.3s;
 }
 
-nav a:hover{
+nav a:hover {
   transform: translateY(-5px);
 }
 
@@ -62,11 +62,12 @@ nav a:hover{
 nav ul ul {
   display: none;
   position: absolute;
-  top: 60px; /* the height of the main nav */
+  top: 60px;
+  /* the height of the main nav */
 }
 
 /* Display Dropdowns on Hover */
-nav ul li:hover > ul {
+nav ul li:hover>ul {
   display: inherit;
 }
 
@@ -77,11 +78,24 @@ nav ul ul li {
   display: list-item;
 }
 
-nav ul ul a:hover{
+nav ul ul a:hover {
   background-color: grey;
 }
 
 
 #list {
   font-size: 0.9rem;
+}
+
+.namefield {
+  width: 600px;
+}
+
+input {
+  width: 100%;
+}
+
+.full-name{
+  display: flex;
+
 }
