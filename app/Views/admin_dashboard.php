@@ -65,6 +65,7 @@
         </div>
     </header>
 
+
     <br>
     <br>
     <br>
@@ -88,6 +89,7 @@
                 <th>Title</th>
                 <th>Date</th>
                 <th>Venue</th>
+                <th></th>
             </tr>
         </thead>
 
@@ -143,6 +145,16 @@
                     </td>
                     <td>
                         <?= $row['venue']; ?>
+                    </td>
+                    <td>
+                        <!-- <a href="home">
+                            <button type="submit">View Details</button>
+                        </a> -->
+
+                        <form action="<?= base_url('seminar/viewDetails/' . $row['id']); ?>" method="post">
+                                <button type="submit">View Details</button>
+                        </form>
+
                     </td>
                 </tr>
             <?php endforeach; ?>

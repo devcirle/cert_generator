@@ -55,6 +55,7 @@
     <table id="datatable" class="display">
         <thead>
             <tr>
+                <th>Name</th>
                 <th>Username</th>
                 <th>Role</th>
                 <th>Account Status</th>
@@ -64,6 +65,9 @@
         <tbody>
             <?php foreach ($data as $row): ?>
                 <tr>
+                    <td>
+                        <?= $row['name']; ?>
+                    </td>
                     <td name="username">
                         <?= $row['username']; ?>
                     </td>

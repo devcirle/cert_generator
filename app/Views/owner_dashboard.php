@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="css/programowner.css">
     <link rel="stylesheet" href="css/eventspage.css">
     <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/admin.css">
     <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:wght@400;700&display=swap" rel="stylesheet">
 
 </head>
@@ -21,21 +22,23 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
-    <div class="header">
-        <div class="logos">
-            <img class="logocontainer" src="images/logos.png" alt="">
-            <b>DASHBOARD</b>
+    <header>
+        <div class="logo">
+            <img src="images\logos.png" alt="DepEd">
+            <div class="title">OWNER HOME</div>
         </div>
+        <div class="container">
+            <nav>
+                <ul>
+                    <li class="tabs"><a href="dashboard">HOME</a></li>
+                    <li class="tabs"><a href="ownerUpdate">ACCOUNT</a></li>
+                    <li class="tabs"><a href="home">LOGOUT</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-        <div class="nav">
-            <ul>
-                <li><a href="dashboard">HOME</a></li>
-                <li><a href="ownerUpdate">ACCOUNT</a></li>
-                <li><a href="home">LOGOUT</a></li>
-            </ul>
-        </div>
-    </div>
-    <hr class="top-hr">
+
     <div class="event">
         <img class="event-logo" src="" alt="">
         <h1>EVENTS</h1>

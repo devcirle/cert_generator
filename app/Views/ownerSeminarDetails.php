@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="/css/admin.css">
 
     <!-- Include jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -39,15 +39,22 @@
 <body>
     <header>
         <div class="logo">
-            <img src="images\logos.png" alt="DepEd">
-            <div class="title">DASHBOARD</div>
+            <img src="\images\logos.png" alt="DepEd">
+            <div class="title">ADMIN HOME</div>
         </div>
         <div class="container">
             <nav>
                 <ul>
-                    <li class="tabs"><a href="datatable">HOME</a></li>
-                    <li class="tabs"><a href="#">ACCOUNT</a></li>
-                    <li class="tabs"><a href="home">LOGOUT</a></li>
+                    <li class="tabs"><a href="/dashboard">HOME</a></li>
+                    <li class="tabs"><a href="/dashboard">EVENTS</a></li>
+                    <li class="tabs"><a>ACCOUNT</a>
+                        <ul>
+                            <li><a id="list" href="/addAccount">CREATE ACCOUNT</a></li>
+                            <li><a id="list" href="/updateAccount">RETRIEVE ACCOUNT</a></li>
+                            <li><a id="list" href="/setAccount">RESTRICT ACCOUNT</a></li>
+                        </ul>
+                    </li>
+                    <li class="tabs"><a href="/home">LOGOUT</a></li>
                 </ul>
             </nav>
         </div>
