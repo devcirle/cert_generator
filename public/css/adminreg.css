@@ -5,3 +5,17 @@
   padding-top: 15rem;
 }
 
+.usernamefield,
+.confirmationfield {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.rolefield{
+  display: flex;
+  align-items: center;
+
+}
+

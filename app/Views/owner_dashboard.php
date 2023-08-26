@@ -38,17 +38,53 @@
         </div>
     </header>
 
+    <!-- <div class="header">
+        <div class="logos">
+            <img class="logocontainer" src="images/logos.png" alt="">
+        </div>
+        <div class="hamburger">
+            <input id="menu__toggle" type="checkbox" />
+            <label class="menu__btn" for="menu__toggle">
+                <span></span>
+            </label>
+
+            <ul class="menu__box blur-effect">
+                <li><a class="menu__item" href="/">ABOUT</a></li>
+                <li><a class="menu__item" href="/">HOME</a></li>
+                <li><a class="menu__item" href="events">EVENTS</a></li>
+                <li><a class="menu__item" href="cert-test">CERTIFICATES</a></li>
+                <li><a class="menu__item" href="attendance">ATTENDANCE</a></li>
+            </ul>
+        </div>
+
+        <div class="nav">
+            <ul>
+                <li><a class="menu__item" href="/">ABOUT</a></li>
+                <li><a href="/">HOME</a></li>
+                <li><a href="events">EVENTS</a></li>
+                <li><a href="cert-test">CERTIFICATES</a></li>
+                <li><a href="attendance">ATTENDANCE</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <hr> -->
 
     <div class="event">
         <img class="event-logo" src="" alt="">
-        <h1>EVENTS</h1>
+        <div class="headerevents">
+            <h1>EVENTS</h1>
+            <div class="add-button">
+                <button id="btnOpenForm" class="add-event">+</button>
+            </div>
+        </div>
+
         <hr class="event-hr">
+
     </div>
 
     <div class="ownerContent">
-        <div class="add-button">
-            <button id="btnOpenForm" class="add-event">+</button>
-        </div>
+
 
         <div class="content">
             <?php foreach ($data as $card) : ?>

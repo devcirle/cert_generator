@@ -294,7 +294,7 @@
 
             captureButton.addEventListener('click', async () => {
                 try {
-                    const scale = 2; // Increase the scale for higher image quality
+                   
                     const contentWidth = elementToCapture.offsetWidth;
                     const contentHeight = elementToCapture.offsetHeight;
 

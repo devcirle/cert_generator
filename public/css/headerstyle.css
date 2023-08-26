@@ -5,15 +5,16 @@
 body,
 html {
     margin: 0;
-    
+
 }
 
-h2{
+h2 {
     margin-left: 1.5rem;
     font-size: 2rem;
     margin-block: 0;
     letter-spacing: .1rem;
 }
+
 .header {
     display: flex;
     justify-content: space-between;
@@ -61,7 +62,7 @@ li {
 }
 
 li a {
-    display: block;
+
     text-decoration: none;
     color: #000;
     text-align: center;
@@ -70,10 +71,16 @@ li a {
     font-weight: 700;
     line-height: 10px;
     letter-spacing: 0.0975rem;
+
 }
 
-nav li a:hover {
-    animation: pulse 1s ease-in;
+.nav li {
+    transition: transform 0.3s;
+}
+
+.nav li:hover {
+    transform: translateY(-3px);
+    ;
 }
 
 @media screen and (max-width:965px) {
