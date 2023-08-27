@@ -122,18 +122,19 @@
                                 <?php
                                 switch ($card['status']) {
                                     case "0":
-                                        echo "Ended";
+                                        echo '<span class="ended">Ended</span>';
                                         break;
                                     case "1":
-                                        echo "Upcoming";
+                                        echo '<span class="upcoming">Upcoming</span>';
                                         break;
                                     case "2":
-                                        echo "Ongoing";
+                                        echo '<span class="ongoing">Ongoing</span>';
                                         break;
                                     case "3":
-                                        echo "Cancelled";
+                                        echo '<span class="cancelled">Cancelled</span>';
                                         break;
                                 }
+                                
                                 ?>
                                 <?php if ($card['status'] == 1) : ?>
                             <form action="<?= base_url('seminar/cancel/' . $card['id']); ?>" method="post">

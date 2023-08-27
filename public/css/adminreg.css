@@ -1,21 +1,77 @@
+*{
+  box-sizing: border-box;
+}
+h1{
+  display: flex;
+  justify-content: center;
+}
+
 .account-form {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 15rem;
+  padding-top: 8rem;
+  
+}
+.container-form{
+  width: 30rem;
+  padding: 1rem;
+
+  border: 1px solid #101541;
 }
 
-.usernamefield,
-.confirmationfield {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-}
 
 .rolefield{
   display: flex;
   align-items: center;
 
+
 }
 
+.admin{
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+}
+
+.owner{
+  display: flex;
+  justify-content: center; 
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.owner p {
+  display: inline;
+}
+
+.container-form input {
+  padding: .5rem;
+  width: 100%;
+  border-radius: 6px;
+  border: 1px solid black;
+
+}
+
+.inputname, .enter-username, .input-password, .input-password1{
+  margin-bottom: 10px;
+}
+.buttonregister{
+  padding: 1rem;
+
+  display: flex;
+  justify-content: center;
+}
+
+.register1{   
+  background: #101541;
+  color: #FFF;
+  
+  padding: 14px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 8rem;
+  border-radius: 6px;
+  text-decoration: none;
+}
