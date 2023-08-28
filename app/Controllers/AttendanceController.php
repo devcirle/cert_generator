@@ -238,6 +238,6 @@ class AttendanceController extends Controller
         /*updates the attendance date of the attendee	
         if the attendee attends a seminar	
         */
-        return view('certificate_mockup');
+        return view('certificate');
     }
 }
