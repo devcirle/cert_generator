@@ -88,8 +88,9 @@
                     echo $formattedDateRange;
                     ?>
                     </p>
-                    <button type="submit" class="btn">Pre-Register</button>
-
+                    <div class="btnwrapper">
+                        <button type="submit" class="btn">Pre-Register</button>
+                    </div>
                     </div>
                 </div>
             </div>

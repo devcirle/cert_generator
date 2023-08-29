@@ -78,7 +78,7 @@ class DataController extends BaseController
         } elseif ($certificateData['status'] == 1) {
             $attendeeCert = $attendeeModel->where('code', $searchQuery)->first();
             $seminarData = $seminarModel->where('id', $attendeeCert['seminar'])->first();
-            return view('certificate_mockup', ['data' => $attendeeCert, 'seminar' => $seminarData]);
+            return view('certificate', ['data' => $attendeeCert, 'seminar' => $seminarData]);
         }
     }
 }

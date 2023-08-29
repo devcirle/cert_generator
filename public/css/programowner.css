@@ -74,7 +74,7 @@ b {
 }
 
 .event {
-  margin-top: 3rem;
+  margin-top: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -117,7 +117,7 @@ b {
   justify-content: center;
   border-radius: 1.5625rem;
   background: #fff;
-  box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 4px 14px 0px rgba(101, 101, 101, 0.149);
   flex-direction: column;
   padding: 3rem;
   margin-left: auto;
@@ -213,7 +213,7 @@ label {
   height: 2rem;
   border-radius: 6px;
   background: #fff;
-  box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 1px 6px 0px rgba(0, 0, 0, 0.25);
   border: none;
   padding: 0;
   cursor: pointer;
@@ -231,3 +231,26 @@ label {
   justify-content: center;
   align-items: center;
 }
+
+.ended {
+  color: gray;
+  /* Other styles for the "Ended" status */
+}
+
+.upcoming {
+  color: blue;
+  /* Other styles for the "Upcoming" status */
+}
+
+.ongoing {
+  color: green;
+  /* Other styles for the "Ongoing" status */
+}
+
+.cancelled {
+  color: red;
+ 
+  
+  /* Other styles for the "Cancelled" status */
+}
+

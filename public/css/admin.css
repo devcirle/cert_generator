@@ -87,15 +87,8 @@ nav ul ul a:hover {
   font-size: 0.9rem;
 }
 
-.namefield {
-  width: 600px;
-}
 
-input {
-  width: 100%;
-}
+.full-name, .namefield{
 
-.full-name{
-  display: flex;
 
 }
