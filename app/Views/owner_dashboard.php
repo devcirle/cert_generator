@@ -31,7 +31,8 @@
             <nav>
                 <ul>
                     <li class="tabs"><a href="dashboard">HOME</a></li>
-                    <li class="tabs"><a href="ownerUpdate">ACCOUNT</a></li>
+                    <!-- <li class="tabs"><a href="ownerUpdate">ACCOUNT</a></li> -->
+                    <li class="tabs"><a href="<?= site_url('ownerUpdate/' . $username) ?>">ACCOUNT</a></li>
                     <li class="tabs"><a href="home">LOGOUT</a></li>
                 </ul>
             </nav>
@@ -174,13 +175,13 @@
 
                 <label for="title">Event Name:</label>
                 <div id="title">
-                    <textarea name="title" id="title" cols="30" rows="3"></textarea>
+                    <textarea name="title" id="title" cols="30" rows="3" required></textarea>
                 </div>
 
                 <label for="title">Set Date:</label>
                 <div id="date-range">
                     <input type="hidden" id="date" name="date">
-                    <input type="text" class="picker" id="dateRangePicker" name="daterange" value="01/01/2023 - 01/15/2023">
+                    <input type="text" class="picker" id="dateRangePicker" name="daterange" required>
 
                     <script>
                         $(function() {
@@ -219,7 +220,7 @@
                 </div>
                 <label for="venue">Set Venue:</label>
                 <div id="venue">
-                    <textarea name="venue" id="" cols="30" rows="3"></textarea>
+                    <textarea name="venue" id="" cols="30" rows="3" required></textarea>
                 </div>
 
 

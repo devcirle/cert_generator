@@ -23,6 +23,7 @@ class AccountController extends Controller
         $session = session();
         $userModel = new UserModel();
         $username = $this->request->getVar('username');
+        
         $password = $this->request->getVar('password');
 
         $data = $userModel->where('username', $username)->first();
@@ -43,15 +44,16 @@ class AccountController extends Controller
                     echo "Account Locked";
                 } else {
                     $session->set($ses_data);
+                    var_dump($session->get('username')); //testing
                     return redirect()->to('dashboard');
                 }
             } else {
-                $session->setFlashdata('msg', 'Password is incorrect.');
-                return redirect()->to('dashboard');
+                $session->setFlashdata('msg', 'Incorrect Password');
+                return redirect()->to('home');
             }
         } else {
             $session->setFlashdata('msg', 'User does not exist.');
-            return redirect()->to('dashboard');
+            return redirect()->to('home');
         }
     }
 
@@ -59,7 +61,9 @@ class AccountController extends Controller
     {
         $session = session();
         $username = $session->get('username');
+        // var_dump($username);
         $role = $session->get('role');
+        // var_dump($role);
         $seminarModel = new SeminarsModel();
         $userModel = new UserModel();
 
@@ -161,11 +165,13 @@ class AccountController extends Controller
         return view('accountupdate');
     }
 
-    public function ownerAccountUpdate()
+    // public function ownerAccountUpdate($username)
+    public function ownerAccountUpdate($username)
     {
         helper(['form']);
 
-        return view('ownerAccountUpdate');
+        return view('ownerAccountUpdate', ['username' => $username]);
+        // return view('ownerAccountUpdate', ['username' => $username]);
     }
 
 
@@ -174,10 +180,12 @@ class AccountController extends Controller
         helper(['form']);
         $userModel = new UserModel();
 
-        // var_dump($existingUsername);
-
-        $toUpdate = $userModel->where('name', $this->request->getVar('name'))->first();
-        // var_dump($toUpdate['id']);
+        $oldUsername = $this->request->getVar('oldUserName');
+        if ($oldUsername) {
+            $toUpdate = $userModel->where('username', $oldUsername)->first();
+        } else {
+            $toUpdate = $userModel->where('name', $this->request->getVar('name'))->first();
+        }
 
         $rules = [
             'username' => 'required|min_length[2]|max_length[50]',
@@ -192,8 +200,9 @@ class AccountController extends Controller
                     'username' => $this->request->getVar('username'),
                     'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT)
                 ];
-                var_dump($existingUsername);
                 $userModel->updateAccount($toUpdate['id'], $data['username'], $data['password']);
+                return redirect()->to('home');
+
             }
         }
     }

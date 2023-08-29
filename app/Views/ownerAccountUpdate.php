@@ -65,6 +65,7 @@
                         <?= session('error_message') ?>
                     </div>
                 <?php endif; ?>
+                <input name="oldUserName" type="hidden" value="<?= $username ?>">
 
                 <div class="username">
                     <label for="username">New Username:</label>

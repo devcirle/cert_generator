@@ -75,7 +75,9 @@ $routes->post('seminar/viewAttendees/(:num)', 'DataController::viewAttendeesFull
 
 $routes->get('success', 'AttendanceController::preRegSuccess');
 
-$routes->get('ownerUpdate', 'AccountController::ownerAccountUpdate');
+// $routes->get('ownerUpdate', 'AccountController::ownerAccountUpdate');
+$routes->get('ownerUpdate/(:any)', 'AccountController::ownerAccountUpdate/$1');
+
 
 if (is_file(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {
     require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
