@@ -72,10 +72,17 @@ class AccountController extends Controller
         $ownerId = $userModel->getUserIdByUsername($username);
 
         $ownerData = $seminarModel->getSeminar($ownerId->id);
+        $owners = [];
+        
+        foreach ($data as $item){
+            $owner = $userModel->getProgramOwnersById($item['id']);
+            $owners[] = $owner;
+        }
+        
 
 
         if ($role == 1) {
-            return view('admin_dashboard', ['username' => $username, 'data' => $data]);
+            return view('admin_dashboard', ['username' => $username, 'data' => $data, 'owners' => $owners]);
         } elseif ($role == 2) {
             return view('owner_dashboard', ['username' => $username, 'data' => $ownerData]);
         } else {
@@ -155,7 +162,7 @@ class AccountController extends Controller
             // Add a success message or redirect after updating
             echo "Updated Successfully";
         }
-        echo "Failed Update";
+        return redirect()->to('dashboard');  
     }
 
     public function updateAccountView()

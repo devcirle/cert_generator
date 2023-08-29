@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="/css/admin.css">
 
     <!-- Include jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -21,22 +21,17 @@
             body * {
                 visibility: hidden;
             }
-
-            #datatable_wrapper,
-            #datatable_wrapper * {
+            #datatable_wrapper, #datatable_wrapper * {
                 visibility: visible;
             }
-
             #datatable_wrapper {
                 position: static;
             }
-
             br {
                 display: none;
             }
         }
     </style>
-
 
     <title>Dashboard Admin</title>
 </head>
@@ -45,28 +40,28 @@
     <header>
         <div class="logo">
             <img src="images\logos.png" alt="DepEd">
-            <div class="title">ADMIN</div>
+            <div class="title">ADMIN HOME</div>
         </div>
         <div class="container">
             <nav>
                 <ul>
-                    <li class="tabs"><a href="dashboard">HOME</a></li>
-                    <li class="tabs"><a href="updateData">SET DATA</a></li>
-                    <li class="tabs"><a href="viewOwners">VIEW OWNERS</a></li>
+                    <li class="tabs"><a href="/dashboard">HOME</a></li>
+                    <li class="tabs"><a href="">EVENTS</a></li>
+                    <li class="tabs"><a href="/updateData">SET DATA</a></li>
+                    <li class="tabs"><a href="/viewOwners">VIEW OWNERS</a></li>
                     <li class="tabs"><a>ACCOUNT</a>
                         <ul>
-                            <li><a id="list" href="addAccount">CREATE ACCOUNT</a></li>
-                            <li><a id="list" href="updateAccount">RETRIEVE ACCOUNT</a></li>
-                            <li><a id="list" href="setAccount">RESTRICT ACCOUNT</a></li>
+                            <li><a id="list" href="/addAccount">CREATE ACCOUNT</a></li>
+                            <li><a id="list" href="/updateAccount">RETRIEVE ACCOUNT</a></li>
+                            <li><a id="list" href="/setAccount">RESTRICT ACCOUNT</a></li>
                         </ul>
                     </li>
-                    <li class="tabs"><a href="home">LOGOUT</a></li>
+                    <li class="tabs"><a href="/home">LOGOUT</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-
     <br>
     <br>
     <br>
@@ -77,15 +72,10 @@
     <br>
     <br>
     <br>
-    <label for="yearFilter">Filter by Year:</label>
-    <select id="yearFilter">
-        <!-- Options will be dynamically added by the JavaScript code -->
-    </select>
 
     <table id="datatable" class="display">
         <thead>
             <tr>
-                <th>Owner</th>
                 <th>Status</th>
                 <th>Title</th>
                 <th>Date</th>
@@ -95,13 +85,8 @@
         </thead>
 
         <tbody>
-    <?php foreach ($data as $index => $row) : ?>
-        <?php $owner = $owners[$index][0]; ?>
-
-        <tr>
-            <td>
-                <?= $owner['username']; ?>
-            </td>
+            <?php foreach ($data as $row): ?>
+                <tr>
             <td>
                 <?php
                 switch ($row['status']) {
@@ -155,46 +140,19 @@
                 </form>
             </td>
         </tr>
-    <?php endforeach; ?>
-</tbody>
+                <?php endforeach; ?>
+        </tbody>
 
     </table>
-
+    
     <button id="printButton">Print Data</button>
 
     <script>
-        $(document).ready(function() {
-            var dataTable = $('#datatable').DataTable({
-                "order": [
-                    [3, "desc"]
-                ] // Sort by the fourth column (date) in descending order
-            });
-
-            var yearFilter = $('#yearFilter');
-
-            yearFilter.append('<option value="">All Years</option>'); // Add an option for all years
-
-            for (var year = 2023; year <= new Date().getFullYear() + 1; year++) {
-                yearFilter.append('<option value="' + year + '">' + year + '</option>');
-            }
-
-
-            // Add a change event listener to the year filter select element
-            yearFilter.on('change', function() {
-                var selectedYear = $(this).val();
-
-                // Clear any existing filtering
-                dataTable.search('').columns().search('').draw();
-
-                // Apply the selected year as a filter
-                if (selectedYear !== '') {
-                    dataTable.column(3).search(selectedYear, true, false).draw();
-                }
-            });
-
-            document.getElementById('printButton').addEventListener('click', function() {
-                window.print();
-            });
+        $(document).ready(function () {
+            $('#datatable').DataTable();
+        });
+        document.getElementById('printButton').addEventListener('click', function () {
+            window.print();
         });
     </script>
 </body>
