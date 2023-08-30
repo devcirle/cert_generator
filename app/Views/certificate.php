@@ -19,7 +19,34 @@
             background: #f3f3f3;
             
         }
-        
+
+        .signature {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .signature {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .signature img {
+            max-width: 25%;
+            /* Set your desired maximum width, for example, 80% */
+            max-height: 25%;
+            /* Set your desired maximum height, for example, 80% */
+            object-fit: contain;
+            /* Adjust the object-fit property to control how the image is displayed */
+            z-index: 1;
+            padding-top: 490px;
+        }
+
         .body-bg {
             /* background-image: url('images/cert.png'); */
             position: relative;
@@ -172,14 +199,22 @@
                 </div>
 
 
-            </div>
-            <div class="body-chief">
-                <div class="position">Schools Division Superintendent</div>
-            </div>
-            <div class="unique-code">
-                <?= $data['code']; ?>
-            </div>
         </div>
+
+        <div class="signature">
+            <img src="<?= $signature; ?>">
+        </div>
+        <div class="sds">
+            <?= $sds; ?>
+        </div>
+
+        <div class="body-chief">
+            <div class="position">Schools Division Superintendent</div>
+        </div>
+        <div class="unique-code">
+            <?= $data['code']; ?>
+        </div>
+    </div>
 
         <a class="download-button" href="#" id="download-button">Download Image</a>
         <script>

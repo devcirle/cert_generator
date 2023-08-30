@@ -1,51 +1,47 @@
 .container {
-    position: relative;
-    width: 559.29px;
-    height: 794.49px;
-
+  position: relative;
+  width: 559.29px;
+  height: 794.49px;
 }
 
-
-
 .wrapper {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    height: 100vh;
-
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
 }
 
 .background-img {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    /* background-image: url('../images/cert-images/cert-bg.png'); */
-    background-size: cover;
-    background-position: center;
-    z-index: -1;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  /* background-image: url('../images/cert-images/cert-bg.png'); */
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
 }
 
 .main-contents .header,
 .main-contents .contents,
 .main-contents .footer,
 .signature {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .header {
-    padding-top: 58.66px;
+  padding-top: 58.66px;
 }
 
 .republic {
-    padding-top: 9.024px;
+  padding-top: 9.024px;
 }
 
 .certificate {
-    padding-top: 20.16px;
-    color: #085296;
+  padding-top: 20.16px;
+  color: #085296;
 }
 
 .awarded,
@@ -54,7 +50,7 @@
 .seminar,
 .venue,
 .date {
-    padding-top: 15px;
+  padding-top: 15px;
 }
 
 /*
@@ -63,23 +59,22 @@
 }
 */
 
-
 .republic,
 .department {
-    font-family: 'Old English Text MT';
+  font-family: "Old English Text MT";
 }
 
 .region {
-    font-family: 'Trajan Pro';
+  font-family: "Trajan Pro";
 }
 
 .division,
 .laoag {
-    font-family: 'Tahoma';
+  font-family: "Tahoma";
 }
 
 .certificate {
-    font-family: 'Blacksword';
+  font-family: "Blacksword";
 }
 
 .awarded,
@@ -89,13 +84,13 @@
 .venue,
 .date,
 .footer {
-    font-family: 'Bookman Old Style';
+  font-family: "Bookman Old Style";
 }
 
 .region,
 .division,
 .laoag {
-    font-size: 8pt;
+  font-size: 8pt;
 }
 
 .awarded,
@@ -103,29 +98,29 @@
 .venue,
 .footer,
 .date {
-    font-size: 10pt;
+  font-size: 10pt;
 }
 
 .republic,
 .seminar {
-    font-size: 11pt;
+  font-size: 11pt;
 }
 
 .department {
-    font-size: 14pt;
+  font-size: 14pt;
 }
 
 .name {
-    font-size: 16pt;
+  font-size: 16pt;
 }
 
 .certificate {
-    font-size: 32pt;
+  font-size: 32pt;
 }
 
 .header,
 .footer {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .awarded,
@@ -134,75 +129,74 @@
 .seminar,
 .venue,
 .date {
-    font-style: italic;
+  font-style: italic;
 }
-.edukasyon{
-    width: 74.112px;
-    height: 74.112px
+.edukasyon {
+  width: 74.112px;
+  height: 74.112px;
 }
 .edukasyon-logo {
-    width: 100%;
-
+  width: 100%;
 }
 
 .deped-logos {
-    width: 363.84px;
-    height: 51.65px;
+  width: 363.84px;
+  height: 51.65px;
 }
 
 .qr-code {
-    width: 52.8px;
-    height: 52.8px;
+  width: 52.8px;
+  height: 52.8px;
 }
 
 .seminar,
 .venue,
 .name {
-    max-width: 400px;
-    text-align: center;
+  max-width: 400px;
+  text-align: center;
 }
 
 .footer {
-    position: absolute;
-    bottom: 65px;
-    width: 100%;
+  position: absolute;
+  bottom: 65px;
+  width: 100%;
 }
 
 .signature {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
 }
 
 .signature img {
-    max-width: 25%;
-    /* Set your desired maximum width, for example, 80% */
-    max-height: 25%;
-    /* Set your desired maximum height, for example, 80% */
-    object-fit: contain;
-    /* Adjust the object-fit property to control how the image is displayed */
-    z-index: 1;
-    padding-top: 490px;
+  max-width: 25%;
+  /* Set your desired maximum width, for example, 80% */
+  max-height: 25%;
+  /* Set your desired maximum height, for example, 80% */
+  object-fit: contain;
+  /* Adjust the object-fit property to control how the image is displayed */
+  z-index: 1;
+  padding-top: 490px;
 }
 
 .logos {
-    display: flex;
-    justify-content: center;
-    align-content: center;
+  display: flex;
+  justify-content: center;
+  align-content: center;
 }
 
 .qr-tab {
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    flex-direction: column;
-    padding-left: 19.36px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  padding-left: 19.36px;
 }
 
 .unique-code {
-    background-color: white;
-    font-size: 5pt;
+  background-color: white;
+  font-size: 5pt;
 }

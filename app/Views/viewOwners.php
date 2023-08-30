@@ -40,12 +40,21 @@
     <header>
         <div class="logo">
             <img src="\images\logos.png" alt="DepEd">
-            <div class="title">PROGRAM OWNER</div>
+            <div class="title">ADMIN</div>
         </div>
         <div class="container">
             <nav>
                 <ul>
                     <li class="tabs"><a href="/dashboard">HOME</a></li>
+                    <li class="tabs"><a href="/updateData">SET DATA</a></li>
+                    <li class="tabs"><a href="/viewOwners">VIEW OWNERS</a></li>
+                    <li class="tabs"><a>ACCOUNT</a>
+                        <ul>
+                            <li><a id="list" href="/addAccount">CREATE ACCOUNT</a></li>
+                            <li><a id="list" href="/updateAccount">RETRIEVE ACCOUNT</a></li>
+                            <li><a id="list" href="/setAccount">RESTRICT ACCOUNT</a></li>
+                        </ul>
+                    </li>
                     <li class="tabs"><a href="/home">LOGOUT</a></li>
                 </ul>
             </nav>
@@ -66,16 +75,10 @@
     <table id="datatable" class="display">
         <thead>
             <tr>
-                <th>Seminar</th>
+                <th>Role</th>
                 <th>Name</th>
-                <th>School</th>
-                <th>District</th>
-                <th>Position</th>
-                <th>Contact</th>
-                <th>Gender</th>
-                <th>Age</th>
-                <th>Pre-Reg Date</th>
-                <th>Code</th>
+                <th>Username</th>
+                <th></th>
             </tr>
         </thead>
 
@@ -83,34 +86,26 @@
             <?php foreach ($data as $row): ?>
                 <tr>
                     <td>
-                        <?= $row['seminar']; ?>
+                        <?php
+                        if ($row['role'] == "1") {
+                            echo "Admin";
+                        } elseif ($row['role'] == "2") {
+                            echo "Program Owner";
+                        } else {
+                            echo "Account Locked";
+                        }
+                        ?>
                     </td>
                     <td>
                         <?= $row['name']; ?>
                     </td>
                     <td>
-                        <?= $row['school']; ?>
+                        <?= $row['username']; ?>
                     </td>
                     <td>
-                        <?= $row['district']; ?>
-                    </td>
-                    <td>
-                        <?= $row['position']; ?>
-                    </td>
-                    <td>
-                        <?= $row['contact']; ?>
-                    </td>
-                    <td>
-                        <?= $row['gender']; ?>
-                    </td>
-                    <td>
-                        <?= $row['age']; ?>
-                    </td>
-                    <td>
-                        <?= $row['pre_reg']; ?>
-                    </td>
-                    <td>
-                        <?= $row['code']; ?>
+                        <form action="<?= base_url('seminar/viewSeminars/' . $row['id']); ?>" method="post">
+                            <button type="submit">View Details</button>
+                        </form>
                     </td>
                 </tr>
                 <?php endforeach; ?>

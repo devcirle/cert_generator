@@ -31,6 +31,11 @@ class UserModel extends Model
         return $this->where('role', $role)->findAll();
     }
 
+    public function getProgramOwnersById($id)
+    {
+        return $this->where('id', $id)->findAll();
+    }
+
     public function updateRole($id, $newRole)
     {
         $this->where('id', $id)

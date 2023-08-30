@@ -45,13 +45,14 @@
     <header>
         <div class="logo">
             <img src="images\logos.png" alt="DepEd">
-            <div class="title">ADMIN HOME</div>
+            <div class="title">ADMIN</div>
         </div>
         <div class="container">
             <nav>
                 <ul>
                     <li class="tabs"><a href="dashboard">HOME</a></li>
-                    <li class="tabs"><a href="">EVENTS</a></li>
+                    <li class="tabs"><a href="updateData">SET DATA</a></li>
+                    <li class="tabs"><a href="viewOwners">VIEW OWNERS</a></li>
                     <li class="tabs"><a>ACCOUNT</a>
                         <ul>
                             <li><a id="list" href="addAccount">CREATE ACCOUNT</a></li>
@@ -64,7 +65,7 @@
             </nav>
         </div>
     </header>
-
+    <h2>CURRENT EVENTS</h2>
 
     <br>
     <br>
@@ -94,10 +95,12 @@
         </thead>
 
         <tbody>
-            <?php foreach ($data as $row) : ?>
+            <?php foreach ($data as $index => $row): ?>
+                <?php $owner = $owners[$index][0]; ?>
+
                 <tr>
                     <td>
-                        <?= $row['owner']; ?>
+                        <?= $owner['username']; ?>
                     </td>
                     <td>
                         <?php
@@ -147,14 +150,9 @@
                         <?= $row['venue']; ?>
                     </td>
                     <td>
-                        <!-- <a href="home">
-                            <button type="submit">View Details</button>
-                        </a> -->
-
                         <form action="<?= base_url('seminar/viewDetails/' . $row['id']); ?>" method="post">
-                                <button type="submit">View Details</button>
+                            <button type="submit">View Seminar Attendees</button>
                         </form>
-
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -165,7 +163,7 @@
     <button id="printButton">Print Data</button>
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             var dataTable = $('#datatable').DataTable({
                 "order": [
                     [3, "desc"]
@@ -182,7 +180,7 @@
 
 
             // Add a change event listener to the year filter select element
-            yearFilter.on('change', function() {
+            yearFilter.on('change', function () {
                 var selectedYear = $(this).val();
 
                 // Clear any existing filtering
@@ -194,7 +192,7 @@
                 }
             });
 
-            document.getElementById('printButton').addEventListener('click', function() {
+            document.getElementById('printButton').addEventListener('click', function () {
                 window.print();
             });
         });

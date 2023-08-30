@@ -20,11 +20,13 @@
       <nav>
         <ul>
           <li class="tabs"><a href="dashboard">HOME</a></li>
-          <li class="tabs"><a href="#">EVENTS</a></li>
+          <li class="tabs"><a href="/updateData">SET DATA</a></li>
+          <li class="tabs"><a href="/viewOwners">VIEW OWNERS</a></li>
           <li class="tabs"><a>ACCOUNT</a>
             <ul>
-              <li><a href="addAccount">CREATE ACCOUNT</a></li>
-              <li><a href="#">RETRIEVE ACCOUNT</a></li>
+              <li><a id="list" href="/addAccount">CREATE ACCOUNT</a></li>
+              <li><a id="list" href="/updateAccount">RETRIEVE ACCOUNT</a></li>
+              <li><a id="list" href="/setAccount">RESTRICT ACCOUNT</a></li>
             </ul>
           </li>
           <li class="tabs"><a href="home">LOGOUT</a></li>
