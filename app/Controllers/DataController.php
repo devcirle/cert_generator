@@ -84,7 +84,6 @@ class DataController extends BaseController
         $imageName = $imageData['name'];
         $imagePath = 'signature/' . $imageName;
 
-
         if (!$certificateData) {
             session()->setFlashdata('error_message', 'Certificate Not Available');
             return redirect()->to('cert-test');
