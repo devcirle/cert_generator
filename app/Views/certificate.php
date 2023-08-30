@@ -17,6 +17,33 @@
             font-family: 'Bookman Old Style';
         }
 
+        .signature {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .signature {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .signature img {
+            max-width: 25%;
+            /* Set your desired maximum width, for example, 80% */
+            max-height: 25%;
+            /* Set your desired maximum height, for example, 80% */
+            object-fit: contain;
+            /* Adjust the object-fit property to control how the image is displayed */
+            z-index: 1;
+            padding-top: 490px;
+        }
+
         .body-bg {
             /* background-image: url('images/cert.png'); */
             position: relative;
@@ -41,9 +68,11 @@
         .body-content {
             padding: 30rem 0rem 11rem 0rem;
         }
-        .name{
+
+        .name {
             padding: 0 7rem 0 7rem;
         }
+
         .name,
         .participation,
         .seminar,
@@ -89,15 +118,15 @@
             font-weight: bold;
         }
 
-        .unique-code{
-            font-family: Tahoma, sans-serif ;
+        .unique-code {
+            font-family: Tahoma, sans-serif;
             position: absolute;
             top: 63.5rem;
             left: 39.45rem;
             font-weight: 900;
             font-size: 6.6pt;
             width: 70px;
-            
+
         }
     </style>
 </head>
@@ -163,6 +192,14 @@
 
 
         </div>
+
+        <div class="signature">
+            <img src="<?= $signature; ?>">
+        </div>
+        <div class="sds">
+            <?= $sds; ?>
+        </div>
+
         <div class="body-chief">
             <div class="position">Schools Division Superintendent</div>
         </div>

@@ -11,7 +11,8 @@ use App\Models\ImageModel;
 
 class DataController extends BaseController
 {
-    public function viewAllOwners(){
+    public function viewAllOwners()
+    {
         $userModel = new UserModel();
         $data = $userModel->getAllUser();
 
@@ -74,12 +75,14 @@ class DataController extends BaseController
         $seminarModel = new SeminarsModel();
         $attendeeModel = new AttendeesModel();
         $certModel = new CertificateModel();
+        $imageModel = new ImageModel();
 
         //SDOIN-123423
         $searchQuery = $this->request->getVar('query');
-        // var_dump($searchQuery);
         $certificateData = $certModel->where('cert_no', $searchQuery)->first();
-        // var_dump($certificateData);
+        $imageData = $imageModel->first();
+        $imageName = $imageData['name'];
+        $imagePath = 'signature/' . $imageName;
 
 
         if (!$certificateData) {
@@ -88,7 +91,7 @@ class DataController extends BaseController
         } elseif ($certificateData['status'] == 1) {
             $attendeeCert = $attendeeModel->where('code', $searchQuery)->first();
             $seminarData = $seminarModel->where('id', $attendeeCert['seminar'])->first();
-            return view('certificate', ['data' => $attendeeCert, 'seminar' => $seminarData]);
+            return view('certificate', ['data' => $attendeeCert, 'seminar' => $seminarData, 'signature' => $imagePath, 'sds' => $imageData['sds']]);
         }
     }
 
@@ -97,30 +100,38 @@ class DataController extends BaseController
         helper(['form']);
         return view('updateData');
     }
-    // Create a controller method to handle image upload
+
     public function uploadImage()
     {
-        // helper(['form']);
-        // if ($this->request->getMethod() === 'post' && $this->validate(['image' => 'uploaded[image]|max_size[image,1024]'])) {
-        if ($this->request->getMethod() === 'post') {
-            $image = $this->request->getFile('image');
 
-            // if ($image->isValid() && !$image->hasMoved()) {
-            if (!$image->hasMoved()) {
-                $newName = $image->getRandomName();
-                $image->move('public\images\signature', $newName);
+        helper(['form', 'url']);
 
-                // Save image details to the database
-                $imageModel = new ImageModel(); // Replace with your model
-                $imageModel->save([
-                    'image_name' => $newName,
-                    'image_data' => '' . $newName,
-                ]);
+        $db = \Config\Database::connect();
+        $builder = $db->table('data');
 
-                // return redirect()->to('/success'); // Redirect after successful upload
-            }
+        $validated = $this->validate([
+            'data' => [
+                'uploaded[data]',
+                'mime_in[data,image/jpg,image/jpeg,image/gif,image/png]',
+                'max_size[data,4096]',
+            ],
+        ]);
+
+        $msg = 'Please select a valid file';
+
+        if ($validated) {
+            $avatar = $this->request->getFile('data');
+            $avatar->move(FCPATH . 'signature');
+
+            $data = [
+                'sds' => $this->request->getVar('name'),
+                'name' => $avatar->getClientName(),
+                'type' => $avatar->getClientMimeType()
+            ];
+
+            $save = $builder->insert($data);
+            $msg = 'File has been uploaded';
         }
-
-        // return view('updateData'); // Display upload form view
+        return redirect()->to('home');
     }
 }

@@ -23,7 +23,7 @@ class AccountController extends Controller
         $session = session();
         $userModel = new UserModel();
         $username = $this->request->getVar('username');
-        
+
         $password = $this->request->getVar('password');
 
         $data = $userModel->where('username', $username)->first();
@@ -73,12 +73,12 @@ class AccountController extends Controller
 
         $ownerData = $seminarModel->getSeminar($ownerId->id);
         $owners = [];
-        
-        foreach ($data as $item){
+
+        foreach ($data as $item) {
             $owner = $userModel->getProgramOwnersById($item['id']);
             $owners[] = $owner;
         }
-        
+
 
 
         if ($role == 1) {
@@ -162,7 +162,7 @@ class AccountController extends Controller
             // Add a success message or redirect after updating
             echo "Updated Successfully";
         }
-        return redirect()->to('dashboard');  
+        return redirect()->to('dashboard');
     }
 
     public function updateAccountView()

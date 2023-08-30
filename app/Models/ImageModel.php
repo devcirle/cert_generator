@@ -9,7 +9,8 @@ class ImageModel extends Model
     protected $table = 'data';
     protected $primaryKey = 'id';
     protected $allowedFields = [
-        'image_name',
-        'image_data',
+        'sds',
+        'name',
+        'type'
     ];
 }
