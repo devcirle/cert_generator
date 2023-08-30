@@ -8,6 +8,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
 
     <style>
+        
         @font-face {
             font-family: 'Bookman Old Style';
             src: url('fonts/bookman.ttf') format('ttf');
@@ -15,15 +16,21 @@
 
         body {
             font-family: 'Bookman Old Style';
+            background: #f3f3f3;
+            
         }
-
+        
         .body-bg {
             /* background-image: url('images/cert.png'); */
             position: relative;
             width: 794px;
             height: 1122px;
             margin: 0 auto;
+            
             /* left: -9999px; */
+            
+
+
 
         }
 
@@ -41,9 +48,11 @@
         .body-content {
             padding: 30rem 0rem 11rem 0rem;
         }
-        .name{
+
+        .name {
             padding: 0 7rem 0 7rem;
         }
+
         .name,
         .participation,
         .seminar,
@@ -89,116 +98,117 @@
             font-weight: bold;
         }
 
-        .unique-code{
-            font-family: Tahoma, sans-serif ;
+        .unique-code {
+            font-family: Tahoma, sans-serif;
             position: absolute;
             top: 63.5rem;
             left: 39.45rem;
             font-weight: 900;
             font-size: 6.6pt;
             width: 70px;
-            
+
         }
     </style>
 </head>
 
 <body>
-    <div class="body-bg">
-        <img class="img-bg" src="images/cert.png" alt="">
-        <div class="body-content">
-            <div class="name">
-                <?= $data['name']; ?>
-            </div>
-            <div class="participation"><i>for his/her active participation during the</i></div>
-            <div class="seminar">
-
-                <div class="seminar-title">
-                    <?= $seminar['title']; ?>
+    <div class="wrapper">
+        <div class="body-bg">
+            <img class="img-bg" src="images/cert.png" alt="">
+            <div class="body-content">
+                <div class="name">
+                    <?= $data['name']; ?>
                 </div>
-                Program
+                <div class="participation"><i>for his/her active participation during the</i></div>
+                <div class="seminar">
+
+                    <div class="seminar-title">
+                        <?= $seminar['title']; ?>
+                    </div>
+                    Program
+                </div>
+                <br>
+                <div class="venue">held at
+                    <?= $seminar['venue']; ?>
+                    on <br>
+                    <?php
+                    $seminarDates = json_decode($seminar['date']);
+                    // Convert dates to DateTime objects
+                    $dateObjects = array_map(function ($date) {
+                        return new DateTime($date);
+                    }, $seminarDates);
+
+                    $startDate = reset($dateObjects);
+                    $endDate = end($dateObjects);
+
+                    $formattedStartDate = $startDate->format('F j');
+                    $formattedEndDate = $endDate->format('F j, Y');
+
+                    if ($startDate->format('m') !== $endDate->format('m')) {
+                        $formattedDateRange = $formattedStartDate . '-' . $formattedEndDate;
+                    } else {
+                        $formattedDateRange = $startDate->format('F d') . '-' . $endDate->format('d, Y');
+                    }
+
+                    echo $formattedDateRange;
+                    ?>
+
+                </div>
+                <br>
+                <div class="given-date">
+                    <?php
+                    $seminarDates = json_decode($seminar['date']);
+                    // Convert dates to DateTime objects
+                    $dateObjects = array_map(function ($date) {
+                        return new DateTime($date);
+                    }, $seminarDates);
+
+                    $startDate = reset($dateObjects);
+                    $formattedDate = $endDate->format('jS');
+                    echo "Given this " . $formattedDate . " day of " . $startDate->format('F, Y');
+                    ?>
+                    at the<br>
+                    <?= $seminar['venue']; ?>
+                </div>
+
+
             </div>
-            <br>
-            <div class="venue">held at
-                <?= $seminar['venue']; ?>
-                on <br>
-                <?php
-                $seminarDates = json_decode($seminar['date']);
-                // Convert dates to DateTime objects
-                $dateObjects = array_map(function ($date) {
-                    return new DateTime($date);
-                }, $seminarDates);
-
-                $startDate = reset($dateObjects);
-                $endDate = end($dateObjects);
-
-                $formattedStartDate = $startDate->format('F j');
-                $formattedEndDate = $endDate->format('F j, Y');
-
-                if ($startDate->format('m') !== $endDate->format('m')) {
-                    $formattedDateRange = $formattedStartDate . '-' . $formattedEndDate;
-                } else {
-                    $formattedDateRange = $startDate->format('F d') . '-' . $endDate->format('d, Y');
-                }
-
-                echo $formattedDateRange;
-                ?>
-
+            <div class="body-chief">
+                <div class="position">Schools Division Superintendent</div>
             </div>
-            <br>
-            <div class="given-date">
-                <?php
-                $seminarDates = json_decode($seminar['date']);
-                // Convert dates to DateTime objects
-                $dateObjects = array_map(function ($date) {
-                    return new DateTime($date);
-                }, $seminarDates);
-
-                $startDate = reset($dateObjects);
-                $formattedDate = $endDate->format('jS');
-                echo "Given this " . $formattedDate . " day of " . $startDate->format('F, Y');
-                ?>
-                at the<br>
-                <?= $seminar['venue']; ?>
+            <div class="unique-code">
+                <?= $data['code']; ?>
             </div>
-
-
         </div>
-        <div class="body-chief">
-            <div class="position">Schools Division Superintendent</div>
-        </div>
-        <div class="unique-code">
-            <?= $data['code']; ?>
-        </div>
-    </div>
 
-    <a class="download-button" href="#" id="download-button">Download Image</a>
-    <script>
-        const captureButton = document.getElementById('download-button');
+        <a class="download-button" href="#" id="download-button">Download Image</a>
+        <script>
+            const captureButton = document.getElementById('download-button');
 
-        captureButton.addEventListener('click', async () => {
-            const elementToCapture = document.querySelector('.body-bg');
+            captureButton.addEventListener('click', async () => {
+                const elementToCapture = document.querySelector('.body-bg');
 
-            const scaleFactor = 5; // Scale factor
+                const scaleFactor = 5; // Scale factor
 
-            const canvas = await html2canvas(elementToCapture, {
-                scale: scaleFactor
+                const canvas = await html2canvas(elementToCapture, {
+                    scale: scaleFactor
+                });
+
+                const dataURL = canvas.toDataURL('image/png');
+
+                const link = document.createElement('a');
+                link.href = dataURL;
+                link.download = 'SDOIN-certificate.png';
+                link.click();
             });
-
-            const dataURL = canvas.toDataURL('image/png');
-
-            const link = document.createElement('a');
-            link.href = dataURL;
-            link.download = 'captured_image.png';
-            link.click();
-        });
-    </script>
+        </script>
 
 
 
 
 
 
-
+    </div>
 
 </body>
 
