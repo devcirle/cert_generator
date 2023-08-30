@@ -47,7 +47,7 @@ CREATE TABLE `data` (
   `id` int(11) NOT NULL,
   `sds` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
-  `type` varchar(255) DEFAULT NULL,
+  `type` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 -- --------------------------------------------------------
 
@@ -85,7 +85,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `name`, `password`, `role`, `created_at`) VALUES
-(1, 'admin', 'Richie Ritz Yoro', '$2y$10$/6tAEm74QhNLofgp9obBS.z9wdfpXnSJWg66BM9VS5QNFigBg76Y.', 1, '2023-07-19 22:49:19'),
+(1, 'admin', 'Richie Ritz Yoro','$2y$10$/6tAEm74QhNLofgp9obBS.z9wdfpXnSJWg66BM9VS5QNFigBg76Y.', 1, '2023-07-19 22:49:19'),
 (2, 'owner', 'Mark Eugene Lorenzo', '$2y$10$//JzFiF81aNFFz4xf2gNJ.5XC8.e5q.ShVhXlj.3hmhSI3blTI.Ni', 2, '2023-07-19 22:52:28');
 
 --
@@ -114,6 +114,8 @@ ALTER TABLE `seminars`
   ADD PRIMARY KEY (`id`),
   ADD KEY `owner` (`owner`);
 
+ALTER TABLE `data`
+	ADD PRIMARY KEY (`id`);
 --
 -- Indexes for table `users`
 --
