@@ -80,11 +80,12 @@ class DataController extends BaseController
         //SDOIN-123423
         $searchQuery = $this->request->getVar('query');
         $certificateData = $certModel->where('cert_no', $searchQuery)->first();
+
         $imageData = $imageModel->first();
         $imageName = $imageData['name'];
         $imagePath = 'signature/' . $imageName;
 
-        if (!$certificateData) {
+        if ($certificateData['status'] == 0) {
             session()->setFlashdata('error_message', 'Certificate Not Available');
             return redirect()->to('cert-test');
         } elseif ($certificateData['status'] == 1) {
