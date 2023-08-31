@@ -67,15 +67,19 @@ class AccountController extends Controller
         $seminarModel = new SeminarsModel();
         $userModel = new UserModel();
 
+        //fetch all seminars
         $data = $seminarModel->getAll();
 
+        ////
         $ownerId = $userModel->getUserIdByUsername($username);
 
         $ownerData = $seminarModel->getSeminar($ownerId->id);
+        ////
+
         $owners = [];
 
         foreach ($data as $item) {
-            $owner = $userModel->getProgramOwnersById($item['id']);
+            $owner = $userModel->getProgramOwnersById($item['owner']);
             $owners[] = $owner;
         }
 
