@@ -8,7 +8,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
 
     <style>
-        
         @font-face {
             font-family: 'Bookman Old Style';
             src: url('fonts/bookman.ttf') format('ttf');
@@ -17,7 +16,8 @@
         body {
             font-family: 'Bookman Old Style';
             background: #f3f3f3;
-            
+            margin: 0 auto;
+            width: 794px;
         }
 
         .signature {
@@ -27,24 +27,35 @@
             flex-direction: column;
         }
 
-        .signature {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
+
+
+        .wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 794px;
+            margin: 0 auto;
         }
 
-        .signature img {
-            max-width: 25%;
-            /* Set your desired maximum width, for example, 80% */
-            max-height: 25%;
-            /* Set your desired maximum height, for example, 80% */
-            object-fit: contain;
-            /* Adjust the object-fit property to control how the image is displayed */
-            z-index: 1;
-            padding-top: 490px;
+        #download-button {
+
+
+
+            font-size: 1.2rem;
+            background: #101541;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            color: #fff;
+            margin: 2rem;
+            padding: 1rem;
+
+        }
+
+        #download-button:hover {
+            cursor: pointer;
+            background: #41c3ca;
         }
 
         .body-bg {
@@ -53,10 +64,8 @@
             width: 794px;
             height: 1122px;
             margin: 0 auto;
-            
-            /* left: -9999px; */
-            
 
+            /* left: -9999px; */
 
 
         }
@@ -73,7 +82,7 @@
         }
 
         .body-content {
-            padding: 30rem 0rem 11rem 0rem;
+            padding: 30rem 0rem 1rem 0rem;
         }
 
         .name {
@@ -107,6 +116,7 @@
             font-weight: 900;
             font-size: 30pt;
             text-transform: uppercase;
+            text-align: center;
         }
 
         .participation {
@@ -120,9 +130,45 @@
 
         }
 
+        .seminar-title,
+        .venue,
+        .given-date {
+            padding: 0 9rem 0 9rem;
+        }
+
         .position {
-            font-size: 14pt;
+            font-size: 12pt;
             font-weight: bold;
+
+
+            position: absolute;
+            top: 940px;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .sds {
+            font-size: 16pt;
+            font-weight: bold;
+            position: absolute;
+            /* top: 908px;
+            left: 250px; */
+            top: 82%;
+            left: 50%;
+            /* Translate the element back by half of its width and height */
+            transform: translate(-50%, -50%);
+        }
+
+        .signature img {
+            width: 200px;
+            position: absolute;
+            /* top: 908px;
+            left: 250px; */
+            top: 81%;
+            left: 50%;
+            /* Translate the element back by half of its width and height */
+            transform: translate(-50%, -50%);
         }
 
         .unique-code {
@@ -140,6 +186,9 @@
 
 <body>
     <div class="wrapper">
+        <button id="download-button">
+            DOWNLOAD CERTIFICATE
+        </button>
         <div class="body-bg">
             <img class="img-bg" src="images/cert.png" alt="">
             <div class="body-content">
@@ -182,6 +231,7 @@
 
                 </div>
                 <br>
+                <br>
                 <div class="given-date">
                     <?php
                     $seminarDates = json_decode($seminar['date']);
@@ -199,24 +249,23 @@
                 </div>
 
 
+            </div>
+
+            <div class="signature">
+                <img src="<?= $signature; ?>">
+            </div>
+            <div class="sds">
+                <?= $sds; ?>
+            </div>
+
+            <div class="body-chief">
+                <div class="position">Schools Division Superintendent</div>
+            </div>
+            <div class="unique-code">
+                <?= $data['code']; ?>
+            </div>
         </div>
 
-        <div class="signature">
-            <img src="<?= $signature; ?>">
-        </div>
-        <div class="sds">
-            <?= $sds; ?>
-        </div>
-
-        <div class="body-chief">
-            <div class="position">Schools Division Superintendent</div>
-        </div>
-        <div class="unique-code">
-            <?= $data['code']; ?>
-        </div>
-    </div>
-
-        <a class="download-button" href="#" id="download-button">Download Image</a>
         <script>
             const captureButton = document.getElementById('download-button');
 
