@@ -26,7 +26,8 @@ $routes->get('api/getUserSeminars/(:num)', 'Api::getUserSeminars/$1');
 
 $routes->get('home', 'AccountController::index');
 $routes->match(['get', 'post'], 'loginAuth', 'AccountController::loginAuth');
-$routes->match(['get', 'post'], 'dashboard', 'AccountController::login', ['filter' => 'authGuard']);
+$routes->match(['get', 'post'], 'admindashboard', 'AccountController::login');
+$routes->match(['get', 'post'], 'ownerdashboard', 'AccountController::login');
 $routes->get('addAccount', 'AccountController::addAccount');
 $routes->match(['get', 'post'], 'addAccount', 'AccountController::storeAccount');
 

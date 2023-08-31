@@ -19,7 +19,7 @@
     <div class="container">
       <nav>
         <ul>
-          <li class="tabs"><a href="dashboard">HOME</a></li>
+          <li class="tabs"><a href="admindashboard">HOME</a></li>
           <li class="tabs"><a href="/updateData">SET DATA</a></li>
           <li class="tabs"><a href="/viewOwners">VIEW OWNERS</a></li>
           <li class="tabs"><a>ACCOUNT</a>
@@ -53,7 +53,7 @@
       <div class="namefield">
         <div class="name">Name</div>
         <div class="full-name">
-          <input class="inputname" name="name" type="text" >
+          <input class="inputname" name="name" type="text">
         </div>
       </div>
 
@@ -68,11 +68,11 @@
     </div> -->
 
 
-      <?php if (session()->has('success_message')) : ?>
+      <?php if (session()->has('success_message')): ?>
         <div class="alert alert-success" role="alert">
           <?= session('success_message') ?>
         </div>
-      <?php elseif (session()->has('error_message')) : ?>
+      <?php elseif (session()->has('error_message')): ?>
         <div class="alert alert-danger" role="alert">
           <?= session('error_message') ?>
         </div>
@@ -81,7 +81,8 @@
         <div class="username">
           <div class="username1">Username</div>
           <div class="usernamefield">
-            <input class="enter-username" name="username" type="username" required value="<?= isset($_SESSION['prev_username']) ? $_SESSION['prev_username'] : '' ?>">
+            <input class="enter-username" name="username" type="username" required
+              value="<?= isset($_SESSION['prev_username']) ? $_SESSION['prev_username'] : '' ?>">
           </div>
         </div>
 
@@ -89,7 +90,7 @@
           <div class="password1">Password</div>
           <div class="usernamefield">
             <input class="input-password" name="password" type="password" required>
-            <?php if (isset($validation) && $validation->getError('confirmpassword')) : ?>
+            <?php if (isset($validation) && $validation->getError('confirmpassword')): ?>
               <div class="error-message">
                 <?= $validation->getError('confirmpassword') ?>
               </div>
@@ -101,7 +102,7 @@
           <div class="confirm-password">Confirm Password</div>
           <div class="confirmationfield">
             <input class="input-password1" name="confirmpassword" type="password" required>
-            <?php if (isset($validation) && $validation->getError('confirmpassword')) : ?>
+            <?php if (isset($validation) && $validation->getError('confirmpassword')): ?>
               <div class="error-message">
                 <?= $validation->getError('confirmpassword') ?>
               </div>

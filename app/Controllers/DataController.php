@@ -24,9 +24,13 @@ class DataController extends BaseController
     public function viewSeminarDetails($seminarId)
     {
         $model = new AttendeesModel();
+        $seminarModel = new SeminarsModel();
         $data = $model->getAttendeeBySeminar($seminarId);
 
-        return view('ownerSeminarDetails', ['data' => $data]);
+        $seminarData = $seminarModel->getSeminarTitle($seminarId);
+        $title = $seminarData['title'];
+
+        return view('ownerSeminarDetails', ['data' => $data, 'title' => $title]);
     }
 
     public function viewSeminarByOwner($id)

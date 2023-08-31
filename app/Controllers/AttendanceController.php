@@ -21,7 +21,7 @@ class AttendanceController extends Controller
         helper(['form']);
 
         $data = [
-            'seminarId' =>  $this->request->getVar('id')
+            'seminarId' => $this->request->getVar('id')
         ];
 
         return view('pre_reg_page', ['data' => $data]);
@@ -184,7 +184,7 @@ class AttendanceController extends Controller
         } else {
             session()->setFlashdata('error_message', 'Account not available');
         }
-        
+
         return redirect()->to('attendance');
 
     }
@@ -192,7 +192,7 @@ class AttendanceController extends Controller
     public function eventspage()
     {
         helper(['form']);
-        $userModel = new UserModel();        
+        $userModel = new UserModel();
         $userData = $userModel->getAllUser();
 
         $seminarModel = new SeminarsModel();
@@ -201,23 +201,23 @@ class AttendanceController extends Controller
 
         $upcomingSeminar = $seminarModel->getAllUpcomingSeminar();
         $ongoingSeminar = $seminarModel->getAllOnGoingSeminar();
-        
+
 
         $seminars = $seminarModel->getAllUpcomingSeminar();
 
         $allSeminars = $seminarModel->getAll();
 
-        foreach ($allSeminars as $seminarData){
-            if ($seminarData['status'] == 1){
+        foreach ($allSeminars as $seminarData) {
+            if ($seminarData['status'] == 1) {
                 $newData = json_decode($seminarData['date'], true); // Decode as an associative array
                 if (is_array($newData) && (in_array($formattedCurrentDate, $newData) || (!empty($newData) && $formattedCurrentDate == $newData[0]))) {
                     $seminarModel->updateStatusToOngoing($seminarData['id']);
                 }
-            } elseif ($seminarData['status'] == 2){
+            } elseif ($seminarData['status'] == 2) {
                 $dateArray = json_decode($seminarData['date']);
-            
-                $endDate = end($dateArray);
-                if ($formattedCurrentDate > $endDate){
+
+                $endDate = $dateArray[0];
+                if ($formattedCurrentDate > $endDate) {
                     $seminarModel->updateStatusToEnded($seminarData['id']);
                 }
             }
@@ -230,14 +230,5 @@ class AttendanceController extends Controller
         }
 
         return view('eventspage', ['seminars' => $seminars, 'user' => $userData]);
-    }
-
-    public function certificates()
-    {
-        helper(['form']);
-        /*updates the attendance date of the attendee	
-        if the attendee attends a seminar	
-        */
-        return view('certificate');
     }
 }

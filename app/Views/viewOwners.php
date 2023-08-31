@@ -21,12 +21,16 @@
             body * {
                 visibility: hidden;
             }
-            #datatable_wrapper, #datatable_wrapper * {
+
+            #datatable_wrapper,
+            #datatable_wrapper * {
                 visibility: visible;
             }
+
             #datatable_wrapper {
                 position: static;
             }
+
             br {
                 display: none;
             }
@@ -45,7 +49,7 @@
         <div class="container">
             <nav>
                 <ul>
-                    <li class="tabs"><a href="/dashboard">HOME</a></li>
+                    <li class="tabs"><a href="/admindashboard">HOME</a></li>
                     <li class="tabs"><a href="/updateData">SET DATA</a></li>
                     <li class="tabs"><a href="/viewOwners">VIEW OWNERS</a></li>
                     <li class="tabs"><a>ACCOUNT</a>
@@ -108,11 +112,11 @@
                         </form>
                     </td>
                 </tr>
-                <?php endforeach; ?>
+            <?php endforeach; ?>
         </tbody>
 
     </table>
-    
+
     <button id="printButton">Print Data</button>
 
     <script>

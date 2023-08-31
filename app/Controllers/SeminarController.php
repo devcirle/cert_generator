@@ -32,10 +32,10 @@ class SeminarController extends Controller
             ];
 
             $seminarModel->save($data);
-            return redirect()->to('dashboard');
+            return redirect()->to('ownerdashboard');
         } else {
             $data['validation'] = $this->validator;
-            echo view('dashboard', $data);
+            echo view('owner_dashboard', $data);
         }
     }
 
@@ -45,7 +45,7 @@ class SeminarController extends Controller
 
         $seminarModel->updateStatusToCancelled($id);
 
-        return redirect()->to('dashboard');
+        return redirect()->to('ownerdashboard');
     }
 
 }

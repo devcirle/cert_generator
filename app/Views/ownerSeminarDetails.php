@@ -21,12 +21,16 @@
             body * {
                 visibility: hidden;
             }
-            #datatable_wrapper, #datatable_wrapper * {
+
+            #datatable_wrapper,
+            #datatable_wrapper * {
                 visibility: visible;
             }
+
             #datatable_wrapper {
                 position: static;
             }
+
             br {
                 display: none;
             }
@@ -40,12 +44,11 @@
     <header>
         <div class="logo">
             <img src="\images\logos.png" alt="DepEd">
-            <div class="title">PROGRAM OWNER</div>
         </div>
         <div class="container">
             <nav>
                 <ul>
-                    <li class="tabs"><a href="/dashboard">HOME</a></li>
+                    <li class="tabs"><a href="/ownerdashboard">HOME</a></li>
                     <li class="tabs"><a href="/home">LOGOUT</a></li>
                 </ul>
             </nav>
@@ -67,6 +70,7 @@
         <thead>
             <tr>
                 <th>Seminar</th>
+                <th>Date Attended</th>
                 <th>Name</th>
                 <th>School</th>
                 <th>District</th>
@@ -83,7 +87,10 @@
             <?php foreach ($data as $row): ?>
                 <tr>
                     <td>
-                        <?= $row['seminar']; ?>
+                        <?= $title; ?>
+                    </td>
+                    <td>
+                        <?= $row['date']; ?>
                     </td>
                     <td>
                         <?= $row['name']; ?>
@@ -113,11 +120,11 @@
                         <?= $row['code']; ?>
                     </td>
                 </tr>
-                <?php endforeach; ?>
+            <?php endforeach; ?>
         </tbody>
 
     </table>
-    
+
     <button id="printButton">Print Data</button>
 
     <script>

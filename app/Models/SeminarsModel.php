@@ -28,6 +28,11 @@ class SeminarsModel extends Model
         return $this->where('title', $seminar)->get()->getRow();
     }
 
+    public function getSeminarTitle($seminarId)
+    {
+        return $this->where('id', $seminarId)->first();
+    }
+
     public function getData($id)
     {
         return $this->where('id', $id)->findAll();
@@ -43,11 +48,13 @@ class SeminarsModel extends Model
         return $this->findAll();
     }
 
-    public function getAllUpcomingSeminar(){
+    public function getAllUpcomingSeminar()
+    {
         return $this->where('status', 1)->findAll();
     }
 
-    public function getAllOnGoingSeminar(){
+    public function getAllOnGoingSeminar()
+    {
         return $this->where('status', 2)->findAll();
     }
 

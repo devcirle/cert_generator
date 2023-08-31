@@ -50,7 +50,7 @@
         <div class="container">
             <nav>
                 <ul>
-                    <li class="tabs"><a href="dashboard">HOME</a></li>
+                    <li class="tabs"><a href="admindashboard">HOME</a></li>
                     <li class="tabs"><a href="updateData">SET DATA</a></li>
                     <li class="tabs"><a href="viewOwners">VIEW OWNERS</a></li>
                     <li class="tabs"><a>ACCOUNT</a>

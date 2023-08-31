@@ -21,12 +21,16 @@
             body * {
                 visibility: hidden;
             }
-            #datatable_wrapper, #datatable_wrapper * {
+
+            #datatable_wrapper,
+            #datatable_wrapper * {
                 visibility: visible;
             }
+
             #datatable_wrapper {
                 position: static;
             }
+
             br {
                 display: none;
             }
@@ -45,7 +49,7 @@
         <div class="container">
             <nav>
                 <ul>
-                    <li class="tabs"><a href="/dashboard">HOME</a></li>
+                    <li class="tabs"><a href="/ownerdashboard">HOME</a></li>
                     <li class="tabs"><a href="">EVENTS</a></li>
                     <li class="tabs"><a href="/updateData">SET DATA</a></li>
                     <li class="tabs"><a href="/viewOwners">VIEW OWNERS</a></li>
@@ -87,64 +91,64 @@
         <tbody>
             <?php foreach ($data as $row): ?>
                 <tr>
-            <td>
-                <?php
-                switch ($row['status']) {
-                    case "0":
-                        echo "Ended";
-                        break;
-                    case "1":
-                        echo "Upcoming";
-                        break;
-                    case "2":
-                        echo "Ongoing";
-                        break;
-                    case "3":
-                        echo "Cancelled";
-                        break;
-                }
-                ?>
-            </td>
-            <td>
-                <?= $row['title']; ?>
-            </td>
-            <td>
-                <?php
-                $seminarDates = json_decode($row['date']);
-                // Convert dates to DateTime objects
-                $dateObjects = array_map(function ($date) {
-                    return new DateTime($date);
-                }, $seminarDates);
+                    <td>
+                        <?php
+                        switch ($row['status']) {
+                            case "0":
+                                echo "Ended";
+                                break;
+                            case "1":
+                                echo "Upcoming";
+                                break;
+                            case "2":
+                                echo "Ongoing";
+                                break;
+                            case "3":
+                                echo "Cancelled";
+                                break;
+                        }
+                        ?>
+                    </td>
+                    <td>
+                        <?= $row['title']; ?>
+                    </td>
+                    <td>
+                        <?php
+                        $seminarDates = json_decode($row['date']);
+                        // Convert dates to DateTime objects
+                        $dateObjects = array_map(function ($date) {
+                            return new DateTime($date);
+                        }, $seminarDates);
 
-                $startDate = reset($dateObjects);
-                $endDate = end($dateObjects);
+                        $startDate = reset($dateObjects);
+                        $endDate = end($dateObjects);
 
-                $formattedStartDate = $startDate->format('F j');
-                $formattedEndDate = $endDate->format('F j, Y');
+                        $formattedStartDate = $startDate->format('F j');
+                        $formattedEndDate = $endDate->format('F j, Y');
 
-                if ($startDate->format('m') !== $endDate->format('m')) {
-                    $formattedDateRange = $formattedStartDate . '-' . $formattedEndDate;
-                } else {
-                    $formattedDateRange = $startDate->format('F d') . '-' . $endDate->format('d, Y');
-                }
+                        if ($startDate->format('m') !== $endDate->format('m')) {
+                            $formattedDateRange = $formattedStartDate . '-' . $formattedEndDate;
+                        } else {
+                            $formattedDateRange = $startDate->format('F d') . '-' . $endDate->format('d, Y');
+                        }
 
-                echo $formattedDateRange;
-                ?>
-            </td>
-            <td>
-                <?= $row['venue']; ?>
-            </td>
-            <td>
-                <form action="<?= base_url('seminar/viewDetails/' . $row['id']); ?>" method="post">
-                    <button type="submit">View Details</button>
-                </form>
-            </td>
-        </tr>
-                <?php endforeach; ?>
+                        echo $formattedDateRange;
+                        ?>
+                    </td>
+                    <td>
+                        <?= $row['venue']; ?>
+                    </td>
+                    <td>
+                        <form action="<?= base_url('seminar/viewDetails/' . $row['id']); ?>" method="post">
+                            <button type="submit">View Details</button>
+                        </form>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
         </tbody>
 
     </table>
-    
+
     <button id="printButton">Print Data</button>
 
     <script>

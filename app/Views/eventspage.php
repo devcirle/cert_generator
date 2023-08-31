@@ -45,7 +45,7 @@
     <hr>
     <?= form_open('preregister'); ?>
     <div class="content">
-        <?php foreach ($seminars as $card) : ?>
+        <?php foreach ($seminars as $card): ?>
             <div class="cards">
                 <div class="card">
                     <input type="hidden" name="id" value="<?= $card['id']; ?>">
@@ -56,41 +56,41 @@
                             </div>
                         </div>
                         <p class="card__text">
-                            <?php if (isset($card['registeredBy'])) : ?>
-                        <p>Created By:
-                            <b>
-                                <?php echo $card['registeredBy']; ?>
-                            </b>
+                            <?php if (isset($card['registeredBy'])): ?>
+                            <p>Created By:
+                                <b>
+                                    <?php echo $card['registeredBy']; ?>
+                                </b>
+                            </p>
+                        <?php endif; ?>
+                        <br>
+                        <?= $card['venue']; ?>
+                        <br><br>
+                        <?php
+                        $seminarDates = json_decode($card['date']);
+                        // Convert dates to DateTime objects
+                        $dateObjects = array_map(function ($date) {
+                            return new DateTime($date);
+                        }, $seminarDates);
+
+                        $startDate = reset($dateObjects);
+                        $endDate = end($dateObjects);
+
+                        $formattedStartDate = $startDate->format('F j');
+                        $formattedEndDate = $endDate->format('F j, Y');
+
+                        if ($startDate->format('m') !== $endDate->format('m')) {
+                            $formattedDateRange = $formattedStartDate . '-' . $formattedEndDate;
+                        } else {
+                            $formattedDateRange = $startDate->format('F d') . '-' . $endDate->format('d, Y');
+                        }
+
+                        echo $formattedDateRange;
+                        ?>
                         </p>
-                    <?php endif; ?>
-                    <br>
-                    <?= $card['venue']; ?>
-                    <br><br>
-                    <?php
-                    $seminarDates = json_decode($card['date']);
-                    // Convert dates to DateTime objects
-                    $dateObjects = array_map(function ($date) {
-                        return new DateTime($date);
-                    }, $seminarDates);
-
-                    $startDate = reset($dateObjects);
-                    $endDate = end($dateObjects);
-
-                    $formattedStartDate = $startDate->format('F j');
-                    $formattedEndDate = $endDate->format('F j, Y');
-
-                    if ($startDate->format('m') !== $endDate->format('m')) {
-                        $formattedDateRange = $formattedStartDate . '-' . $formattedEndDate;
-                    } else {
-                        $formattedDateRange = $startDate->format('F d') . '-' . $endDate->format('d, Y');
-                    }
-
-                    echo $formattedDateRange;
-                    ?>
-                    </p>
-                    <div class="btnwrapper">
-                        <button type="submit" class="btn">Pre-Register</button>
-                    </div>
+                        <div class="btnwrapper">
+                            <button type="submit" class="btn">Pre-Register</button>
+                        </div>
                     </div>
                 </div>
             </div>
