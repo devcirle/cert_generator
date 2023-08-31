@@ -15,6 +15,9 @@
 
         body {
             font-family: 'Bookman Old Style';
+            background: #f3f3f3;
+            margin: 0 auto;
+            width: 794px;
         }
 
         .signature {
@@ -24,24 +27,35 @@
             flex-direction: column;
         }
 
-        .signature {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
+
+
+        .wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 794px;
+            margin: 0 auto;
         }
 
-        .signature img {
-            max-width: 25%;
-            /* Set your desired maximum width, for example, 80% */
-            max-height: 25%;
-            /* Set your desired maximum height, for example, 80% */
-            object-fit: contain;
-            /* Adjust the object-fit property to control how the image is displayed */
-            z-index: 1;
-            padding-top: 490px;
+        #download-button {
+
+
+
+            font-size: 1.2rem;
+            background: #101541;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            color: #fff;
+            margin: 2rem;
+            padding: 1rem;
+
+        }
+
+        #download-button:hover {
+            cursor: pointer;
+            background: #41c3ca;
         }
 
         .body-bg {
@@ -50,7 +64,9 @@
             width: 794px;
             height: 1122px;
             margin: 0 auto;
+
             /* left: -9999px; */
+
 
         }
 
@@ -66,7 +82,7 @@
         }
 
         .body-content {
-            padding: 30rem 0rem 11rem 0rem;
+            padding: 30rem 0rem 1rem 0rem;
         }
 
         .name {
@@ -100,6 +116,7 @@
             font-weight: 900;
             font-size: 30pt;
             text-transform: uppercase;
+            text-align: center;
         }
 
         .participation {
@@ -113,9 +130,45 @@
 
         }
 
+        .seminar-title,
+        .venue,
+        .given-date {
+            padding: 0 9rem 0 9rem;
+        }
+
         .position {
-            font-size: 14pt;
+            font-size: 12pt;
             font-weight: bold;
+
+
+            position: absolute;
+            top: 940px;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .sds {
+            font-size: 16pt;
+            font-weight: bold;
+            position: absolute;
+            /* top: 908px;
+            left: 250px; */
+            top: 82%;
+            left: 50%;
+            /* Translate the element back by half of its width and height */
+            transform: translate(-50%, -50%);
+        }
+
+        .signature img {
+            width: 200px;
+            position: absolute;
+            /* top: 908px;
+            left: 250px; */
+            top: 81%;
+            left: 50%;
+            /* Translate the element back by half of its width and height */
+            transform: translate(-50%, -50%);
         }
 
         .unique-code {
@@ -132,110 +185,114 @@
 </head>
 
 <body>
-    <div class="body-bg">
-        <img class="img-bg" src="images/cert.png" alt="">
-        <div class="body-content">
-            <div class="name">
-                <?= $data['name']; ?>
-            </div>
-            <div class="participation"><i>for his/her active participation during the</i></div>
-            <div class="seminar">
-
-                <div class="seminar-title">
-                    <?= $seminar['title']; ?>
+    <div class="wrapper">
+        <button id="download-button">
+            DOWNLOAD CERTIFICATE
+        </button>
+        <div class="body-bg">
+            <img class="img-bg" src="images/cert.png" alt="">
+            <div class="body-content">
+                <div class="name">
+                    <?= $data['name']; ?>
                 </div>
-                Program
+                <div class="participation"><i>for his/her active participation during the</i></div>
+                <div class="seminar">
+
+                    <div class="seminar-title">
+                        <?= $seminar['title']; ?>
+                    </div>
+                    Program
+                </div>
+                <br>
+                <div class="venue">held at
+                    <?= $seminar['venue']; ?>
+                    on <br>
+                    <?php
+                    $seminarDates = json_decode($seminar['date']);
+                    // Convert dates to DateTime objects
+                    $dateObjects = array_map(function ($date) {
+                        return new DateTime($date);
+                    }, $seminarDates);
+
+                    $startDate = reset($dateObjects);
+                    $endDate = end($dateObjects);
+
+                    $formattedStartDate = $startDate->format('F j');
+                    $formattedEndDate = $endDate->format('F j, Y');
+
+                    if ($startDate->format('m') !== $endDate->format('m')) {
+                        $formattedDateRange = $formattedStartDate . '-' . $formattedEndDate;
+                    } else {
+                        $formattedDateRange = $startDate->format('F d') . '-' . $endDate->format('d, Y');
+                    }
+
+                    echo $formattedDateRange;
+                    ?>
+
+                </div>
+                <br>
+                <br>
+                <div class="given-date">
+                    <?php
+                    $seminarDates = json_decode($seminar['date']);
+                    // Convert dates to DateTime objects
+                    $dateObjects = array_map(function ($date) {
+                        return new DateTime($date);
+                    }, $seminarDates);
+
+                    $startDate = reset($dateObjects);
+                    $formattedDate = $endDate->format('jS');
+                    echo "Given this " . $formattedDate . " day of " . $startDate->format('F, Y');
+                    ?>
+                    at the<br>
+                    <?= $seminar['venue']; ?>
+                </div>
+
+
             </div>
-            <br>
-            <div class="venue">held at
-                <?= $seminar['venue']; ?>
-                on <br>
-                <?php
-                $seminarDates = json_decode($seminar['date']);
-                // Convert dates to DateTime objects
-                $dateObjects = array_map(function ($date) {
-                    return new DateTime($date);
-                }, $seminarDates);
 
-                $startDate = reset($dateObjects);
-                $endDate = end($dateObjects);
-
-                $formattedStartDate = $startDate->format('F j');
-                $formattedEndDate = $endDate->format('F j, Y');
-
-                if ($startDate->format('m') !== $endDate->format('m')) {
-                    $formattedDateRange = $formattedStartDate . '-' . $formattedEndDate;
-                } else {
-                    $formattedDateRange = $startDate->format('F d') . '-' . $endDate->format('d, Y');
-                }
-
-                echo $formattedDateRange;
-                ?>
-
+            <div class="signature">
+                <img src="<?= $signature; ?>">
             </div>
-            <br>
-            <div class="given-date">
-                <?php
-                $seminarDates = json_decode($seminar['date']);
-                // Convert dates to DateTime objects
-                $dateObjects = array_map(function ($date) {
-                    return new DateTime($date);
-                }, $seminarDates);
-
-                $startDate = reset($dateObjects);
-                $formattedDate = $endDate->format('jS');
-                echo "Given this " . $formattedDate . " day of " . $startDate->format('F, Y');
-                ?>
-                at the<br>
-                <?= $seminar['venue']; ?>
+            <div class="sds">
+                <?= $sds; ?>
             </div>
 
-
+            <div class="body-chief">
+                <div class="position">Schools Division Superintendent</div>
+            </div>
+            <div class="unique-code">
+                <?= $data['code']; ?>
+            </div>
         </div>
 
-        <div class="signature">
-            <img src="<?= $signature; ?>">
-        </div>
-        <div class="sds">
-            <?= $sds; ?>
-        </div>
+        <script>
+            const captureButton = document.getElementById('download-button');
 
-        <div class="body-chief">
-            <div class="position">Schools Division Superintendent</div>
-        </div>
-        <div class="unique-code">
-            <?= $data['code']; ?>
-        </div>
-    </div>
+            captureButton.addEventListener('click', async () => {
+                const elementToCapture = document.querySelector('.body-bg');
 
-    <a class="download-button" href="#" id="download-button">Download Image</a>
-    <script>
-        const captureButton = document.getElementById('download-button');
+                const scaleFactor = 5; // Scale factor
 
-        captureButton.addEventListener('click', async () => {
-            const elementToCapture = document.querySelector('.body-bg');
+                const canvas = await html2canvas(elementToCapture, {
+                    scale: scaleFactor
+                });
 
-            const scaleFactor = 5; // Scale factor
+                const dataURL = canvas.toDataURL('image/png');
 
-            const canvas = await html2canvas(elementToCapture, {
-                scale: scaleFactor
+                const link = document.createElement('a');
+                link.href = dataURL;
+                link.download = 'SDOIN-certificate.png';
+                link.click();
             });
-
-            const dataURL = canvas.toDataURL('image/png');
-
-            const link = document.createElement('a');
-            link.href = dataURL;
-            link.download = 'captured_image.png';
-            link.click();
-        });
-    </script>
+        </script>
 
 
 
 
 
 
-
+    </div>
 
 </body>
 
