@@ -35,6 +35,22 @@
                 display: none;
             }
         }
+
+        .status-ended {
+            color: red;
+        }
+
+        .status-upcoming {
+            color: blue;
+        }
+
+        .status-ongoing {
+            color: green;
+        }
+
+        .status-cancelled {
+            color: gray;
+        }
     </style>
 
     <title>Dashboard Admin</title>
@@ -109,6 +125,7 @@
                         }
                         ?>
                     </td>
+
                     <td>
                         <?= $row['title']; ?>
                     </td>
@@ -158,6 +175,33 @@
         document.getElementById('printButton').addEventListener('click', function () {
             window.print();
         });
+
+        $(document).ready(function () {
+            $('#datatable').DataTable();
+
+            $('#datatable tbody tr').each(function () {
+                var status = $(this).find('td:nth-child(1)').text().trim(); // Trim whitespace
+
+                switch (status) {
+                    case "Ended":
+                        console.log("Ended success");
+                        $(this).find('td:nth-child(1)').addClass('status-ended');
+                        break;
+                    case "Upcoming":
+                        $(this).find('td:nth-child(1)').addClass('status-upcoming');
+                        break;
+                    case "Ongoing":
+                        $(this).find('td:nth-child(1)').addClass('status-ongoing');
+                        break;
+                    case "Cancelled":
+                        $(this).find('td:nth-child(1)').addClass('status-cancelled');
+                        break;
+                }
+            });
+        });
+
+
+
     </script>
 </body>
 
