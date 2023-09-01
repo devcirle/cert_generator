@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"
+        integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
     <script src="js/seminar.js"></script>
     <title>Program Owner Dashboard</title>
     <link rel="stylesheet" type="text/css" href="css/daterangepicker.css" />
@@ -88,7 +89,7 @@
 
 
         <div class="content">
-            <?php foreach ($data as $card) : ?>
+            <?php foreach ($data as $card): ?>
                 <div class="cards">
                     <div class="card">
                         <div class="card__content">
@@ -135,25 +136,25 @@
                                         echo '<span class="cancelled">Cancelled</span>';
                                         break;
                                 }
-                                
+
                                 ?>
-                                <?php if ($card['status'] == 1) : ?>
-                            <form action="<?= base_url('seminar/cancel/' . $card['id']); ?>" method="post">
-                                <button type="submit" name="cancel">Cancel Seminar</button>
-                            </form>
-                        <?php endif; ?>
-                        <?php if ($card['status'] == 0) : ?>
-                            <form action="<?= base_url('seminar/viewAttendees' . $card['id']); ?>" method="post">
-                                <button type="submit">View Attendees</button>
-                            </form>
-                        <?php endif; ?>
-                        </p>
-                        <!-- <button type="submit" name="submit">View Details</button> -->
-                        <?php if ($card['status'] == 0 or $card['status'] == 1 or $card['status'] == 2) : ?>
-                            <form action="<?= base_url('seminar/viewDetails/' . $card['id']); ?>" method="post">
-                                <button type="submit">View Pre-Registered Attendees</button>
-                            </form>
-                        <?php endif; ?>
+                                <?php if ($card['status'] == 1): ?>
+                                <form action="<?= base_url('seminar/cancel/' . $card['id']); ?>" method="post">
+                                    <button type="submit" name="cancel">Cancel Seminar</button>
+                                </form>
+                            <?php endif; ?>
+                            <?php if ($card['status'] == 0): ?>
+                                <form action="<?= base_url('seminar/viewAttendees' . $card['id']); ?>" method="post">
+                                    <button type="submit">View Attendees</button>
+                                </form>
+                            <?php endif; ?>
+                            </p>
+                            <!-- <button type="submit" name="submit">View Details</button> -->
+                            <?php if ($card['status'] == 0 or $card['status'] == 1 or $card['status'] == 2): ?>
+                                <form action="<?= base_url('seminar/viewDetails/' . $card['id']); ?>" method="post">
+                                    <button type="submit">View Pre-Registered Attendees</button>
+                                </form>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -185,7 +186,7 @@
                     <input type="text" class="picker" id="dateRangePicker" name="daterange" required>
 
                     <script>
-                        $(function() {
+                        $(function () {
                             var dateRangePicker = $('#dateRangePicker');
                             dateRangePicker.daterangepicker({
                                 opens: 'center',
@@ -196,7 +197,7 @@
                                 parentEl: "body"
                             });
 
-                            dateRangePicker.on('apply.daterangepicker', function(ev, picker) {
+                            dateRangePicker.on('apply.daterangepicker', function (ev, picker) {
                                 var startDate = picker.startDate;
                                 var endDate = picker.endDate;
 
@@ -212,7 +213,7 @@
                                 $('#date').val(JSON.stringify(dates));
                             });
 
-                            dateRangePicker.on('cancel.daterangepicker', function(ev, picker) {
+                            dateRangePicker.on('cancel.daterangepicker', function (ev, picker) {
                                 $(this).val('');
                                 $('#date').val('');
                             });

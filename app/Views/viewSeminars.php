@@ -21,15 +21,35 @@
             body * {
                 visibility: hidden;
             }
-            #datatable_wrapper, #datatable_wrapper * {
+
+            #datatable_wrapper,
+            #datatable_wrapper * {
                 visibility: visible;
             }
+
             #datatable_wrapper {
                 position: static;
             }
+
             br {
                 display: none;
             }
+        }
+
+        .status-ended {
+            color: red;
+        }
+
+        .status-upcoming {
+            color: blue;
+        }
+
+        .status-ongoing {
+            color: green;
+        }
+
+        .status-cancelled {
+            color: gray;
         }
     </style>
 
@@ -45,7 +65,7 @@
         <div class="container">
             <nav>
                 <ul>
-                    <li class="tabs"><a href="/dashboard">HOME</a></li>
+                    <li class="tabs"><a href="/ownerdashboard">HOME</a></li>
                     <li class="tabs"><a href="">EVENTS</a></li>
                     <li class="tabs"><a href="/updateData">SET DATA</a></li>
                     <li class="tabs"><a href="/viewOwners">VIEW OWNERS</a></li>
@@ -87,64 +107,65 @@
         <tbody>
             <?php foreach ($data as $row): ?>
                 <tr>
-            <td>
-                <?php
-                switch ($row['status']) {
-                    case "0":
-                        echo "Ended";
-                        break;
-                    case "1":
-                        echo "Upcoming";
-                        break;
-                    case "2":
-                        echo "Ongoing";
-                        break;
-                    case "3":
-                        echo "Cancelled";
-                        break;
-                }
-                ?>
-            </td>
-            <td>
-                <?= $row['title']; ?>
-            </td>
-            <td>
-                <?php
-                $seminarDates = json_decode($row['date']);
-                // Convert dates to DateTime objects
-                $dateObjects = array_map(function ($date) {
-                    return new DateTime($date);
-                }, $seminarDates);
+                    <td>
+                        <?php
+                        switch ($row['status']) {
+                            case "0":
+                                echo "Ended";
+                                break;
+                            case "1":
+                                echo "Upcoming";
+                                break;
+                            case "2":
+                                echo "Ongoing";
+                                break;
+                            case "3":
+                                echo "Cancelled";
+                                break;
+                        }
+                        ?>
+                    </td>
 
-                $startDate = reset($dateObjects);
-                $endDate = end($dateObjects);
+                    <td>
+                        <?= $row['title']; ?>
+                    </td>
+                    <td>
+                        <?php
+                        $seminarDates = json_decode($row['date']);
+                        // Convert dates to DateTime objects
+                        $dateObjects = array_map(function ($date) {
+                            return new DateTime($date);
+                        }, $seminarDates);
 
-                $formattedStartDate = $startDate->format('F j');
-                $formattedEndDate = $endDate->format('F j, Y');
+                        $startDate = reset($dateObjects);
+                        $endDate = end($dateObjects);
 
-                if ($startDate->format('m') !== $endDate->format('m')) {
-                    $formattedDateRange = $formattedStartDate . '-' . $formattedEndDate;
-                } else {
-                    $formattedDateRange = $startDate->format('F d') . '-' . $endDate->format('d, Y');
-                }
+                        $formattedStartDate = $startDate->format('F j');
+                        $formattedEndDate = $endDate->format('F j, Y');
 
-                echo $formattedDateRange;
-                ?>
-            </td>
-            <td>
-                <?= $row['venue']; ?>
-            </td>
-            <td>
-                <form action="<?= base_url('seminar/viewDetails/' . $row['id']); ?>" method="post">
-                    <button type="submit">View Details</button>
-                </form>
-            </td>
-        </tr>
-                <?php endforeach; ?>
+                        if ($startDate->format('m') !== $endDate->format('m')) {
+                            $formattedDateRange = $formattedStartDate . '-' . $formattedEndDate;
+                        } else {
+                            $formattedDateRange = $startDate->format('F d') . '-' . $endDate->format('d, Y');
+                        }
+
+                        echo $formattedDateRange;
+                        ?>
+                    </td>
+                    <td>
+                        <?= $row['venue']; ?>
+                    </td>
+                    <td>
+                        <form action="<?= base_url('seminar/viewDetails/' . $row['id']); ?>" method="post">
+                            <button type="submit">View Details</button>
+                        </form>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
         </tbody>
 
     </table>
-    
+
     <button id="printButton">Print Data</button>
 
     <script>
@@ -154,6 +175,33 @@
         document.getElementById('printButton').addEventListener('click', function () {
             window.print();
         });
+
+        $(document).ready(function () {
+            $('#datatable').DataTable();
+
+            $('#datatable tbody tr').each(function () {
+                var status = $(this).find('td:nth-child(1)').text().trim(); // Trim whitespace
+
+                switch (status) {
+                    case "Ended":
+                        console.log("Ended success");
+                        $(this).find('td:nth-child(1)').addClass('status-ended');
+                        break;
+                    case "Upcoming":
+                        $(this).find('td:nth-child(1)').addClass('status-upcoming');
+                        break;
+                    case "Ongoing":
+                        $(this).find('td:nth-child(1)').addClass('status-ongoing');
+                        break;
+                    case "Cancelled":
+                        $(this).find('td:nth-child(1)').addClass('status-cancelled');
+                        break;
+                }
+            });
+        });
+
+
+
     </script>
 </body>
 

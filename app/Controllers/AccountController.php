@@ -33,19 +33,33 @@ class AccountController extends Controller
             $authenticatePassword = password_verify($password, $pass);
 
             if ($authenticatePassword) {
-                $ses_data = [
-                    'id' => $data['id'],
-                    'username' => $data['username'],
-                    'role' => $data['role'],
-                    'isLoggedIn' => true
-                ];
+
 
                 if ($data['role'] < 0) {
                     echo "Account Locked";
-                } else {
-                    $session->set($ses_data);
-                    var_dump($session->get('username')); //testing
-                    return redirect()->to('dashboard');
+                } elseif ($data['role'] == 1) {
+                    $ses_dataAdmin = [
+                        'id' => $data['id'],
+                        'username' => $data['username'],
+                        'role' => $data['role'],
+                        'isLoggedIn' => true
+                    ];
+
+                    $session->set($ses_dataAdmin);
+
+                    // var_dump($session->get('username')); //testing
+                    return redirect()->to('admindashboard');
+                } elseif ($data['role'] == 2) {
+                    $ses_dataOwner = [
+                        'id' => $data['id'],
+                        'username' => $data['username'],
+                        'role' => $data['role'],
+                        'isLoggedIn' => true
+                    ];
+
+                    $session->set($ses_dataOwner);
+                    // var_dump($session->get('username')); //testing
+                    return redirect()->to('ownerdashboard');
                 }
             } else {
                 $session->setFlashdata('msg', 'Incorrect Password');
@@ -126,7 +140,11 @@ class AccountController extends Controller
                     'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT)
                 ];
                 $userModel->save($data);
-                return redirect()->to('dashboard');
+                if ($data['role'] == 1) {
+                    return redirect()->to('admindashboard');
+                } else {
+                    return redirect()->to('ownerdashboard');
+                }
             } else {
                 $data['validation'] = $this->validator;
                 // Store the previously inserted data in session
@@ -166,7 +184,7 @@ class AccountController extends Controller
             // Add a success message or redirect after updating
             echo "Updated Successfully";
         }
-        return redirect()->to('dashboard');
+        return redirect()->to('admindashboard');
     }
 
     public function updateAccountView()

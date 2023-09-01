@@ -26,7 +26,7 @@
             </label>
 
             <ul class="menu__box blur-effect">
-                <li><a class="menu__item" href="dashboard">HOME</a></li>
+                <li><a class="menu__item" href="ownerdashboard">HOME</a></li>
                 <li><a class="menu__item" href="#">ACCOUNT</a></li>
                 <li><a class="menu__item" href="home">LOGOUT</a></li>
             </ul>
@@ -34,7 +34,7 @@
 
         <div class="nav">
             <ul>
-                <li><a href="dashboard">HOME</a></li>
+                <li><a href="ownerdashboard">HOME</a></li>
                 <li><a href="#">ACCOUNT</a></li>
                 <li><a href="home">LOGOUT</a></li>
             </ul>
@@ -56,11 +56,11 @@
                 </div>
                 <hr>
 
-                <?php if (session()->has('success_message')) : ?>
+                <?php if (session()->has('success_message')): ?>
                     <div class="alert alert-success" role="alert">
                         <?= session('success_message') ?>
                     </div>
-                <?php elseif (session()->has('error_message')) : ?>
+                <?php elseif (session()->has('error_message')): ?>
                     <div class="alert alert-danger" role="alert">
                         <?= session('error_message') ?>
                     </div>
