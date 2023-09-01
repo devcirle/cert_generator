@@ -7,7 +7,6 @@
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  margin-top: 5rem;
   max-width: 100%;
 }
 
@@ -56,6 +55,15 @@ p {
   /* display: flex;
   align-items: flex-start; */
   gap: 1.5rem;
+  align-items: center;
+
+
+}
+
+.username,
+.password {
+  display: flex;
+  justify-content: center;
   align-items: center;
 }
 

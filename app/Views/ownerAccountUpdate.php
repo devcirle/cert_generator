@@ -8,15 +8,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/headerstyle.css">
-    <link rel="stylesheet" href="css/global.css">
-    <link rel="stylesheet" href="css/accountupdate.css">
+    <link rel="stylesheet" href="/css/headerstyle.css">
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/accountupdate.css">
 </head>
 
 <body>
     <div class="header">
         <div class="logos">
-            <img class="logocontainer" src="images/logos.png" alt="">
+            <img class="logocontainer" src="/images/logos.png" alt="">
             <h2>Account</h2>
         </div>
         <div class="hamburger">
@@ -51,7 +51,7 @@
     <div class="container">
         <div class="content">
             <div class="change-cred">
-                <div class="heading"><img src="images/vector.png">
+                <div class="heading"><img src="/images/vector.png">
                     <p>Account Update</p>
                 </div>
                 <hr>

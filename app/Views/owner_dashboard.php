@@ -25,14 +25,14 @@
     <header>
         <div class="logo">
             <img src="images\logos.png" alt="DepEd">
-            <div class="title">OWNER HOME</div>
+            <div class="title"><b>EVENT OWNER</b></div>
         </div>
         <div class="container">
             <nav>
                 <ul>
-                    <li class="tabs"><a href="dashboard">HOME</a></li>
-                    <!-- <li class="tabs"><a href="ownerUpdate">ACCOUNT</a></li> -->
-                    <li class="tabs"><a href="<?= site_url('ownerUpdate/' . $username) ?>">ACCOUNT</a></li>
+                    <!-- <li class="tabs"><a href="dashboard">HOME</a></li> -->
+                     <!--<li class="tabs"><a href="ownerUpdate">ACCOUNT</a></li> -->
+                    <!-- <li class="tabs"><a href="<?= site_url('ownerUpdate/' . $username) ?>">ACCOUNT</a></li> -->
                     <li class="tabs"><a href="home">LOGOUT</a></li>
                 </ul>
             </nav>

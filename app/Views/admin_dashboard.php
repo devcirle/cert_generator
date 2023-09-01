@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/global.css">
 
     <!-- Include jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -29,11 +30,23 @@
 
             #datatable_wrapper {
                 position: static;
+
             }
 
             br {
                 display: none;
             }
+        }
+
+        .dataTables_wrapper {
+            padding: 2.5rem;
+        }
+
+        h2 {
+            display: flex;
+            justify-content: center;
+            margin-top: 2.5rem;
+            margin-bottom: 0;
         }
     </style>
 
@@ -65,15 +78,8 @@
             </nav>
         </div>
     </header>
-    <h2>CURRENT EVENTS</h2>
+    <h2>SEMINAR/EVENTS OVERVIEW</h2>
 
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
     <br>
     <br>
     <br>
@@ -95,7 +101,7 @@
         </thead>
 
         <tbody>
-            <?php foreach ($data as $index => $row): ?>
+            <?php foreach ($data as $index => $row) : ?>
                 <?php $owner = $owners[$index][0]; ?>
 
                 <tr>
@@ -163,7 +169,7 @@
     <button id="printButton">Print Data</button>
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             var dataTable = $('#datatable').DataTable({
                 "order": [
                     [3, "desc"]
@@ -180,7 +186,7 @@
 
 
             // Add a change event listener to the year filter select element
-            yearFilter.on('change', function () {
+            yearFilter.on('change', function() {
                 var selectedYear = $(this).val();
 
                 // Clear any existing filtering
@@ -192,7 +198,7 @@
                 }
             });
 
-            document.getElementById('printButton').addEventListener('click', function () {
+            document.getElementById('printButton').addEventListener('click', function() {
                 window.print();
             });
         });
