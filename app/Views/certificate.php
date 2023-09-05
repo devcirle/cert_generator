@@ -172,13 +172,13 @@
         }
 
         .unique-code {
-            font-family: Tahoma, sans-serif;
+            font-family: Tahoma;
             position: absolute;
-            top: 63.5rem;
-            left: 39.45rem;
+            top: 62.3rem;
+            left: 39.2rem;
             font-weight: 900;
-            font-size: 6.6pt;
-            width: 70px;
+            font-size: 7pt;
+            width: 76px;
 
         }
     </style>
@@ -201,7 +201,6 @@
                     <div class="seminar-title">
                         <?= $seminar['title']; ?>
                     </div>
-                    Program
                 </div>
                 <br>
                 <div class="venue">held at
